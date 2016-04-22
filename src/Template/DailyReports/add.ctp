@@ -11,22 +11,24 @@
     <fieldset>
         <legend><?= __('Add Daily Report') ?></legend>
         <?php
-            echo $this->Form->input('date', ['empty' => true]);
+            echo $this->Form->input('staff_id', [
+								'options' => $staffs,
+						]);
+            echo $this->Form->input('date', [
+								'type' => 'text',
+								'empty' => true,
+								'value' => date("Y-m-d"),
+						]);
             echo $this->Form->input('room');
-            echo $this->Form->input('staff_id', ['options' => $staffs]);
-            echo $this->Form->input('activity');
-            echo $this->Form->input('objective');
-            echo $this->Form->input('movement');
-            echo $this->Form->input('distribution');
-            echo $this->Form->input('agenda');
-            echo $this->Form->input('gist');
-            echo $this->Form->input('report');
-            echo $this->Form->input('problem');
-            echo $this->Form->input('injury');
-            echo $this->Form->input('principal_checked', ['empty' => true]);
-            echo $this->Form->input('sub_checked', ['empty' => true]);
-            echo $this->Form->input('chief1_checked', ['empty' => true]);
-            echo $this->Form->input('chief2_checked', ['empty' => true]);
+            echo $this->Form->input('activity', ['rows' => 1]);
+            echo $this->Form->input('objective', ['rows' => 1]);
+            echo $this->Form->input('movement', ['rows' => 1]);
+            echo $this->Form->input('distribution', ['rows' => 5]);
+            echo $this->Form->input('agenda', ['rows' => 8]);
+            echo $this->Form->input('gist', ['rows' => 4]);
+            echo $this->Form->input('report', ['rows' => 8]);
+            echo $this->Form->input('problem', ['rows' => 3]);
+            echo $this->Form->input('injury', ['rows' => 3]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

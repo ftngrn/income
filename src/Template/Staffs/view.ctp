@@ -111,8 +111,8 @@
             <td><?= h($staff->birthday) ?></td>
         </tr>
         <tr>
-            <th><?= __('Updated') ?></th>
-            <td><?= h($staff->updated) ?></td>
+            <th><?= __('Modified') ?></th>
+            <td><?= h($staff->modified) ?></td>
         </tr>
         <tr>
             <th><?= __('Created') ?></th>
@@ -161,7 +161,7 @@
                 <th><?= __('Sub Checked') ?></th>
                 <th><?= __('Chief1 Checked') ?></th>
                 <th><?= __('Chief2 Checked') ?></th>
-                <th><?= __('Updated') ?></th>
+                <th><?= __('Modified') ?></th>
                 <th><?= __('Created') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -184,7 +184,7 @@
                 <td><?= h($dailyReports->sub_checked) ?></td>
                 <td><?= h($dailyReports->chief1_checked) ?></td>
                 <td><?= h($dailyReports->chief2_checked) ?></td>
-                <td><?= h($dailyReports->updated) ?></td>
+                <td><?= h($dailyReports->modified) ?></td>
                 <td><?= h($dailyReports->created) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'DailyReports', 'action' => 'view', $dailyReports->id]) ?>
@@ -203,6 +203,8 @@
             <tr>
                 <th><?= __('Id') ?></th>
                 <th><?= __('Child Id') ?></th>
+                <th><?= __('Parent Id') ?></th>
+                <th><?= __('Staff Id') ?></th>
                 <th><?= __('Income Type') ?></th>
                 <th><?= __('Absence Type') ?></th>
                 <th><?= __('Start') ?></th>
@@ -210,11 +212,9 @@
                 <th><?= __('Repeat Type') ?></th>
                 <th><?= __('Repeat Week') ?></th>
                 <th><?= __('Sickness') ?></th>
-                <th><?= __('Staff Id') ?></th>
-                <th><?= __('Parent Id') ?></th>
                 <th><?= __('Ip Addr') ?></th>
                 <th><?= __('Memo') ?></th>
-                <th><?= __('Updated') ?></th>
+                <th><?= __('Modified') ?></th>
                 <th><?= __('Created') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -222,6 +222,8 @@
             <tr>
                 <td><?= h($incomes->id) ?></td>
                 <td><?= h($incomes->child_id) ?></td>
+                <td><?= h($incomes->parent_id) ?></td>
+                <td><?= h($incomes->staff_id) ?></td>
                 <td><?= h($incomes->income_type) ?></td>
                 <td><?= h($incomes->absence_type) ?></td>
                 <td><?= h($incomes->start) ?></td>
@@ -229,11 +231,9 @@
                 <td><?= h($incomes->repeat_type) ?></td>
                 <td><?= h($incomes->repeat_week) ?></td>
                 <td><?= h($incomes->sickness) ?></td>
-                <td><?= h($incomes->staff_id) ?></td>
-                <td><?= h($incomes->parent_id) ?></td>
                 <td><?= h($incomes->ip_addr) ?></td>
                 <td><?= h($incomes->memo) ?></td>
-                <td><?= h($incomes->updated) ?></td>
+                <td><?= h($incomes->modified) ?></td>
                 <td><?= h($incomes->created) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Incomes', 'action' => 'view', $incomes->id]) ?>
@@ -293,7 +293,7 @@
                 <th><?= __('Sub Checked') ?></th>
                 <th><?= __('Chief1 Checked') ?></th>
                 <th><?= __('Chief2 Checked') ?></th>
-                <th><?= __('Updated') ?></th>
+                <th><?= __('Modified') ?></th>
                 <th><?= __('Created') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -309,7 +309,7 @@
                 <td><?= h($weeklyIdeas->sub_checked) ?></td>
                 <td><?= h($weeklyIdeas->chief1_checked) ?></td>
                 <td><?= h($weeklyIdeas->chief2_checked) ?></td>
-                <td><?= h($weeklyIdeas->updated) ?></td>
+                <td><?= h($weeklyIdeas->modified) ?></td>
                 <td><?= h($weeklyIdeas->created) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'WeeklyIdeas', 'action' => 'view', $weeklyIdeas->id]) ?>

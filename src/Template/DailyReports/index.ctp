@@ -19,7 +19,7 @@
                 <th><?= $this->Paginator->sort('sub_checked') ?></th>
                 <th><?= $this->Paginator->sort('chief1_checked') ?></th>
                 <th><?= $this->Paginator->sort('chief2_checked') ?></th>
-                <th><?= $this->Paginator->sort('updated') ?></th>
+                <th><?= $this->Paginator->sort('modified') ?></th>
                 <th><?= $this->Paginator->sort('created') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -35,7 +35,7 @@
                 <td><?= h($dailyReport->sub_checked) ?></td>
                 <td><?= h($dailyReport->chief1_checked) ?></td>
                 <td><?= h($dailyReport->chief2_checked) ?></td>
-                <td><?= h($dailyReport->updated) ?></td>
+                <td><?= h($dailyReport->modified) ?></td>
                 <td><?= h($dailyReport->created) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $dailyReport->id]) ?>

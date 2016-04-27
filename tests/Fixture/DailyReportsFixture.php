@@ -34,7 +34,7 @@ class DailyReportsFixture extends TestFixture
         'sub_checked' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '副園長確認', 'precision' => null],
         'chief1_checked' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '主任確認', 'precision' => null],
         'chief2_checked' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '主任確認', 'precision' => null],
-        'updated' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
@@ -54,7 +54,7 @@ class DailyReportsFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
-            'date' => '2016-04-22',
+            'date' => '2016-04-27',
             'room' => 'Lorem ipsum dolor sit amet',
             'staff_id' => 1,
             'activity' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
@@ -66,12 +66,12 @@ class DailyReportsFixture extends TestFixture
             'report' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
             'problem' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
             'injury' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-            'principal_checked' => '2016-04-22 08:57:10',
-            'sub_checked' => '2016-04-22 08:57:10',
-            'chief1_checked' => '2016-04-22 08:57:10',
-            'chief2_checked' => '2016-04-22 08:57:10',
-            'updated' => '2016-04-22 08:57:10',
-            'created' => '2016-04-22 08:57:10'
+            'principal_checked' => '2016-04-27 15:33:29',
+            'sub_checked' => '2016-04-27 15:33:29',
+            'chief1_checked' => '2016-04-27 15:33:29',
+            'chief2_checked' => '2016-04-27 15:33:29',
+            'modified' => '2016-04-27 15:33:29',
+            'created' => '2016-04-27 15:33:29'
         ],
     ];
 }

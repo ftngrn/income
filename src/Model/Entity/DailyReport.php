@@ -24,7 +24,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $sub_checked
  * @property \Cake\I18n\Time $chief1_checked
  * @property \Cake\I18n\Time $chief2_checked
- * @property \Cake\I18n\Time $updated
+ * @property \Cake\I18n\Time $modified
  * @property \Cake\I18n\Time $created
  */
 class DailyReport extends Entity

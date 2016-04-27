@@ -44,7 +44,7 @@
                 <th><?= $this->Paginator->sort('attended_25th') ?></th>
                 <th><?= $this->Paginator->sort('attended_50th') ?></th>
                 <th><?= $this->Paginator->sort('nondelivery') ?></th>
-                <th><?= $this->Paginator->sort('updated') ?></th>
+                <th><?= $this->Paginator->sort('modified') ?></th>
                 <th><?= $this->Paginator->sort('created') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -79,7 +79,7 @@
                 <td><?= h($staff->attended_25th) ?></td>
                 <td><?= h($staff->attended_50th) ?></td>
                 <td><?= h($staff->nondelivery) ?></td>
-                <td><?= h($staff->updated) ?></td>
+                <td><?= h($staff->modified) ?></td>
                 <td><?= h($staff->created) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $staff->id]) ?>

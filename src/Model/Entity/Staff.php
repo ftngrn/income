@@ -34,7 +34,7 @@ use Cake\ORM\Entity;
  * @property bool $attended_25th
  * @property bool $attended_50th
  * @property bool $nondelivery
- * @property \Cake\I18n\Time $updated
+ * @property \Cake\I18n\Time $modified
  * @property \Cake\I18n\Time $created
  * @property \App\Model\Entity\DailyReport[] $daily_reports
  * @property \App\Model\Entity\Income[] $incomes

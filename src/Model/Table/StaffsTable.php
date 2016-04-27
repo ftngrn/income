@@ -10,9 +10,11 @@ use Cake\Validation\Validator;
 /**
  * Staffs Model
  *
+ * @property \Cake\ORM\Association\HasMany $ChildMedicationHistories
  * @property \Cake\ORM\Association\HasMany $DailyReports
  * @property \Cake\ORM\Association\HasMany $Incomes
  * @property \Cake\ORM\Association\HasMany $Journals
+ * @property \Cake\ORM\Association\HasMany $Vacations
  * @property \Cake\ORM\Association\HasMany $WeeklyIdeas
  */
 class StaffsTable extends Table
@@ -34,6 +36,9 @@ class StaffsTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->hasMany('ChildMedicationHistories', [
+            'foreignKey' => 'staff_id'
+        ]);
         $this->hasMany('DailyReports', [
             'foreignKey' => 'staff_id'
         ]);
@@ -41,6 +46,9 @@ class StaffsTable extends Table
             'foreignKey' => 'staff_id'
         ]);
         $this->hasMany('Journals', [
+            'foreignKey' => 'staff_id'
+        ]);
+        $this->hasMany('Vacations', [
             'foreignKey' => 'staff_id'
         ]);
         $this->hasMany('WeeklyIdeas', [

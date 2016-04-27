@@ -45,7 +45,7 @@ class StaffsFixture extends TestFixture
         'attended_25th' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => '0', 'comment' => '25周年記念に出席したら1', 'precision' => null],
         'attended_50th' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => '0', 'comment' => '50周年記念に出席したら1', 'precision' => null],
         'nondelivery' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => '0', 'comment' => '住所が不達だったら1', 'precision' => null],
-        'updated' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
             'job' => ['type' => 'index', 'columns' => ['job'], 'length' => []],
@@ -82,9 +82,9 @@ class StaffsFixture extends TestFixture
             'kana' => 'Lorem ipsum dolor sit amet',
             'old_name' => 'Lorem ipsum dolor sit amet',
             'wife_name' => 'Lorem ipsum dolor sit amet',
-            'joined' => '2016-04-22',
-            'finished' => '2016-04-22',
-            'birthday' => '2016-04-22',
+            'joined' => '2016-04-27',
+            'finished' => '2016-04-27',
+            'birthday' => '2016-04-27',
             'tel' => 'Lorem ipsum dolor ',
             'mobile' => 'Lorem ipsum dolor ',
             'zip' => 'Lorem ip',
@@ -96,8 +96,8 @@ class StaffsFixture extends TestFixture
             'attended_25th' => 1,
             'attended_50th' => 1,
             'nondelivery' => 1,
-            'updated' => '2016-04-22 09:34:51',
-            'created' => '2016-04-22 09:34:51'
+            'modified' => '2016-04-27 15:32:53',
+            'created' => '2016-04-27 15:32:53'
         ],
     ];
 }

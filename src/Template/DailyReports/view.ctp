@@ -45,8 +45,8 @@
             <td><?= h($dailyReport->chief2_checked) ?></td>
         </tr>
         <tr>
-            <th><?= __('Updated') ?></th>
-            <td><?= h($dailyReport->updated) ?></td>
+            <th><?= __('Modified') ?></th>
+            <td><?= h($dailyReport->modified) ?></td>
         </tr>
         <tr>
             <th><?= __('Created') ?></th>

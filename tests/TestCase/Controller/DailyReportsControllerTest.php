@@ -17,7 +17,12 @@ class DailyReportsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.daily_reports',
-        'app.staffs'
+        'app.staffs',
+        'app.child_medication_histories',
+        'app.incomes',
+        'app.journals',
+        'app.vacations',
+        'app.weekly_ideas'
     ];
 
     /**

@@ -10,6 +10,11 @@
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
+    <?= $this->Html->css('https://code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css') ?>
+
+		<?= $this->Html->script('https://code.jquery.com/jquery-2.2.3.min.js') ?>
+		<?= $this->Html->script('https://code.jquery.com/ui/1.11.4/jquery-ui.min.js') ?>
+		<?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -37,5 +42,13 @@
     </section>
     <footer>
 		</footer>
+<script>
+$(function() {
+	$(".datepicker").datepicker({
+		dateFormat: "yy-mm-dd",
+		showButtonPanel: true
+	});
+});
+</script>
 </body>
 </html>

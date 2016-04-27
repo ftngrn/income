@@ -21,7 +21,6 @@
 <?php echo $this->Form->input('date', [
 						'type'=>'text',
 						'empty'=>true,
-						'value'=>date("Y-m-d"),
 						'label'=>'日付',
 						'class'=>'datepicker',
 						]);
@@ -37,7 +36,7 @@
 <?= $this->Form->input('objective', ['rows'=>1,'label'=>'ねらい']);?>
 </td></tr>
 <tr><td>
-<?= $this->Form->input('agenda', ['rows'=>8,'label'=>'その日の流れ','value'=>'']);?>
+<?= $this->Form->input('agenda', ['rows'=>8,'label'=>'その日の流れ']);?>
 </td><td>
 <?= $this->Form->input('gist', ['rows'=>8,'label'=>'やること・指導の要点']);?>
 </td></tr>

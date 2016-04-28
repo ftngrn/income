@@ -1,6 +1,7 @@
 <?php
 /* @var $this \Cake\View\View */
 use Cake\Core\Configure;
+use Cake\Routing\Router;
 
 $this->Html->css('BootstrapUI.dashboard', ['block' => true]);
 $this->prepend('tb_body_attrs', ' class="' . implode(' ', [$this->request->controller, $this->request->action]) . '" ');
@@ -16,35 +17,46 @@ $this->start('tb_body_start');
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><?= Configure::read('App.title') ?></a>
+                <a class="navbar-brand" href="<?= Router::url(['controller'=>'Pages', 'action' => 'display', 'menu']) ?>"><?= Configure::read('App.title') ?></a>
             </div>
             <div class="navbar-collapse collapse">
+<!--
+								<ul class="nav navbar-nav navbar-left">
+                    <li class="nav-divider"></li>
+                    <li><a href="#">出欠</a></li>
+                    <li><a href="#">日誌</a></li>
+                    <li><a href="#">検索</a></li>
+                </ul>
+-->
                 <ul class="nav navbar-nav navbar-right visible-xs">
                     <?= $this->fetch('tb_actions') ?>
                 </ul>
-                <!--
-                <ul class="nav navbar-nav navbar-right">
+<!--
+								<ul class="nav navbar-nav navbar-right">
                     <li class="nav-divider"></li>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">Help</a></li>
+                    <li><a href="#">ログイン</a></li>
                 </ul>
-                <form class="navbar-form navbar-right">
+-->
+<!--
+								<form class="navbar-form navbar-right">
                     <input type="text" class="form-control" placeholder="Search...">
                 </form>
-                -->
-            </div>
+-->
+						</div>
         </div>
     </div>
 
     <div class="container-fluid">
         <div class="row">
+				<?php if (!$this->fetch('tb_sidebar')): ?>
+            <div class="col-sm-12 col-md-12 main">
+				<?php else: ?>
             <div class="col-sm-3 col-md-2 sidebar">
                 <?= $this->fetch('tb_sidebar') ?>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header"><?= $this->request->controller; ?></h1>
+				<?php endif; ?>
+							<h1 class="page-header"><?= $this->fetch('title'); ?></h1>
 <?php
 /**
  * Default `flash` block.

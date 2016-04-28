@@ -73,10 +73,14 @@ $this->start('tb_body_end');
 echo '</body>';
 $this->end();
 
-$this->append('content', '</div></div></div>');
+$this->append('content', '</div></div>');
 echo $this->fetch('content');
 
+
 $this->start('tb_footer');
+echo '<div class="row">';
 echo $this->element('footer');
+echo '</div>';
 $this->end();
+$this->append('tb_footer', '</div>');
 

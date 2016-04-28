@@ -1,3 +1,8 @@
+<?php
+$this->assign('title', '日誌');
+$this->extend('../Layout/bootstrap-ui/dashboard');
+?>
+
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>

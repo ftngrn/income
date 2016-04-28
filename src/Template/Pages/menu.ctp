@@ -25,8 +25,3 @@ $this->end();
 	</dd>
 </dl>
 
-<?php
-$this->start('tb_footer');
-echo $this->element('footer');
-$this->end();
-?>

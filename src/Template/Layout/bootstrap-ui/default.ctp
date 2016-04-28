@@ -88,7 +88,7 @@ $this->append('css', $html5Shim);
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-       Income: <?= $this->fetch('title') ?>
+       <?= Configure::read('App.title') ?>: <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 

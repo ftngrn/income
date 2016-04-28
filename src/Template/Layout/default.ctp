@@ -8,13 +8,17 @@
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
-    <?= $this->Html->css('https://code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css') ?>
-
-		<?= $this->Html->script('https://code.jquery.com/jquery-2.2.3.min.js') ?>
-		<?= $this->Html->script('https://code.jquery.com/ui/1.11.4/jquery-ui.min.js') ?>
-		<?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js') ?>
+    <?= $this->Html->css([
+					'https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css',
+					'https://code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css',
+					'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
+		]) ?>
+		<?= $this->Html->script([
+					'https://code.jquery.com/jquery-2.2.3.min.js',
+					'https://code.jquery.com/ui/1.11.4/jquery-ui.min.js',
+					'https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js',
+					'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',
+		]) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

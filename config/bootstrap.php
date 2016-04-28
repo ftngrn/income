@@ -211,3 +211,10 @@ Type::build('date')
 Type::build('datetime')
     ->useImmutable()
     ->useLocaleParser();
+
+/**
+ * 共通設定
+ *
+ */
+Configure::write('App.title', 'Income');
+

@@ -216,5 +216,6 @@ Type::build('datetime')
  * 共通設定
  *
  */
+Configure::write('App.language', 'ja');
 Configure::write('App.title', 'Income');
 

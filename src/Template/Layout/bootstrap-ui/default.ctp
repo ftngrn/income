@@ -119,4 +119,14 @@ $this->append('css', $html5Shim);
     echo $this->fetch('script');
     echo $this->fetch('tb_body_end');
     ?>
+
+<script>
+$(function() {
+	$(".datepicker").datepicker({
+		dateFormat: "yy-mm-dd",
+		showButtonPanel: true
+	});
+});
+</script>
+
 </html>

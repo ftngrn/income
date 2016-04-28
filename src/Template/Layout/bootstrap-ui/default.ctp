@@ -25,7 +25,7 @@ if (!$this->fetch('title')) {
  */
 if (!$this->fetch('tb_footer')) {
     $this->start('tb_footer');
-    printf('&copy;%s %s', date('Y'), Configure::read('App.title'));
+    printf('<footer>%s &copy;2016 <a href="%s">Sapporo Gakuen</a>.</footer>', Configure::read('App.title'), 'https://www.sapporo-gakuen.jp/');
     $this->end();
 }
 
@@ -104,9 +104,10 @@ $this->append('css', $html5Shim);
 					'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',
 		]) ?>
 
-    <?= $this->fetch('meta') ?>
-        <?= $this->fetch('meta') ?>
-        <?= $this->fetch('css') ?>
+		<?= $this->fetch('meta') ?>
+		<?= $this->fetch('css') ?>
+
+		<?= $this->Html->css(['income.css']) ?>
 
     </head>
 

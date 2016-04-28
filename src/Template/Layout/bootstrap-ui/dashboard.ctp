@@ -75,3 +75,8 @@ $this->end();
 
 $this->append('content', '</div></div></div>');
 echo $this->fetch('content');
+
+$this->start('tb_footer');
+echo $this->element('footer');
+$this->end();
+

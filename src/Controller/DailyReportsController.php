@@ -63,18 +63,22 @@ class DailyReportsController extends AppController
             } else {
                 $this->Flash->error(__('The daily report could not be saved. Please, try again.'));
             }
-        } else if (is_numeric($this->request->query['source'])) {
-					$dailyReport = $this->DailyReports->get(intVal($this->request->query['source']), [
+        } else
+				if (isset($this->request->query['source']) && is_numeric($this->request->query['source'])) {
+					//再利用するために指定されたIDのデータを取得
+					$source = $this->DailyReports->get(intVal($this->request->query['source']), [
 						'contain' => []
 					]);
-					unset(
-						$dailyReport->date,
-						$dailyReport->report,
-						$dailyReport->problem,
-						$dailyReport->injury,
-						$dailyReport->movement,
-						$dailyReport->distribution
-					);
+					//新しいEntityに代入する（直接$sourceをViewに渡すとmethod=PUTになってしまい新規作成できない）
+					$dailyReport = $this->DailyReports->newEntity();
+					$dailyReport->set([
+						'room' => $source->room,
+						'staff_id' => $source->staff_id,
+						'activity' => $source->activity,
+						'objective' => $source->objective,
+						'agenda' => $source->agenda,
+						'gist' => $source->gist,
+					]);
 				}
         $staffs = $this->DailyReports->Staffs->find('list', ['limit' => 200]);
         $this->set(compact('dailyReport', 'staffs'));

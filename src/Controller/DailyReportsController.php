@@ -10,7 +10,6 @@ use App\Controller\AppController;
  */
 class DailyReportsController extends AppController
 {
-
     /**
      * Index method
      *
@@ -19,7 +18,11 @@ class DailyReportsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Staffs']
+					'limit' => 20,
+					'order' => [
+						'DailyReports.date' => 'desc'
+					],
+					'contain' => ['Staffs']
         ];
         $dailyReports = $this->paginate($this->DailyReports);
 

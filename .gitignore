@@ -3,4 +3,6 @@
 /tmp/*
 /logs/*
 *.swp
+/webroot/icon/*
+/webroot/favicon.ico
 

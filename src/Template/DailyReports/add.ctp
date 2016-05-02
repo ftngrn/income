@@ -25,7 +25,7 @@ _EOT_
 ?>
 <div class="dailyReports form large-9 medium-8 columns content">
 <?= $this->Form->create($dailyReport) ?>
-<table>
+<table class="table table-hover table-responsive">
 <tr><td>
 <?= $this->Form->input('room',['label'=>'クラス名']);?>
 </td><td>
@@ -41,7 +41,7 @@ _EOT_
 <?= $this->Form->input('staff_id', ['options'=>$staffs,'label'=>'教職員名']);?>
 </td></tr>
 </table>
-<table>
+<table class="table table-hover table-responsive">
 <tr><td>
 <?= $this->Form->input('activity', ['rows'=>1,'label'=>'主な活動']);?>
 </td><td>
@@ -64,6 +64,6 @@ _EOT_
 <?= $this->Form->input('movement', ['rows'=>2,'label'=>'欠席・入退園児']);?>
 </td></tr>
 </table>
-<?= $this->Form->button(__('Submit')) ?>
+<?= $this->Form->button('内容を保存する', ['class' => 'btn btn-lg btn-success']) ?>
 <?= $this->Form->end() ?>
 </div>

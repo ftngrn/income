@@ -15,7 +15,7 @@ $week_day = ['日', '月', '火', '水', '木', '金', '土'];
 </nav>
 <div class="dailyReports index large-9 medium-8 columns content">
     <h3><?= __('Daily Reports') ?></h3>
-    <table cellpadding="0" cellspacing="0" class="table">
+    <table cellpadding="0" cellspacing="0" class="table table-hover table-responsive">
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id', 'ID') ?></th>
@@ -23,6 +23,7 @@ $week_day = ['日', '月', '火', '水', '木', '金', '土'];
                 <th><?= $this->Paginator->sort('room', 'クラス名') ?></th>
                 <th><?= $this->Paginator->sort('date', '日報の日付') ?></th>
                 <th><?= $this->Paginator->sort('gist', 'やること') ?></th>
+                <th><?= $this->Paginator->sort('gist', '感想・反省') ?></th>
                 <th><?= $this->Paginator->sort('principal_checked', '園長の確認') ?></th>
                 <th class="actions">操作</th>
                 <th><?= $this->Paginator->sort('modified', '更新日時') ?></th>
@@ -37,18 +38,19 @@ $week_day = ['日', '月', '火', '水', '木', '金', '土'];
 						?>
             <tr>
                 <td><?= $this->Number->format($dailyReport->id) ?></td>
-                <td><?= $dailyReport->has('staff') ? $this->Html->link($dailyReport->staff->name, ['controller' => 'Staffs', 'action' => 'view', $dailyReport->staff->id]) : '' ?></td>
+                <td><small><?= $dailyReport->has('staff') ? $this->Html->link($dailyReport->staff->name, ['controller' => 'Staffs', 'action' => 'view', $dailyReport->staff->id]) : '' ?></small></td>
                 <td><?= h($dailyReport->room) ?></td>
                 <td><?= $this->Html->link($date, ['action' => 'edit', $dailyReport->id], ['class' => 'btn btn-primary']) ?></td>
-                <td><small><?= h($this->Text->truncate($dailyReport->gist, 30, ['ellipsis' => '...'])) ?></small></td>
+                <td><small title="<?= h($dailyReport->gist) ?>"><?= h($this->Text->truncate($dailyReport->gist, 20, ['ellipsis' => '...'])) ?></small></td>
+                <td><small title="<?= h($dailyReport->report) ?>"><?= h($this->Text->truncate($dailyReport->report, 20, ['ellipsis' => '...'])) ?></small></td>
                 <td><?= h($dailyReport->principal_checked) ?></td>
                 <td class="actions">
                     <?= $this->Html->link('表示', ['action' => 'view', $dailyReport->id], ['class' => 'btn btn-sm btn-warning']) ?>
                     <?= $this->Html->link('再利用', ['action' => 'add', $dailyReport->id], ['class' => 'btn btn-sm btn-info']) ?>
                     <?= $this->Html->link('書き足し', ['action' => 'edit', $dailyReport->id], ['class' => 'btn btn-sm btn-primary']) ?>
                 </td>
-                <td><?= h($dailyReport->modified) ?></td>
-                <td><?= h($dailyReport->created) ?></td>
+                <td><small><?= h($dailyReport->modified) ?></small></td>
+                <td><small><?= h($dailyReport->created) ?></small></td>
             </tr>
             <?php endforeach; ?>
         </tbody>

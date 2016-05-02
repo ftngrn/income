@@ -67,6 +67,14 @@ class DailyReportsController extends AppController
 					$dailyReport = $this->DailyReports->get(intVal($this->request->query['source']), [
 						'contain' => []
 					]);
+					unset(
+						$dailyReport->date,
+						$dailyReport->report,
+						$dailyReport->problem,
+						$dailyReport->injury,
+						$dailyReport->movement,
+						$dailyReport->distribution
+					);
 				}
         $staffs = $this->DailyReports->Staffs->find('list', ['limit' => 200]);
         $this->set(compact('dailyReport', 'staffs'));

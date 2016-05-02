@@ -46,7 +46,7 @@ $week_day = ['日', '月', '火', '水', '木', '金', '土'];
                 <td><?= h($dailyReport->principal_checked) ?></td>
                 <td class="actions">
                     <?= $this->Html->link('表示', ['action' => 'view', $dailyReport->id], ['class' => 'btn btn-sm btn-warning']) ?>
-                    <?= $this->Html->link('再利用', ['action' => 'add', $dailyReport->id], ['class' => 'btn btn-sm btn-info']) ?>
+                    <?= $this->Html->link('再利用', ['action' => 'add', 'source' => $dailyReport->id], ['class' => 'btn btn-sm btn-info']) ?>
                     <?= $this->Html->link('書き足し', ['action' => 'edit', $dailyReport->id], ['class' => 'btn btn-sm btn-primary']) ?>
                 </td>
                 <td><small><?= h($dailyReport->modified) ?></small></td>

@@ -63,7 +63,11 @@ class DailyReportsController extends AppController
             } else {
                 $this->Flash->error(__('The daily report could not be saved. Please, try again.'));
             }
-        }
+        } else if (is_numeric($this->request->query['source'])) {
+					$dailyReport = $this->DailyReports->get(intVal($this->request->query['source']), [
+						'contain' => []
+					]);
+				}
         $staffs = $this->DailyReports->Staffs->find('list', ['limit' => 200]);
         $this->set(compact('dailyReport', 'staffs'));
         $this->set('_serialize', ['dailyReport']);

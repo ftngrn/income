@@ -66,8 +66,8 @@ class IncomesFixture extends TestFixture
             'income_types' => 1,
             'cautions' => 'Lorem ipsum dolor sit amet',
             'absence_type' => 'Lorem ipsum dolor sit amet',
-            'childcare_start' => '15:11:13',
-            'childcare_end' => '15:11:13',
+            'childcare_start' => '15:51:50',
+            'childcare_end' => '15:51:50',
             'childcare_meal' => 1,
             'start' => '2016-05-06',
             'end' => '2016-05-06',
@@ -82,8 +82,8 @@ class IncomesFixture extends TestFixture
             'route' => 'Lorem ipsum dolor sit amet',
             'ip_addr' => 'Lorem ipsum dolor sit amet',
             'memo' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-            'modified' => '2016-05-06 15:11:13',
-            'created' => '2016-05-06 15:11:13'
+            'modified' => '2016-05-06 15:51:50',
+            'created' => '2016-05-06 15:51:50'
         ],
     ];
 }

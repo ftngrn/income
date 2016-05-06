@@ -17,7 +17,7 @@
 -->
 	<li><?= $this->Html->link("真幼会役員", ['controller'=>'ptas', 'action'=>'index']);?></li>
 	<li><?= $this->Html->link("教職員", ['controller'=>'staffs', 'action'=>'index']);?></li>
-	<li><?= $this->Html->link("保護者", ['controller'=>'parents', 'action'=>'index']);?></li>
+	<li><?= $this->Html->link("保護者", ['controller'=>'guardians', 'action'=>'index']);?></li>
 	<li><?= $this->Html->link("園児", ['controller'=>'children', 'action'=>'index']);?></li>
 	<li><?= $this->Html->link("バス停", ['controller'=>'busstops', 'action'=>'index']);?></li>
 	<li><?= $this->Html->link("変更履歴", ['controller'=>'journals', 'action'=>'index']);?></li>

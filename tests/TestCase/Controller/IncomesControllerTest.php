@@ -28,11 +28,11 @@ class IncomesControllerTest extends IntegrationTestCase
         'app.journals',
         'app.vacations',
         'app.weekly_ideas',
+        'app.weekly_idea_details',
+        'app.weeklyeas',
         'app.ptas',
         'app.busstops',
-        'app.busstops_guardians',
-        'app.busstops_child_parents',
-        'app.child_parents'
+        'app.busstops_guardians'
     ];
 
     /**

@@ -4,6 +4,8 @@
         <li><?= $this->Html->link(__('New Income'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Children'), ['controller' => 'Children', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Child'), ['controller' => 'Children', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Guardians'), ['controller' => 'Guardians', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Guardian'), ['controller' => 'Guardians', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Staffs'), ['controller' => 'Staffs', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Staff'), ['controller' => 'Staffs', 'action' => 'add']) ?></li>
     </ul>
@@ -45,7 +47,7 @@
             <tr>
                 <td><?= $this->Number->format($income->id) ?></td>
                 <td><?= $income->has('child') ? $this->Html->link($income->child->name, ['controller' => 'Children', 'action' => 'view', $income->child->id]) : '' ?></td>
-                <td><?= $this->Number->format($income->guardian_id) ?></td>
+                <td><?= $income->has('guardian') ? $this->Html->link($income->guardian->id, ['controller' => 'Guardians', 'action' => 'view', $income->guardian->id]) : '' ?></td>
                 <td><?= $income->has('staff') ? $this->Html->link($income->staff->name, ['controller' => 'Staffs', 'action' => 'view', $income->staff->id]) : '' ?></td>
                 <td><?= $this->Number->format($income->income_types) ?></td>
                 <td><?= h($income->cautions) ?></td>

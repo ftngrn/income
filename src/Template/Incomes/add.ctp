@@ -4,6 +4,8 @@
         <li><?= $this->Html->link(__('List Incomes'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Children'), ['controller' => 'Children', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Child'), ['controller' => 'Children', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Guardians'), ['controller' => 'Guardians', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Guardian'), ['controller' => 'Guardians', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Staffs'), ['controller' => 'Staffs', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Staff'), ['controller' => 'Staffs', 'action' => 'add']) ?></li>
     </ul>
@@ -14,7 +16,7 @@
         <legend><?= __('Add Income') ?></legend>
         <?php
             echo $this->Form->input('child_id', ['options' => $children]);
-            echo $this->Form->input('guardian_id');
+            echo $this->Form->input('guardian_id', ['options' => $guardians]);
             echo $this->Form->input('staff_id', ['options' => $staffs]);
             echo $this->Form->input('income_types');
             echo $this->Form->input('cautions');

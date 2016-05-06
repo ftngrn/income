@@ -19,7 +19,7 @@ class IncomesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Children', 'ChildParents', 'Staffs']
+            'contain' => ['Children', 'Guardians', 'Staffs']
         ];
         $incomes = $this->paginate($this->Incomes);
 
@@ -37,7 +37,7 @@ class IncomesController extends AppController
     public function view($id = null)
     {
         $income = $this->Incomes->get($id, [
-            'contain' => ['Children', 'ChildParents', 'Staffs']
+            'contain' => ['Children', 'Guardians', 'Staffs']
         ]);
 
         $this->set('income', $income);
@@ -62,9 +62,9 @@ class IncomesController extends AppController
             }
         }
         $children = $this->Incomes->Children->find('list', ['limit' => 200]);
-        $childParents = $this->Incomes->ChildParents->find('list', ['limit' => 200]);
+        $guardians = $this->Incomes->Guardians->find('list', ['limit' => 200]);
         $staffs = $this->Incomes->Staffs->find('list', ['limit' => 200]);
-        $this->set(compact('income', 'children', 'childParents', 'staffs'));
+        $this->set(compact('income', 'children', 'guardians', 'staffs'));
         $this->set('_serialize', ['income']);
     }
 
@@ -90,9 +90,9 @@ class IncomesController extends AppController
             }
         }
         $children = $this->Incomes->Children->find('list', ['limit' => 200]);
-        $childParents = $this->Incomes->ChildParents->find('list', ['limit' => 200]);
+        $guardians = $this->Incomes->Guardians->find('list', ['limit' => 200]);
         $staffs = $this->Incomes->Staffs->find('list', ['limit' => 200]);
-        $this->set(compact('income', 'children', 'childParents', 'staffs'));
+        $this->set(compact('income', 'children', 'guardians', 'staffs'));
         $this->set('_serialize', ['income']);
     }
 

@@ -10,6 +10,7 @@ use Cake\ORM\Entity;
  * @property int $child_id
  * @property \App\Model\Entity\Child $child
  * @property int $guardian_id
+ * @property \App\Model\Entity\Guardian $guardian
  * @property int $staff_id
  * @property \App\Model\Entity\Staff $staff
  * @property int $income_types
@@ -33,7 +34,6 @@ use Cake\ORM\Entity;
  * @property string $memo
  * @property \Cake\I18n\Time $modified
  * @property \Cake\I18n\Time $created
- * @property \App\Model\Entity\ChildParent $child_parent
  */
 class Income extends Entity
 {

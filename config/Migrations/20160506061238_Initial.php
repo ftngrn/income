@@ -93,14 +93,14 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
-        $table = $this->table('busstops_parents');
+        $table = $this->table('busstops_guardians');
         $table
             ->addColumn('busstop_id', 'integer', [
                 'default' => null,
                 'limit' => 11,
                 'null' => false,
             ])
-            ->addColumn('parent_id', 'integer', [
+            ->addColumn('guardian_id', 'integer', [
                 'default' => null,
                 'limit' => 11,
                 'null' => false,
@@ -136,7 +136,7 @@ class Initial extends AbstractMigration
                 'limit' => 11,
                 'null' => false,
             ])
-            ->addColumn('parent_id', 'integer', [
+            ->addColumn('guardian_id', 'integer', [
                 'default' => null,
                 'limit' => 11,
                 'null' => false,
@@ -252,7 +252,7 @@ class Initial extends AbstractMigration
                 'limit' => 11,
                 'null' => false,
             ])
-            ->addColumn('parent_id', 'integer', [
+            ->addColumn('guardian_id', 'integer', [
                 'default' => null,
                 'limit' => 11,
                 'null' => false,
@@ -408,6 +408,44 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
+        $table = $this->table('comments');
+        $table
+            ->addColumn('commented_id', 'integer', [
+                'comment' => 'コメント対象ID',
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ])
+            ->addColumn('commented_model', 'string', [
+                'comment' => 'コメント対象モデル名',
+                'default' => null,
+                'limit' => 64,
+                'null' => false,
+            ])
+            ->addColumn('staff_id', 'integer', [
+                'comment' => 'コメントした教職員ID',
+                'default' => null,
+                'limit' => 11,
+                'null' => true,
+            ])
+            ->addColumn('body', 'text', [
+                'comment' => 'コメント内容',
+                'default' => null,
+                'limit' => 16777215,
+                'null' => true,
+            ])
+            ->addColumn('modified', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->addColumn('created', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->create();
+
         $table = $this->table('daily_reports');
         $table
             ->addColumn('date', 'date', [
@@ -517,157 +555,7 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
-        $table = $this->table('incomes');
-        $table
-            ->addColumn('child_id', 'integer', [
-                'default' => null,
-                'limit' => 11,
-                'null' => false,
-            ])
-            ->addColumn('parent_id', 'integer', [
-                'comment' => '登録した保護者ID',
-                'default' => null,
-                'limit' => 11,
-                'null' => false,
-            ])
-            ->addColumn('staff_id', 'integer', [
-                'comment' => '登録した教職員ID',
-                'default' => null,
-                'limit' => 11,
-                'null' => false,
-            ])
-            ->addColumn('income_type', 'integer', [
-                'comment' => '連絡種別（欠席/朝送り/迎え/預かり/遅刻/連絡 etc）',
-                'default' => null,
-                'limit' => 11,
-                'null' => false,
-            ])
-            ->addColumn('absence_type', 'integer', [
-                'comment' => '欠席種別（病欠/私用/事故/忌引）',
-                'default' => null,
-                'limit' => 11,
-                'null' => false,
-            ])
-            ->addColumn('start', 'date', [
-                'comment' => '出欠の開始日',
-                'default' => null,
-                'limit' => null,
-                'null' => true,
-            ])
-            ->addColumn('end', 'date', [
-                'comment' => '出欠の最終日',
-                'default' => null,
-                'limit' => null,
-                'null' => true,
-            ])
-            ->addColumn('repeat_type', 'string', [
-                'comment' => '繰り返す種類（毎日/毎週）',
-                'default' => null,
-                'limit' => 16,
-                'null' => true,
-            ])
-            ->addColumn('repeat_week', 'string', [
-                'comment' => '繰り返す曜日',
-                'default' => null,
-                'limit' => 8,
-                'null' => true,
-            ])
-            ->addColumn('sickness', 'string', [
-                'comment' => '病名',
-                'default' => null,
-                'limit' => 64,
-                'null' => true,
-            ])
-            ->addColumn('ip_addr', 'string', [
-                'default' => null,
-                'limit' => 128,
-                'null' => true,
-            ])
-            ->addColumn('memo', 'text', [
-                'default' => null,
-                'limit' => null,
-                'null' => true,
-            ])
-            ->addColumn('modified', 'datetime', [
-                'default' => null,
-                'limit' => null,
-                'null' => true,
-            ])
-            ->addColumn('created', 'datetime', [
-                'default' => null,
-                'limit' => null,
-                'null' => true,
-            ])
-            ->create();
-
-        $table = $this->table('journal_details');
-        $table
-            ->addColumn('journal_id', 'integer', [
-                'comment' => '変更履歴ID',
-                'default' => null,
-                'limit' => 11,
-                'null' => false,
-            ])
-            ->addColumn('journalized_key', 'string', [
-                'comment' => '変更したモデルのキー名',
-                'default' => null,
-                'limit' => 64,
-                'null' => false,
-            ])
-            ->addColumn('old_value', 'text', [
-                'comment' => '古い値',
-                'default' => null,
-                'limit' => 16777215,
-                'null' => false,
-            ])
-            ->addColumn('value', 'text', [
-                'comment' => '新しい値',
-                'default' => null,
-                'limit' => 16777215,
-                'null' => false,
-            ])
-            ->create();
-
-        $table = $this->table('journals');
-        $table
-            ->addColumn('journalized_id', 'integer', [
-                'comment' => '変更対象ID',
-                'default' => null,
-                'limit' => 11,
-                'null' => false,
-            ])
-            ->addColumn('journalized_model', 'string', [
-                'comment' => '変更対象モデル名',
-                'default' => null,
-                'limit' => 64,
-                'null' => false,
-            ])
-            ->addColumn('staff_id', 'integer', [
-                'comment' => '更新した教職員ID',
-                'default' => null,
-                'limit' => 11,
-                'null' => true,
-            ])
-            ->addColumn('parent_id', 'integer', [
-                'comment' => '更新した保護者ID',
-                'default' => null,
-                'limit' => 11,
-                'null' => true,
-            ])
-            ->addColumn('note', 'text', [
-                'comment' => '更新メモ',
-                'default' => null,
-                'limit' => null,
-                'null' => true,
-            ])
-            ->addColumn('created', 'datetime', [
-                'default' => null,
-                'limit' => null,
-                'null' => true,
-            ])
-            ->create();
-
-        $table = $this->table('parents');
+        $table = $this->table('guardians');
         $table
             ->addColumn('account', 'string', [
                 'comment' => 'アカウント名',
@@ -767,6 +655,216 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
+        $table = $this->table('incomes');
+        $table
+            ->addColumn('child_id', 'integer', [
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ])
+            ->addColumn('guardian_id', 'integer', [
+                'comment' => '登録した保護者ID',
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ])
+            ->addColumn('staff_id', 'integer', [
+                'comment' => '登録した教職員ID',
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ])
+            ->addColumn('income_types', 'integer', [
+                'comment' => '連絡種別（欠席/朝送り/迎え/預かり/遅刻/連絡 etc）',
+                'default' => null,
+                'limit' => 11,
+                'null' => true,
+            ])
+            ->addColumn('cautions', 'string', [
+                'comment' => '注意事項（帰りモチ/園だより/荷物）',
+                'default' => null,
+                'limit' => 128,
+                'null' => true,
+            ])
+            ->addColumn('absence_type', 'string', [
+                'comment' => '欠席種別（病欠/私用/事故/忌引）',
+                'default' => null,
+                'limit' => 128,
+                'null' => true,
+            ])
+            ->addColumn('childcare_start', 'time', [
+                'comment' => '預かり保育開始時間',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->addColumn('childcare_end', 'time', [
+                'comment' => '預かり保育終了時間',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->addColumn('childcare_meal', 'boolean', [
+                'comment' => '預かり保育給食利用（1:利用',
+                'default' => 0,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addColumn('start', 'date', [
+                'comment' => '出欠の開始日',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->addColumn('end', 'date', [
+                'comment' => '出欠の最終日',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->addColumn('repeat_type', 'string', [
+                'comment' => '繰り返す種類（毎日/毎週）',
+                'default' => null,
+                'limit' => 16,
+                'null' => true,
+            ])
+            ->addColumn('repeat_week', 'string', [
+                'comment' => '繰り返す曜日',
+                'default' => null,
+                'limit' => 8,
+                'null' => true,
+            ])
+            ->addColumn('sickness', 'string', [
+                'comment' => '病名',
+                'default' => null,
+                'limit' => 128,
+                'null' => true,
+            ])
+            ->addColumn('consulted', 'date', [
+                'comment' => '受診日',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->addColumn('fevered', 'date', [
+                'comment' => '発熱した日',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->addColumn('recovered', 'date', [
+                'comment' => '回復日',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->addColumn('temperature', 'float', [
+                'comment' => '体温',
+                'default' => null,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addColumn('cough', 'boolean', [
+                'comment' => '咳の有無（1:有',
+                'default' => 0,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addColumn('route', 'string', [
+                'comment' => '感染経路',
+                'default' => null,
+                'limit' => 128,
+                'null' => true,
+            ])
+            ->addColumn('ip_addr', 'string', [
+                'default' => null,
+                'limit' => 128,
+                'null' => true,
+            ])
+            ->addColumn('memo', 'text', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->addColumn('modified', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->addColumn('created', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->create();
+
+        $table = $this->table('journal_details');
+        $table
+            ->addColumn('journal_id', 'integer', [
+                'comment' => '変更履歴ID',
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ])
+            ->addColumn('journalized_key', 'string', [
+                'comment' => '変更したモデルのキー名',
+                'default' => null,
+                'limit' => 64,
+                'null' => false,
+            ])
+            ->addColumn('old_value', 'text', [
+                'comment' => '古い値',
+                'default' => null,
+                'limit' => 16777215,
+                'null' => false,
+            ])
+            ->addColumn('value', 'text', [
+                'comment' => '新しい値',
+                'default' => null,
+                'limit' => 16777215,
+                'null' => false,
+            ])
+            ->create();
+
+        $table = $this->table('journals');
+        $table
+            ->addColumn('journalized_id', 'integer', [
+                'comment' => '変更対象ID',
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ])
+            ->addColumn('journalized_model', 'string', [
+                'comment' => '変更対象モデル名',
+                'default' => null,
+                'limit' => 64,
+                'null' => false,
+            ])
+            ->addColumn('staff_id', 'integer', [
+                'comment' => '更新した教職員ID',
+                'default' => null,
+                'limit' => 11,
+                'null' => true,
+            ])
+            ->addColumn('child_parent_id', 'integer', [
+                'comment' => '更新した保護者ID',
+                'default' => null,
+                'limit' => 11,
+                'null' => true,
+            ])
+            ->addColumn('note', 'text', [
+                'comment' => '更新メモ',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->addColumn('created', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->create();
+
         $table = $this->table('photos');
         $table
             ->addColumn('model', 'string', [
@@ -831,7 +929,7 @@ class Initial extends AbstractMigration
 
         $table = $this->table('ptas');
         $table
-            ->addColumn('parent_id', 'integer', [
+            ->addColumn('guardian_id', 'integer', [
                 'comment' => '保護者ID（parentsに登録されているとは限らないので0もありえる）',
                 'default' => null,
                 'limit' => 11,
@@ -1247,16 +1345,17 @@ class Initial extends AbstractMigration
     public function down()
     {
         $this->dropTable('busstops');
-        $this->dropTable('busstops_parents');
+        $this->dropTable('busstops_guardians');
         $this->dropTable('child_healths');
         $this->dropTable('child_medication_histories');
         $this->dropTable('child_medications');
         $this->dropTable('children');
+        $this->dropTable('comments');
         $this->dropTable('daily_reports');
+        $this->dropTable('guardians');
         $this->dropTable('incomes');
         $this->dropTable('journal_details');
         $this->dropTable('journals');
-        $this->dropTable('parents');
         $this->dropTable('photos');
         $this->dropTable('ptas');
         $this->dropTable('staffs');

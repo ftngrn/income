@@ -1,22 +1,16 @@
 <?php
-$this->assign('title', '日誌');
+$this->assign('title', '日誌を書き足す');
 $this->extend('../Layout/bootstrap-ui/dashboard');
-?>
 
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $dailyReport->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $dailyReport->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Daily Reports'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Staffs'), ['controller' => 'Staffs', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Staff'), ['controller' => 'Staffs', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+$week_day = ['日', '月', '火', '水', '木', '金', '土'];
+?>
+<?php $this->start('tb_left_actions'); ?>
+<li><?= $this->Html->link('日誌', ['action' => 'index']) ?></li>
+<li><?= $this->Html->link('日誌を書く', ['action' => 'add']) ?></li>
+<li><?= $this->Html->link('再利用する', ['action' => 'add', 'source' => $dailyReport->id]) ?></li>
+<li><?= $this->Form->postLink('削除', ['action' => 'delete', $dailyReport->id],['confirm' => '削除します。よろしいですか？']) ?></li>
+<?php $this->end(); ?>
+
 <div class="dailyReports form large-9 medium-8 columns content">
 <?= $this->Form->create($dailyReport) ?>
 <table class="table table-hover table-responsive">

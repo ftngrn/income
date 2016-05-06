@@ -1,16 +1,13 @@
 <?php
-$this->assign('title', '日誌');
+$this->assign('title', '日誌を書く');
 $this->extend('../Layout/bootstrap-ui/dashboard');
-?>
 
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Daily Reports'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Staffs'), ['controller' => 'Staffs', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Staff'), ['controller' => 'Staffs', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+$week_day = ['日', '月', '火', '水', '木', '金', '土'];
+?>
+<?php $this->start('tb_left_actions'); ?>
+<li><?= $this->Html->link('日誌', ['action' => 'index']) ?></li>
+<?php $this->end(); ?>
+
 <?php
 	$agenda_for_teacher =<<<_EOT_
 08:30　登園・身支度・自由遊び

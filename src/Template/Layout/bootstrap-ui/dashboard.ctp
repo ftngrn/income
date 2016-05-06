@@ -20,23 +20,16 @@ $this->start('tb_body_start');
                 <a class="navbar-brand" href="<?= Router::url(['controller'=>'Pages', 'action' => 'display', 'menu']) ?>"><?= Configure::read('App.title') ?></a>
             </div>
             <div class="navbar-collapse collapse">
-<!--
 								<ul class="nav navbar-nav navbar-left">
                     <li class="nav-divider"></li>
-                    <li><a href="#">出欠</a></li>
-                    <li><a href="#">日誌</a></li>
-                    <li><a href="#">検索</a></li>
+                    <?= $this->fetch('tb_left_actions') ?>
                 </ul>
--->
+								<ul class="nav navbar-nav navbar-right">
+                    <?= $this->fetch('tb_right_actions') ?>
+                </ul>
                 <ul class="nav navbar-nav navbar-right visible-xs">
                     <?= $this->fetch('tb_actions') ?>
                 </ul>
-<!--
-								<ul class="nav navbar-nav navbar-right">
-                    <li class="nav-divider"></li>
-                    <li><a href="#">ログイン</a></li>
-                </ul>
--->
 <!--
 								<form class="navbar-form navbar-right">
                     <input type="text" class="form-control" placeholder="Search...">

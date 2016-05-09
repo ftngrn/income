@@ -140,7 +140,7 @@ $this->append('css', $html5Shim);
     echo $this->fetch('tb_body_end');
     ?>
 
-<?= $this->Html->scriptStart() ?>
+<?= $this->Html->scriptStart(['block' => true]) ?>
 $(function() {
 	$(".datepicker").datepicker({
 		dateFormat: "yy-mm-dd",

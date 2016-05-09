@@ -1,103 +1,63 @@
 <?php
-$this->assign('title', '日誌');
+use Cake\I18n\Date;
 $this->extend('../Layout/bootstrap-ui/dashboard');
-?>
 
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Daily Report'), ['action' => 'edit', $dailyReport->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Daily Report'), ['action' => 'delete', $dailyReport->id], ['confirm' => __('Are you sure you want to delete # {0}?', $dailyReport->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Daily Reports'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Daily Report'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Staffs'), ['controller' => 'Staffs', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Staff'), ['controller' => 'Staffs', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="dailyReports view large-9 medium-8 columns content">
-    <h3><?= h($dailyReport->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th><?= __('Room') ?></th>
-            <td><?= h($dailyReport->room) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Staff') ?></th>
-            <td><?= $dailyReport->has('staff') ? $this->Html->link($dailyReport->staff->name, ['controller' => 'Staffs', 'action' => 'view', $dailyReport->staff->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($dailyReport->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Date') ?></th>
-            <td><?= h($dailyReport->date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Principal Checked') ?></th>
-            <td><?= h($dailyReport->principal_checked) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Sub Checked') ?></th>
-            <td><?= h($dailyReport->sub_checked) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Chief1 Checked') ?></th>
-            <td><?= h($dailyReport->chief1_checked) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Chief2 Checked') ?></th>
-            <td><?= h($dailyReport->chief2_checked) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Modified') ?></th>
-            <td><?= h($dailyReport->modified) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Created') ?></th>
-            <td><?= h($dailyReport->created) ?></td>
-        </tr>
-    </table>
-    <div class="row">
-        <h4><?= __('Activity') ?></h4>
-				<p class="marked"><?= h($dailyReport->activity) ?></p>
-    </div>
-    <div class="row marked">
-        <h4><?= __('Objective') ?></h4>
-				<p class="marked"><?= h($dailyReport->objective) ?></p>
-    </div>
-    <div class="row">
-        <h4><?= __('Movement') ?></h4>
-				<p class="marked"><?= h($dailyReport->movement) ?></p>
-    </div>
-    <div class="row">
-        <h4><?= __('Distribution') ?></h4>
-				<p class="marked"><?= h($dailyReport->distribution) ?></p>
-    </div>
-    <div class="row">
-        <h4><?= __('Agenda') ?></h4>
-				<p class="marked"><?= h($dailyReport->agenda) ?></p>
-    </div>
-    <div class="row">
-        <h4><?= __('Gist') ?></h4>
-				<p class="marked"><?= h($dailyReport->gist) ?></p>
-    </div>
-    <div class="row">
-        <h4><?= __('Report') ?></h4>
-				<p class="marked"><?= h($dailyReport->report) ?></p>
-    </div>
-    <div class="row">
-        <h4><?= __('Problem') ?></h4>
-				<p class="marked"><?= h($dailyReport->problem) ?></p>
-    </div>
-    <div class="row">
-        <h4><?= __('Injury') ?></h4>
-				<p class="marked"><?= h($dailyReport->injury) ?></p>
-    </div>
+$week_day = ['日', '月', '火', '水', '木', '金', '土'];
+$date = new Date($dailyReport->date);
+$date_str = sprintf('<span class="date">%s</span><span class="week">%s</span>', $date->format('n/j'), $week_day[$date->format('w')]);
+$this->assign('title', sprintf('日誌<span class="dateweek">%s</span><span class="room">%s</span><span class="name">%s</span>', $date_str, $dailyReport->room, $dailyReport->staff->name));
+?>
+<?php $this->start('tb_left_actions'); ?>
+<li><?= $this->Html->link('日誌', ['action' => 'index']) ?></li>
+<li><?= $this->Html->link('日誌を書く', ['action' => 'add']) ?></li>
+<li><?= $this->Html->link('再利用する', ['action' => 'add', 'source' => $dailyReport->id]) ?></li>
+<li><?= $this->Form->postLink('削除', ['action' => 'delete', $dailyReport->id],['confirm' => '削除します。よろしいですか？']) ?></li>
+<?php $this->end(); ?>
+
+<div class="row dailyReports view large-9 medium-8 columns content">
+	<div class="report col-sm-9 col-md-9">
+		<h2>主な活動</h2>
+		<p class="marked"><?= h($dailyReport->activity) ?></p>
+		<h2>ねらい</h2>
+		<p class="marked"><?= h($dailyReport->objective) ?></p>
+		<h2>保育の流れ</h2>
+		<p class="marked"><?= h($dailyReport->agenda) ?></p>
+		<h2>やること・指導の要点</h2>
+		<p class="marked"><?= h($dailyReport->gist) ?></p>
+		<h2>感想・反省</h2>
+		<p class="marked"><?= h($dailyReport->report) ?></p>
+		<h2>問題・課題</h2>
+		<p class="marked"><?= h($dailyReport->problem) ?></p>
+		<h2>ケガ</h2>
+		<p class="marked"><?= h($dailyReport->injury) ?></p>
+		<h2>欠席・入退園</h2>
+		<p class="marked"><?= h($dailyReport->movement) ?></p>
+		<h2>配布物</h2>
+		<p class="marked"><?= h($dailyReport->distribution) ?></p>
+	</div>
+	<div class="report-sub col-sm-3 col-md-3">
+		<h2>その他の情報</h2>
+		<dl class="dl-horizontal">
+			<dt>クラス名</dt>
+			<dd><?= h($dailyReport->room) ?></dd>
+			<dt>教職員名</dt>
+			<dd><?= h($dailyReport->staff->name) ?></dd>
+			<dt>園長確認</dt>
+			<dd><?= h($dailyReport->principal_checked) ?></dd>
+			<dt>副園長確認</dt>
+			<dd><?= h($dailyReport->sub_checked) ?></dd>
+			<dt>主任確認1</dt>
+			<dd><?= h($dailyReport->chief1_checked) ?></dd>
+			<dt>主任確認2</dt>
+			<dd><?= h($dailyReport->chief2_checked) ?></dd>
+			<dt>初回日時</dt>
+			<dd><?= h($dailyReport->created) ?></dd>
+		</dl>
+	</div>
 </div>
 
 <!-- Markdown用のCSS,JS -->
-<?= $this->Html->css('marked') ?>
+<?= $this->Html->css(['marked', 'report']) ?>
 <?= $this->Html->scriptStart(['block' => true]) ?>
 $(function() {
 	$('p.marked').each(function(i, block) {

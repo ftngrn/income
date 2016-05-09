@@ -98,10 +98,11 @@ $this->extend('../Layout/bootstrap-ui/dashboard');
 
 <!-- Markdown用のCSS,JS -->
 <?= $this->Html->css('marked') ?>
-<script>
+<?= $this->Html->scriptStart(['block' => true]) ?>
 $(function() {
 	$('p.marked').each(function(i, block) {
 		$(this).html(marked($(block).text()));
 	});
 });
-</script>
+<?= $this->Html->scriptEnd() ?>
+

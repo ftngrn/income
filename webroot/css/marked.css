@@ -3,7 +3,8 @@
  *
  */
 ol, ul {
-	list-style: inside;
+	list-style: inherit;
+	margin-left: 1.5em;
 }
 ol {
 	list-style-type: decimal;

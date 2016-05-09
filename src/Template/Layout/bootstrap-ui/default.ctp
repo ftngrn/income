@@ -121,6 +121,7 @@ $this->append('css', $html5Shim);
 					'https://code.jquery.com/ui/1.11.4/jquery-ui.min.js',
 					'https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js',
 					'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',
+					'https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js',
 		]) ?>
 
 		<?= $this->fetch('meta') ?>

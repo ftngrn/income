@@ -60,38 +60,48 @@ $this->extend('../Layout/bootstrap-ui/dashboard');
     </table>
     <div class="row">
         <h4><?= __('Activity') ?></h4>
-        <?= $this->Text->autoParagraph(h($dailyReport->activity)); ?>
+				<p class="marked"><?= h($dailyReport->activity) ?></p>
     </div>
-    <div class="row">
+    <div class="row marked">
         <h4><?= __('Objective') ?></h4>
-        <?= $this->Text->autoParagraph(h($dailyReport->objective)); ?>
+				<p class="marked"><?= h($dailyReport->objective) ?></p>
     </div>
     <div class="row">
         <h4><?= __('Movement') ?></h4>
-        <?= $this->Text->autoParagraph(h($dailyReport->movement)); ?>
+				<p class="marked"><?= h($dailyReport->movement) ?></p>
     </div>
     <div class="row">
         <h4><?= __('Distribution') ?></h4>
-        <?= $this->Text->autoParagraph(h($dailyReport->distribution)); ?>
+				<p class="marked"><?= h($dailyReport->distribution) ?></p>
     </div>
     <div class="row">
         <h4><?= __('Agenda') ?></h4>
-        <?= $this->Text->autoParagraph(h($dailyReport->agenda)); ?>
+				<p class="marked"><?= h($dailyReport->agenda) ?></p>
     </div>
     <div class="row">
         <h4><?= __('Gist') ?></h4>
-        <?= $this->Text->autoParagraph(h($dailyReport->gist)); ?>
+				<p class="marked"><?= h($dailyReport->gist) ?></p>
     </div>
     <div class="row">
         <h4><?= __('Report') ?></h4>
-        <?= $this->Text->autoParagraph(h($dailyReport->report)); ?>
+				<p class="marked"><?= h($dailyReport->report) ?></p>
     </div>
     <div class="row">
         <h4><?= __('Problem') ?></h4>
-        <?= $this->Text->autoParagraph(h($dailyReport->problem)); ?>
+				<p class="marked"><?= h($dailyReport->problem) ?></p>
     </div>
     <div class="row">
         <h4><?= __('Injury') ?></h4>
-        <?= $this->Text->autoParagraph(h($dailyReport->injury)); ?>
+				<p class="marked"><?= h($dailyReport->injury) ?></p>
     </div>
 </div>
+
+<!-- Markdown用のCSS,JS -->
+<?= $this->Html->css('marked') ?>
+<script>
+$(function() {
+	$('p.marked').each(function(i, block) {
+		$(this).html(marked($(block).text()));
+	});
+});
+</script>

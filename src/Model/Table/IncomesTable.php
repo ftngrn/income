@@ -80,7 +80,7 @@ class IncomesTable extends Table
         $validator
             ->boolean('childcare_meal')
             ->requirePresence('childcare_meal', 'create')
-            ->notEmpty('childcare_meal');
+            ->allowEmpty('childcare_meal');
 
         $validator
             ->date('start')
@@ -114,12 +114,12 @@ class IncomesTable extends Table
         $validator
             ->numeric('temperature')
             ->requirePresence('temperature', 'create')
-            ->notEmpty('temperature');
+            ->allowEmpty('temperature');
 
         $validator
             ->boolean('cough')
             ->requirePresence('cough', 'create')
-            ->notEmpty('cough');
+            ->allowEmpty('cough');
 
         $validator
             ->allowEmpty('route');

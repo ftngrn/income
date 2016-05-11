@@ -60,6 +60,23 @@ $this->assign('title', sprintf('日誌<span class="dateweek">%s</span><span clas
 <?= $this->Html->css(['marked', 'report']) ?>
 <?= $this->Html->scriptStart(['block' => true]) ?>
 $(function() {
+	//tableにはclassを追加する
+	var renderer = new marked.Renderer();
+	renderer.table = function(header, body) {
+		return '<table class="table table-hover table-responsive">\n'
+			+ '<thead>\n'
+			+ header
+			+ '</thead>\n'
+			+ '<tbody>\n'
+			+ body
+			+ '</tbody>\n'
+			+ '</table>\n';
+	};
+	marked.setOptions({
+		renderer: renderer,
+	});
+
+	//Marked.js適用
 	$('p.marked').each(function(i, block) {
 		$(this).html(marked($(block).text()));
 	});

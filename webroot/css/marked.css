@@ -17,4 +17,11 @@ pre, code, var, samp, kbd, .mono {
 	font-size: 14px;
 	line-height: 1.2;
 }
+.table {
+	width: auto;
+	max-width: auto;
+}
+.table th {
+	font-weight: bold;
+}
 

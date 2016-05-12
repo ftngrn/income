@@ -65,6 +65,18 @@ class DailyReportsController extends AppController
             }
         } else
 				if (isset($this->request->query['source']) && is_numeric($this->request->query['source'])) {
+					$agenda_for_teacher =<<<_EOT_
+|時刻|内容|
+|---:|----|
+|8:30|登園・身支度・自由遊び|
+|9:50|片付け|
+|10:10|朝の会|
+|10:20|主な活動|
+|11:30|昼食|
+|13:30|片付け・身支度・帰りの会|
+|14:00|降園|
+_EOT_;
+
 					//再利用するために指定されたIDのデータを取得
 					$source = $this->DailyReports->get(intVal($this->request->query['source']), [
 						'contain' => []
@@ -77,6 +89,7 @@ class DailyReportsController extends AppController
 						'activity' => $source->activity,
 						'objective' => $source->objective,
 						'agenda' => $source->agenda,
+//						'agenda' => $agenda_for_teacher,
 						'gist' => $source->gist,
 					]);
 				}

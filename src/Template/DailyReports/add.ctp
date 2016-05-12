@@ -8,18 +8,6 @@ $week_day = ['日', '月', '火', '水', '木', '金', '土'];
 <li><?= $this->Html->link('日誌', ['action' => 'index']) ?></li>
 <?php $this->end(); ?>
 
-<?php
-	$agenda_for_teacher =<<<_EOT_
-08:30　登園・身支度・自由遊び
-09:50　片付け
-10:10　朝の会
-10:20　主な活動
-11:30　昼食
-
-13:30　片付け・身支度・帰りの会
-14:00　降園
-_EOT_
-?>
 <div class="dailyReports form large-9 medium-8 columns content">
 <?= $this->Form->create($dailyReport) ?>
 <table class="table table-hover table-responsive">
@@ -45,7 +33,7 @@ _EOT_
 <?= $this->Form->input('objective', ['rows'=>1,'label'=>'ねらい']);?>
 </td></tr>
 <tr><td>
-<?= $this->Form->input('agenda', ['rows'=>8,'label'=>'その日の流れ','value'=>'']);?>
+<?= $this->Form->input('agenda', ['rows'=>8,'label'=>'その日の流れ']);?>
 </td><td>
 <?= $this->Form->input('gist', ['rows'=>8,'label'=>'やること・指導の要点']);?>
 </td></tr>

@@ -4,8 +4,9 @@ $this->extend('../Layout/bootstrap-ui/dashboard');
 
 $week_day = ['日', '月', '火', '水', '木', '金', '土'];
 $date = new Date($dailyReport->date);
+$this->assign('title', sprintf('日誌 %s %s %s', $date->format('n/j'), $dailyReport->room, $dailyReport->staff->name));
 $date_str = sprintf('<span class="date">%s</span><span class="week">%s</span>', $date->format('n/j'), $week_day[$date->format('w')]);
-$this->assign('title', sprintf('日誌<span class="dateweek">%s</span><span class="room">%s</span><span class="name">%s</span>', $date_str, $dailyReport->room, $dailyReport->staff->name));
+$this->assign('page_header', sprintf('日誌<span class="dateweek">%s</span><span class="room">%s</span><span class="name">%s</span>', $date_str, $dailyReport->room, $dailyReport->staff->name));
 ?>
 <?php $this->start('tb_left_actions'); ?>
 <li><?= $this->Html->link('日誌', ['action' => 'index']) ?></li>

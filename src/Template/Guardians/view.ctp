@@ -9,8 +9,12 @@
         <li><?= $this->Html->link(__('New Child Health'), ['controller' => 'ChildHealths', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Child Medications'), ['controller' => 'ChildMedications', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Child Medication'), ['controller' => 'ChildMedications', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Children'), ['controller' => 'Children', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Child'), ['controller' => 'Children', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Incomes'), ['controller' => 'Incomes', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Income'), ['controller' => 'Incomes', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Journals'), ['controller' => 'Journals', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Journal'), ['controller' => 'Journals', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Ptas'), ['controller' => 'Ptas', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Pta'), ['controller' => 'Ptas', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Busstops'), ['controller' => 'Busstops', 'action' => 'index']) ?> </li>
@@ -204,6 +208,77 @@
         <?php endif; ?>
     </div>
     <div class="related">
+        <h4><?= __('Related Children') ?></h4>
+        <?php if (!empty($guardian->children)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th><?= __('Id') ?></th>
+                <th><?= __('Guardian Id') ?></th>
+                <th><?= __('School') ?></th>
+                <th><?= __('Room') ?></th>
+                <th><?= __('Grade') ?></th>
+                <th><?= __('Bus') ?></th>
+                <th><?= __('Course') ?></th>
+                <th><?= __('Name') ?></th>
+                <th><?= __('Kana') ?></th>
+                <th><?= __('Sex') ?></th>
+                <th><?= __('Birthed') ?></th>
+                <th><?= __('Joined') ?></th>
+                <th><?= __('Finished') ?></th>
+                <th><?= __('Memo') ?></th>
+                <th><?= __('Season') ?></th>
+                <th><?= __('Number') ?></th>
+                <th><?= __('Oldname') ?></th>
+                <th><?= __('Newschool') ?></th>
+                <th><?= __('Newzip') ?></th>
+                <th><?= __('Newpref') ?></th>
+                <th><?= __('Newaddr') ?></th>
+                <th><?= __('Newaddr2') ?></th>
+                <th><?= __('Newtel') ?></th>
+                <th><?= __('Nondelivery') ?></th>
+                <th><?= __('Modified') ?></th>
+                <th><?= __('Created') ?></th>
+                <th class="actions"><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($guardian->children as $children): ?>
+            <tr>
+                <td><?= h($children->id) ?></td>
+                <td><?= h($children->guardian_id) ?></td>
+                <td><?= h($children->school) ?></td>
+                <td><?= h($children->room) ?></td>
+                <td><?= h($children->grade) ?></td>
+                <td><?= h($children->bus) ?></td>
+                <td><?= h($children->course) ?></td>
+                <td><?= h($children->name) ?></td>
+                <td><?= h($children->kana) ?></td>
+                <td><?= h($children->sex) ?></td>
+                <td><?= h($children->birthed) ?></td>
+                <td><?= h($children->joined) ?></td>
+                <td><?= h($children->finished) ?></td>
+                <td><?= h($children->memo) ?></td>
+                <td><?= h($children->season) ?></td>
+                <td><?= h($children->number) ?></td>
+                <td><?= h($children->oldname) ?></td>
+                <td><?= h($children->newschool) ?></td>
+                <td><?= h($children->newzip) ?></td>
+                <td><?= h($children->newpref) ?></td>
+                <td><?= h($children->newaddr) ?></td>
+                <td><?= h($children->newaddr2) ?></td>
+                <td><?= h($children->newtel) ?></td>
+                <td><?= h($children->nondelivery) ?></td>
+                <td><?= h($children->modified) ?></td>
+                <td><?= h($children->created) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Children', 'action' => 'view', $children->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Children', 'action' => 'edit', $children->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Children', 'action' => 'delete', $children->id], ['confirm' => __('Are you sure you want to delete # {0}?', $children->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
+    <div class="related">
         <h4><?= __('Related Incomes') ?></h4>
         <?php if (!empty($guardian->incomes)): ?>
         <table cellpadding="0" cellspacing="0">
@@ -266,6 +341,39 @@
                     <?= $this->Html->link(__('View'), ['controller' => 'Incomes', 'action' => 'view', $incomes->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Incomes', 'action' => 'edit', $incomes->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Incomes', 'action' => 'delete', $incomes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $incomes->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
+    <div class="related">
+        <h4><?= __('Related Journals') ?></h4>
+        <?php if (!empty($guardian->journals)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th><?= __('Id') ?></th>
+                <th><?= __('Journalized Id') ?></th>
+                <th><?= __('Journalized Model') ?></th>
+                <th><?= __('Staff Id') ?></th>
+                <th><?= __('Guardian Id') ?></th>
+                <th><?= __('Note') ?></th>
+                <th><?= __('Created') ?></th>
+                <th class="actions"><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($guardian->journals as $journals): ?>
+            <tr>
+                <td><?= h($journals->id) ?></td>
+                <td><?= h($journals->journalized_id) ?></td>
+                <td><?= h($journals->journalized_model) ?></td>
+                <td><?= h($journals->staff_id) ?></td>
+                <td><?= h($journals->guardian_id) ?></td>
+                <td><?= h($journals->note) ?></td>
+                <td><?= h($journals->created) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Journals', 'action' => 'view', $journals->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Journals', 'action' => 'edit', $journals->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Journals', 'action' => 'delete', $journals->id], ['confirm' => __('Are you sure you want to delete # {0}?', $journals->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

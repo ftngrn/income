@@ -5,6 +5,8 @@
         <li><?= $this->Form->postLink(__('Delete Child'), ['action' => 'delete', $child->id], ['confirm' => __('Are you sure you want to delete # {0}?', $child->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Children'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Child'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Guardians'), ['controller' => 'Guardians', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Guardian'), ['controller' => 'Guardians', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Child Healths'), ['controller' => 'ChildHealths', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Child Health'), ['controller' => 'ChildHealths', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Child Medications'), ['controller' => 'ChildMedications', 'action' => 'index']) ?> </li>
@@ -18,6 +20,10 @@
 <div class="children view large-9 medium-8 columns content">
     <h3><?= h($child->name) ?></h3>
     <table class="vertical-table">
+        <tr>
+            <th><?= __('Guardian') ?></th>
+            <td><?= $child->has('guardian') ? $this->Html->link($child->guardian->id, ['controller' => 'Guardians', 'action' => 'view', $child->guardian->id]) : '' ?></td>
+        </tr>
         <tr>
             <th><?= __('School') ?></th>
             <td><?= h($child->school) ?></td>
@@ -81,10 +87,6 @@
         <tr>
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($child->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Guardian Id') ?></th>
-            <td><?= $this->Number->format($child->guardian_id) ?></td>
         </tr>
         <tr>
             <th><?= __('Season') ?></th>

@@ -2,6 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Child'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Guardians'), ['controller' => 'Guardians', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Guardian'), ['controller' => 'Guardians', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Child Healths'), ['controller' => 'ChildHealths', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Child Health'), ['controller' => 'ChildHealths', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Child Medications'), ['controller' => 'ChildMedications', 'action' => 'index']) ?></li>
@@ -49,7 +51,7 @@
             <?php foreach ($children as $child): ?>
             <tr>
                 <td><?= $this->Number->format($child->id) ?></td>
-                <td><?= $this->Number->format($child->guardian_id) ?></td>
+                <td><?= $child->has('guardian') ? $this->Html->link($child->guardian->id, ['controller' => 'Guardians', 'action' => 'view', $child->guardian->id]) : '' ?></td>
                 <td><?= h($child->school) ?></td>
                 <td><?= h($child->room) ?></td>
                 <td><?= h($child->grade) ?></td>

@@ -17,8 +17,8 @@ class ChildrenControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.children',
-        'app.child_healths',
         'app.guardians',
+        'app.child_healths',
         'app.child_medications',
         'app.received_staffs',
         'app.child_medication_histories',

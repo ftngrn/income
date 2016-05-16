@@ -2,6 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Children'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Guardians'), ['controller' => 'Guardians', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Guardian'), ['controller' => 'Guardians', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Child Healths'), ['controller' => 'ChildHealths', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Child Health'), ['controller' => 'ChildHealths', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Child Medications'), ['controller' => 'ChildMedications', 'action' => 'index']) ?></li>
@@ -17,7 +19,7 @@
     <fieldset>
         <legend><?= __('Add Child') ?></legend>
         <?php
-            echo $this->Form->input('guardian_id');
+            echo $this->Form->input('guardian_id', ['options' => $guardians]);
             echo $this->Form->input('school');
             echo $this->Form->input('room');
             echo $this->Form->input('grade');

@@ -34,7 +34,7 @@ class GuardiansController extends AppController
     public function view($id = null)
     {
         $guardian = $this->Guardians->get($id, [
-            'contain' => ['Busstops', 'ChildHealths', 'ChildMedications', 'Incomes', 'Ptas']
+            'contain' => ['Busstops', 'ChildHealths', 'ChildMedications', 'Children', 'Incomes', 'Journals', 'Ptas']
         ]);
 
         $this->set('guardian', $guardian);

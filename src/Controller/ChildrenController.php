@@ -18,6 +18,9 @@ class ChildrenController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Guardians']
+        ];
         $children = $this->paginate($this->Children);
 
         $this->set(compact('children'));
@@ -34,7 +37,7 @@ class ChildrenController extends AppController
     public function view($id = null)
     {
         $child = $this->Children->get($id, [
-            'contain' => ['ChildHealths', 'ChildMedications', 'Incomes', 'Ptas']
+            'contain' => ['Guardians', 'ChildHealths', 'ChildMedications', 'Incomes', 'Ptas']
         ]);
 
         $this->set('child', $child);
@@ -58,7 +61,8 @@ class ChildrenController extends AppController
                 $this->Flash->error(__('The child could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('child'));
+        $guardians = $this->Children->Guardians->find('list', ['limit' => 200]);
+        $this->set(compact('child', 'guardians'));
         $this->set('_serialize', ['child']);
     }
 
@@ -83,7 +87,8 @@ class ChildrenController extends AppController
                 $this->Flash->error(__('The child could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('child'));
+        $guardians = $this->Children->Guardians->find('list', ['limit' => 200]);
+        $this->set(compact('child', 'guardians'));
         $this->set('_serialize', ['child']);
     }
 

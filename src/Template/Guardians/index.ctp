@@ -28,11 +28,13 @@
                 <th><?= $this->Paginator->sort('mother_kana') ?></th>
                 <th><?= $this->Paginator->sort('father_name') ?></th>
                 <th><?= $this->Paginator->sort('father_kana') ?></th>
+                <th><?= $this->Paginator->sort('zip') ?></th>
                 <th><?= $this->Paginator->sort('pref') ?></th>
                 <th><?= $this->Paginator->sort('addr') ?></th>
                 <th><?= $this->Paginator->sort('addr2') ?></th>
                 <th><?= $this->Paginator->sort('mobile') ?></th>
                 <th><?= $this->Paginator->sort('tel') ?></th>
+                <th><?= $this->Paginator->sort('nondelivery') ?></th>
                 <th><?= $this->Paginator->sort('modified') ?></th>
                 <th><?= $this->Paginator->sort('created') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
@@ -50,11 +52,13 @@
                 <td><?= h($guardian->mother_kana) ?></td>
                 <td><?= h($guardian->father_name) ?></td>
                 <td><?= h($guardian->father_kana) ?></td>
+                <td><?= h($guardian->zip) ?></td>
                 <td><?= h($guardian->pref) ?></td>
                 <td><?= h($guardian->addr) ?></td>
                 <td><?= h($guardian->addr2) ?></td>
                 <td><?= h($guardian->mobile) ?></td>
                 <td><?= h($guardian->tel) ?></td>
+                <td><?= h($guardian->nondelivery) ?></td>
                 <td><?= h($guardian->modified) ?></td>
                 <td><?= h($guardian->created) ?></td>
                 <td class="actions">

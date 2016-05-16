@@ -23,6 +23,7 @@
     <fieldset>
         <legend><?= __('Edit Child') ?></legend>
         <?php
+            echo $this->Form->input('guardian_id');
             echo $this->Form->input('school');
             echo $this->Form->input('room');
             echo $this->Form->input('grade');
@@ -32,7 +33,19 @@
             echo $this->Form->input('kana');
             echo $this->Form->input('sex');
             echo $this->Form->input('birthed', ['empty' => true]);
+            echo $this->Form->input('joined', ['empty' => true]);
+            echo $this->Form->input('finished', ['empty' => true]);
             echo $this->Form->input('memo');
+            echo $this->Form->input('season');
+            echo $this->Form->input('number');
+            echo $this->Form->input('oldname');
+            echo $this->Form->input('newschool');
+            echo $this->Form->input('newzip');
+            echo $this->Form->input('newpref');
+            echo $this->Form->input('newaddr');
+            echo $this->Form->input('newaddr2');
+            echo $this->Form->input('newtel');
+            echo $this->Form->input('nondelivery');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

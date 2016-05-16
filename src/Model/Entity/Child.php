@@ -7,6 +7,7 @@ use Cake\ORM\Entity;
  * Child Entity.
  *
  * @property int $id
+ * @property int $guardian_id
  * @property string $school
  * @property string $room
  * @property string $grade
@@ -16,7 +17,19 @@ use Cake\ORM\Entity;
  * @property string $kana
  * @property string $sex
  * @property \Cake\I18n\Time $birthed
+ * @property \Cake\I18n\Time $joined
+ * @property \Cake\I18n\Time $finished
  * @property string $memo
+ * @property int $season
+ * @property int $number
+ * @property string $oldname
+ * @property string $newschool
+ * @property string $newzip
+ * @property string $newpref
+ * @property string $newaddr
+ * @property string $newaddr2
+ * @property string $newtel
+ * @property bool $nondelivery
  * @property \Cake\I18n\Time $modified
  * @property \Cake\I18n\Time $created
  * @property \App\Model\Entity\ChildHealth[] $child_healths

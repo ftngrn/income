@@ -25,14 +25,14 @@ class GuardiansControllerTest extends IntegrationTestCase
         'app.staffs',
         'app.daily_reports',
         'app.incomes',
-        'app.child_parents',
         'app.journals',
+        'app.vacations',
+        'app.weekly_ideas',
+        'app.weekly_idea_details',
+        'app.weeklyeas',
         'app.ptas',
         'app.busstops',
-        'app.busstops_guardians',
-        'app.busstops_child_parents',
-        'app.vacations',
-        'app.weekly_ideas'
+        'app.busstops_guardians'
     ];
 
     /**

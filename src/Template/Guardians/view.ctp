@@ -53,6 +53,10 @@
             <td><?= h($guardian->father_kana) ?></td>
         </tr>
         <tr>
+            <th><?= __('Zip') ?></th>
+            <td><?= h($guardian->zip) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Pref') ?></th>
             <td><?= h($guardian->pref) ?></td>
         </tr>
@@ -83,6 +87,10 @@
         <tr>
             <th><?= __('Created') ?></th>
             <td><?= h($guardian->created) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Nondelivery') ?></th>
+            <td><?= $guardian->nondelivery ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
     <div class="row">
@@ -279,9 +287,11 @@
                 <th><?= __('Job') ?></th>
                 <th><?= __('Zip') ?></th>
                 <th><?= __('Addr') ?></th>
+                <th><?= __('Addr2') ?></th>
                 <th><?= __('Tel') ?></th>
                 <th><?= __('Mobile') ?></th>
                 <th><?= __('Memo') ?></th>
+                <th><?= __('Nondelivery') ?></th>
                 <th><?= __('Modified') ?></th>
                 <th><?= __('Created') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
@@ -298,9 +308,11 @@
                 <td><?= h($ptas->job) ?></td>
                 <td><?= h($ptas->zip) ?></td>
                 <td><?= h($ptas->addr) ?></td>
+                <td><?= h($ptas->addr2) ?></td>
                 <td><?= h($ptas->tel) ?></td>
                 <td><?= h($ptas->mobile) ?></td>
                 <td><?= h($ptas->memo) ?></td>
+                <td><?= h($ptas->nondelivery) ?></td>
                 <td><?= h($ptas->modified) ?></td>
                 <td><?= h($ptas->created) ?></td>
                 <td class="actions">

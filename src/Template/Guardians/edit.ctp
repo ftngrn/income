@@ -33,6 +33,7 @@
             echo $this->Form->input('mother_kana');
             echo $this->Form->input('father_name');
             echo $this->Form->input('father_kana');
+            echo $this->Form->input('zip');
             echo $this->Form->input('pref');
             echo $this->Form->input('addr');
             echo $this->Form->input('addr2');
@@ -40,6 +41,7 @@
             echo $this->Form->input('tel');
             echo $this->Form->input('tels');
             echo $this->Form->input('memo');
+            echo $this->Form->input('nondelivery');
             echo $this->Form->input('busstops._ids', ['options' => $busstops]);
         ?>
     </fieldset>

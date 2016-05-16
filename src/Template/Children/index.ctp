@@ -18,6 +18,7 @@
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
+                <th><?= $this->Paginator->sort('guardian_id') ?></th>
                 <th><?= $this->Paginator->sort('school') ?></th>
                 <th><?= $this->Paginator->sort('room') ?></th>
                 <th><?= $this->Paginator->sort('grade') ?></th>
@@ -27,6 +28,18 @@
                 <th><?= $this->Paginator->sort('kana') ?></th>
                 <th><?= $this->Paginator->sort('sex') ?></th>
                 <th><?= $this->Paginator->sort('birthed') ?></th>
+                <th><?= $this->Paginator->sort('joined') ?></th>
+                <th><?= $this->Paginator->sort('finished') ?></th>
+                <th><?= $this->Paginator->sort('season') ?></th>
+                <th><?= $this->Paginator->sort('number') ?></th>
+                <th><?= $this->Paginator->sort('oldname') ?></th>
+                <th><?= $this->Paginator->sort('newschool') ?></th>
+                <th><?= $this->Paginator->sort('newzip') ?></th>
+                <th><?= $this->Paginator->sort('newpref') ?></th>
+                <th><?= $this->Paginator->sort('newaddr') ?></th>
+                <th><?= $this->Paginator->sort('newaddr2') ?></th>
+                <th><?= $this->Paginator->sort('newtel') ?></th>
+                <th><?= $this->Paginator->sort('nondelivery') ?></th>
                 <th><?= $this->Paginator->sort('modified') ?></th>
                 <th><?= $this->Paginator->sort('created') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
@@ -36,6 +49,7 @@
             <?php foreach ($children as $child): ?>
             <tr>
                 <td><?= $this->Number->format($child->id) ?></td>
+                <td><?= $this->Number->format($child->guardian_id) ?></td>
                 <td><?= h($child->school) ?></td>
                 <td><?= h($child->room) ?></td>
                 <td><?= h($child->grade) ?></td>
@@ -45,6 +59,18 @@
                 <td><?= h($child->kana) ?></td>
                 <td><?= h($child->sex) ?></td>
                 <td><?= h($child->birthed) ?></td>
+                <td><?= h($child->joined) ?></td>
+                <td><?= h($child->finished) ?></td>
+                <td><?= $this->Number->format($child->season) ?></td>
+                <td><?= $this->Number->format($child->number) ?></td>
+                <td><?= h($child->oldname) ?></td>
+                <td><?= h($child->newschool) ?></td>
+                <td><?= h($child->newzip) ?></td>
+                <td><?= h($child->newpref) ?></td>
+                <td><?= h($child->newaddr) ?></td>
+                <td><?= h($child->newaddr2) ?></td>
+                <td><?= h($child->newtel) ?></td>
+                <td><?= h($child->nondelivery) ?></td>
                 <td><?= h($child->modified) ?></td>
                 <td><?= h($child->created) ?></td>
                 <td class="actions">

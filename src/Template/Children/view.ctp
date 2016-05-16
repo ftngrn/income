@@ -51,12 +51,60 @@
             <td><?= h($child->sex) ?></td>
         </tr>
         <tr>
+            <th><?= __('Oldname') ?></th>
+            <td><?= h($child->oldname) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Newschool') ?></th>
+            <td><?= h($child->newschool) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Newzip') ?></th>
+            <td><?= h($child->newzip) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Newpref') ?></th>
+            <td><?= h($child->newpref) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Newaddr') ?></th>
+            <td><?= h($child->newaddr) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Newaddr2') ?></th>
+            <td><?= h($child->newaddr2) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Newtel') ?></th>
+            <td><?= h($child->newtel) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($child->id) ?></td>
         </tr>
         <tr>
+            <th><?= __('Guardian Id') ?></th>
+            <td><?= $this->Number->format($child->guardian_id) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Season') ?></th>
+            <td><?= $this->Number->format($child->season) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Number') ?></th>
+            <td><?= $this->Number->format($child->number) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Birthed') ?></th>
             <td><?= h($child->birthed) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Joined') ?></th>
+            <td><?= h($child->joined) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Finished') ?></th>
+            <td><?= h($child->finished) ?></td>
         </tr>
         <tr>
             <th><?= __('Modified') ?></th>
@@ -65,6 +113,10 @@
         <tr>
             <th><?= __('Created') ?></th>
             <td><?= h($child->created) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Nondelivery') ?></th>
+            <td><?= $child->nondelivery ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
     <div class="row">
@@ -257,9 +309,11 @@
                 <th><?= __('Job') ?></th>
                 <th><?= __('Zip') ?></th>
                 <th><?= __('Addr') ?></th>
+                <th><?= __('Addr2') ?></th>
                 <th><?= __('Tel') ?></th>
                 <th><?= __('Mobile') ?></th>
                 <th><?= __('Memo') ?></th>
+                <th><?= __('Nondelivery') ?></th>
                 <th><?= __('Modified') ?></th>
                 <th><?= __('Created') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
@@ -276,9 +330,11 @@
                 <td><?= h($ptas->job) ?></td>
                 <td><?= h($ptas->zip) ?></td>
                 <td><?= h($ptas->addr) ?></td>
+                <td><?= h($ptas->addr2) ?></td>
                 <td><?= h($ptas->tel) ?></td>
                 <td><?= h($ptas->mobile) ?></td>
                 <td><?= h($ptas->memo) ?></td>
+                <td><?= h($ptas->nondelivery) ?></td>
                 <td><?= h($ptas->modified) ?></td>
                 <td><?= h($ptas->created) ?></td>
                 <td class="actions">

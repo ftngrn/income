@@ -12,7 +12,9 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\HasMany $ChildHealths
  * @property \Cake\ORM\Association\HasMany $ChildMedications
+ * @property \Cake\ORM\Association\HasMany $Children
  * @property \Cake\ORM\Association\HasMany $Incomes
+ * @property \Cake\ORM\Association\HasMany $Journals
  * @property \Cake\ORM\Association\HasMany $Ptas
  * @property \Cake\ORM\Association\BelongsToMany $Busstops
  */
@@ -41,7 +43,13 @@ class GuardiansTable extends Table
         $this->hasMany('ChildMedications', [
             'foreignKey' => 'guardian_id'
         ]);
+        $this->hasMany('Children', [
+            'foreignKey' => 'guardian_id'
+        ]);
         $this->hasMany('Incomes', [
+            'foreignKey' => 'guardian_id'
+        ]);
+        $this->hasMany('Journals', [
             'foreignKey' => 'guardian_id'
         ]);
         $this->hasMany('Ptas', [
@@ -91,6 +99,9 @@ class GuardiansTable extends Table
             ->allowEmpty('father_kana');
 
         $validator
+            ->allowEmpty('zip');
+
+        $validator
             ->allowEmpty('pref');
 
         $validator
@@ -110,6 +121,10 @@ class GuardiansTable extends Table
 
         $validator
             ->allowEmpty('memo');
+
+        $validator
+            ->boolean('nondelivery')
+            ->allowEmpty('nondelivery');
 
         return $validator;
     }

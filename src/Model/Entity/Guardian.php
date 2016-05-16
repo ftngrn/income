@@ -15,6 +15,7 @@ use Cake\ORM\Entity;
  * @property string $mother_kana
  * @property string $father_name
  * @property string $father_kana
+ * @property string $zip
  * @property string $pref
  * @property string $addr
  * @property string $addr2
@@ -22,6 +23,7 @@ use Cake\ORM\Entity;
  * @property string $tel
  * @property string $tels
  * @property string $memo
+ * @property bool $nondelivery
  * @property \Cake\I18n\Time $modified
  * @property \Cake\I18n\Time $created
  * @property \App\Model\Entity\ChildHealth[] $child_healths

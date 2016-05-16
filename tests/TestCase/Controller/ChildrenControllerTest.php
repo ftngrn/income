@@ -19,10 +19,6 @@ class ChildrenControllerTest extends IntegrationTestCase
         'app.children',
         'app.child_healths',
         'app.guardians',
-        'app.busstops_guardians',
-        'app.busstops',
-        'app.busstops_child_parents',
-        'app.child_parents',
         'app.child_medications',
         'app.received_staffs',
         'app.child_medication_histories',
@@ -32,7 +28,11 @@ class ChildrenControllerTest extends IntegrationTestCase
         'app.journals',
         'app.vacations',
         'app.weekly_ideas',
-        'app.ptas'
+        'app.weekly_idea_details',
+        'app.weeklyeas',
+        'app.ptas',
+        'app.busstops',
+        'app.busstops_guardians'
     ];
 
     /**

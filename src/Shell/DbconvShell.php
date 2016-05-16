@@ -77,6 +77,32 @@ class DbconvShell extends Shell
 		}
 	}
 
+	/**
+	 * 期と保育期間から入園日を取得する
+	 *
+	 */
+	private function joinedFromSeasonAndSpan(int $season, int $span_month) {
+		if ($season <= 0 || $span_month <= 0) {
+			return null;
+		}
+		$finished = $this->finishedFromSeason($season);
+		if (is_null($finished)) {
+			return null;
+		}
+		$joined_str = $finished->modify(sprintf('-%d months', $span_month - 1))->format('Y-m-01');
+		return new Date($joined_str);
+	}
+	/**
+	 * 期から卒園日を取得する
+	 *
+	 */
+	private function finishedFromSeason(int $season) {
+		if ($season <= 0) {
+			return null;
+		}
+		return new Date(sprintf("%4d-03-16", 1965 + $season));
+	}
+
 	private function dateFromFinished($finished) {
 		//卒園日の記録は平成しかない（笹久保さんが入力してくれた部分のみなので）
 		if (!is_null($finished) && preg_match('/^平成(\d+)年(\d+)月(\d+)日$/', $finished, $m)) {
@@ -134,16 +160,20 @@ class DbconvShell extends Shell
 
 		foreach ($allchildren as $i => $data) {
 			$season = intVal($data['season']);
-			$finishedBySeason = null;
-			if ($season > 0) {
-				$finishedBySeason = new Date(sprintf("%4d-03-16", $season+1965));
-			}
-			$finished = $this->dateFromFinished($data['finished']);
 			$span = $this->parseSpan($data['span']);
-			//TODO: seasonとspanから入園日・卒園日を算出
+			//seasonとspanから入園日・卒園日を算出
 			//そしてjoined,finishedに入れる
 			//もしfinishedが入ってればそちらを優先する
-
+			$joined = null;
+			if (!is_null($span)) {
+				$joined = $this->joinedFromSeasonAndSpan($season, $span['month_by_span']);
+			}
+			$data['joined'] = $joined;
+			$finished = $this->finishedFromSeason($season);
+			if (isset($data['finished']) && !empty($data['finished'])) {
+				$finished = $this->dateFromFinished($data['finished']);
+			}
+			$data['finished'] = $finished;
 			$data['birthed'] = $this->ymdFromJDate($data['birthday']);
 			//データの空白はNULLにしちゃう
 			if (empty($data['classname'])) {

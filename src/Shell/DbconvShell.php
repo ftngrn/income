@@ -227,7 +227,6 @@ class DbconvShell extends Shell
 
 				}
 			}
-			if ($i > 2) break;
 		}
 	}
 

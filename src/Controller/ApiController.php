@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Collection\Collection;
+use Cake\ORM\TableRegistry;
 
 /**
  * Api Controller
@@ -26,8 +28,31 @@ class ApiController extends AppController
 	 */
 	public function children()
 	{
-		$customers['id'] = '123';
-		$this->set('customers', $customers);
-		$this->set('_serialize', ['customers']);
+		$C = TableRegistry::get('Children');
+		$query = $C->find('all')
+			->where(['finished IS NULL'])
+			->contain(['Incomes'])
+			->order('kana')
+			->all();
+		//結果をもとにサマリを作成
+		$query->each(function ($src, $i) {
+			$d = [];
+			$d []= $src->kana;
+			$d []= 'CR'.$src->room;	//ClassRoom
+			$d []= 'BC'.$src->course;	//BusCourse
+			$d []= 'SC'.$src->school;	//SChool
+			$d []= 'SE'.$src->sex;	//SEx
+			$d []= 'BD'.$src->birthed->format('m');	//month of BirthedDay
+			$summary = implode(' ', $d);
+			$src->summary = $summary;
+		});
+		//サマリをキーにしてEntityを値にする
+		$children = (new Collection($query))->combine(
+			'summary',
+			function ($entity) { return $entity; }
+		);
+		//レスポンス用にする
+		$this->set('children', $children);
+		$this->set('_serialize', 'children');
 	}
 }

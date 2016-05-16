@@ -67,14 +67,22 @@ class DbconvShell extends Shell
 				$chi['guardian_id'] = $guardian->id;
 				$chi['room'] = $data['class'];
 				$chi['grade'] = $this->gradeByRoom($chi['room']);
-				$chi['season'] = !is_null($season) ? $season : 0;
+				$chi['season'] = $season > 0 ? $season : 0;
 				$chi['birthed'] = $data['birthday'];
 				$chi['modified'] = $data['updated'];
+				$chi['number'] = 0;
+				$chi['nondelivery'] = false;
 				//保存してIDを取得する
 				$child = $C->newEntity($chi);
 				if ($C->save($child)) {
 					$this->out(sprintf("%4d %s#:%d (guardian#%d)", $i, $child->name, $child->id, $child->guardian_id));
 				}
+				else {
+					var_dump($child->errors());
+				}
+			}
+			else {
+				var_dump($guardian->errors());
 			}
 		}
 	}
@@ -234,10 +242,13 @@ class DbconvShell extends Shell
 				$child = $C->newEntity($chi);
 				if ($C->save($child)) {
 					$this->out(sprintf("%4d %s#:%d (guardian#%d)", $i, $child->name, $child->id, $child->guardian_id));
-				} else {
-					$this->out("error:".print_r($child, true));
-
 				}
+				else {
+					var_dump($child->errors());
+				}
+			}
+			else {
+				var_dump($guardian->errors());
 			}
 		}
 	}

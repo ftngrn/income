@@ -43,6 +43,7 @@ class DbconvShell extends Shell
 		$G = TableRegistry::get('Guardians');
 
 		foreach ($children as $i => $data) {
+			$season = $this->seasonFromFinished($data['finished']);
 			//Guardiansスキーマが異なる部分は手作業で代入
 			$gua = $data;
 			$gua['mother_name'] = $data['name']." 母";
@@ -66,6 +67,7 @@ class DbconvShell extends Shell
 				$chi['guardian_id'] = $guardian->id;
 				$chi['room'] = $data['class'];
 				$chi['grade'] = $this->gradeByRoom($chi['room']);
+				$chi['season'] = !is_null($season) ? $season : 0;
 				$chi['birthed'] = $data['birthday'];
 				$chi['modified'] = $data['updated'];
 				//保存してIDを取得する
@@ -132,6 +134,15 @@ class DbconvShell extends Shell
 			//最終的には月数で保存するので
 			$span['month_by_span'] = $monthByYear + $span['month'];
 			return $span;
+		}
+		return null;
+	}
+
+	private function seasonFromFinished($finished) {
+		$season = 0;
+		if (preg_match('/^(\d+)-03-16$/', trim($finished), $m)) {
+			$year = intVal($m[1]);
+			return ($year - 1965);
 		}
 		return null;
 	}

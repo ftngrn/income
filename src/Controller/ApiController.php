@@ -54,5 +54,6 @@ class ApiController extends AppController
 		//レスポンス用にする
 		$this->set('children', $children);
 		$this->set('_serialize', 'children');
+		$this->set('_jsonOptions', JSON_UNESCAPED_UNICODE);
 	}
 }

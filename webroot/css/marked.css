@@ -1,0 +1,27 @@
+/**
+ * Markdown用のCSS
+ *
+ */
+ol, ul {
+	list-style: inherit;
+	margin-left: 1.5em;
+}
+ol {
+	list-style-type: decimal;
+}
+em {
+	font-style: italic;
+}
+pre, code, var, samp, kbd, .mono {
+	font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+	font-size: 14px;
+	line-height: 1.2;
+}
+.table {
+	width: auto;
+	max-width: auto;
+}
+.table th {
+	font-weight: bold;
+}
+

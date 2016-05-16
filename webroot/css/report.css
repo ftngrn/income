@@ -1,0 +1,25 @@
+div.report h2, div.report-sub h2 {
+	color: #999;
+	font-weight: bold;
+	font-size: 18px;
+	border-bottom: 2px solid #ccc;
+}
+.dateweek {
+	margin: 0 0.5em 0 0.8em;
+}
+.date {
+	font-family: 'arial black';
+	letter-spacing: 0.08em;
+}
+.week {
+	font-size: 12px;
+}
+.report p {
+	margin-left: 0.5em;
+}
+.room, .name {
+	color: #999;
+	margin-left: 5px;
+	font-size: 75%;
+}
+

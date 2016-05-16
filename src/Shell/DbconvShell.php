@@ -212,7 +212,8 @@ class DbconvShell extends Shell
 				$chi['school'] = '真駒内幼稚園';
 				$chi['guardian_id'] = $guardian->id;
 				$chi['room'] = $data['classname'];
-				$chi['newschool'] = $data['school'];
+				$chi['number'] = isset($data['number']) && is_numeric($data['number']) ? $data['number'] : 0;
+				$chi['newschool'] = isset($data['school']) ? $data['school'] : null;
 				$chi['newzip'] = $data['zip'];
 				$chi['newpref'] = $data['pref'];
 				$chi['newaddr'] = $data['addr'];

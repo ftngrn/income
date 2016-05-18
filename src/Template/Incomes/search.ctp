@@ -121,7 +121,18 @@ var SearchForm = React.createClass({
 var KanaList = React.createClass({
 	render: function() {
 		var name = 'kana';
-		var vars = ['ALL','あ','か','さ','た','な'];
+		var vars = ['ALL',
+			'あ','い','う','え','お',
+			'か','き','く','け','こ',
+			'さ','し','す','せ','そ',
+			'た','ち','つ','て','と',
+			'な','に','ぬ','ね','の',
+			'は','ひ','ふ','へ','ほ',
+			'ま','み','む','め','も',
+			'や','ゆ','よ',
+			'ら','り','る','れ','ろ',
+			'わ','を','ん'
+		];
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
@@ -161,7 +172,7 @@ var RoomList = React.createClass({
 var CourseList = React.createClass({
 	render: function() {
 		var name = 'course';
-		var vars = ['ALL','緑','黄','黄緑','青','白'];
+		var vars = ['ALL','緑','黄','黄緑','青','白','赤','オレンジ','ピンク'];
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (

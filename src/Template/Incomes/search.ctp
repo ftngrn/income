@@ -50,25 +50,38 @@ var Searcher = React.createClass({
 	doSearch: function(e) {
 		//フォームの値を一括取得したいので仕方なくjQueryを使う
 		//Reactでこれを実現する方法が不明なため
+		var kana = $('input[name=kana]:checked').val();
 		var room = $('input[name=room]:checked').val();
 		var course = $('input[name=course]:checked').val();
-		var kana = $('input[name=kana]:checked').val();
-		var mon = $('input[name=mon]:checked').val();
-		var sex = $('input[name=sex]:checked').val();
 		var school = $('input[name=school]:checked').val();
-		console.log("form:", room, course, kana, mon, sex, school);
+		var sex = $('input[name=sex]:checked').val();
+		var mon = $('input[name=birthday]:checked').val();
+		var monp = ('00' + mon).slice(-2);
+		console.log(kana,room,course,school,sex,mon,monp);
 
 		var regexp = "";
-		if (room === 'ALL' && school === 'ALL') {
+		if (kana === 'ALL' && room === 'ALL' && course === 'ALL' && school === 'ALL' && sex === 'ALL' && mon === 'ALL') {
 			console.log("result = children");
 			this.setState({data: children});
 			return;
 		}
+		if (kana != "ALL" && kana != undefined) {
+			regexp = regexp + "^" + kana;
+		}
 		if (room != "ALL" && room != undefined) {
 			regexp = regexp + "(.*)" + "CR" + room + " ";
 		}
+		if (course != "ALL" && course != undefined) {
+			regexp = regexp + "(.*)" + "BC" + course + " ";
+		}
 		if (school != "ALL" && school != undefined) {
 			regexp = regexp + "(.*)" + "SC" + school + " ";
+		}
+		if (sex != "ALL" && sex != undefined) {
+			regexp = regexp + "(.*)" + "SE" + sex + " ";
+		}
+		if (mon != "ALL" && mon != undefined) {
+			regexp = regexp + "(.*)" + "BD" + monp;
 		}
 		console.log("regexp:[" + regexp + "]");
 
@@ -94,26 +107,72 @@ var SearchForm = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<RoomList onClick={this.props.onClick} rooms={['ALL','うめ','もも','たんぽぽ','さくら','ちゅうりっぷ','ひまわり','ばら','すみれ']} />
-				<SchoolList onClick={this.props.onClick} schools={['ALL','真駒内幼稚園','プチピヨランド']} />
+				<KanaList onClick={this.props.onClick} />
+				<RoomList onClick={this.props.onClick} />
+				<CourseList onClick={this.props.onClick} />
+				<SexList onClick={this.props.onClick} />
+				<BirthdayList onClick={this.props.onClick} />
+				<SchoolList onClick={this.props.onClick} />
 				<button onClick={this.props.onReset} >Reset!</button>
+			</div>
+		);
+	}
+});
+var KanaList = React.createClass({
+	render: function() {
+		var name = 'kana';
+		var vars = ['ALL','あ','か','さ','た','な'];
+		var inputs = vars.map(function (v, i) {
+			var key = name + "-" + i;
+			return (
+				<div className={name}>
+					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+					<label htmlFor={key}>{v}</label>
+				</div>
+			);
+		}, this);
+		return (
+			<div className={name + "List"}>
+				{inputs}
 			</div>
 		);
 	}
 });
 var RoomList = React.createClass({
 	render: function() {
-		var inputs = this.props.rooms.map(function (room, i) {
-			var key = "room-" + i;
+		var name = 'room';
+		var vars = ['ALL','うめ','もも','たんぽぽ','さくら','ちゅうりっぷ','ひまわり','ばら','すみれ'];
+		var inputs = vars.map(function (v, i) {
+			var key = name + "-" + i;
 			return (
-				<div className="room">
-					<input type="radio" name="room" ref="room" id={key} defaultValue={room} onClick={this.props.onClick} />
-					<label htmlFor={key}>{room}</label>
+				<div className={name}>
+					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+					<label htmlFor={key}>{v}</label>
 				</div>
 			);
 		}, this);
 		return (
-			<div className="roomList">
+			<div className={name + "List"}>
+				{inputs}
+			</div>
+		);
+	}
+});
+var CourseList = React.createClass({
+	render: function() {
+		var name = 'course';
+		var vars = ['ALL','緑','黄','黄緑','青','白'];
+		var inputs = vars.map(function (v, i) {
+			var key = name + "-" + i;
+			return (
+				<div className={name}>
+					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+					<label htmlFor={key}>{v}</label>
+				</div>
+			);
+		}, this);
+		return (
+			<div className={name + "List"}>
 				{inputs}
 			</div>
 		);
@@ -121,17 +180,59 @@ var RoomList = React.createClass({
 });
 var SchoolList = React.createClass({
 	render: function() {
-		var inputs = this.props.schools.map(function (school, i) {
-			var key = "school-" + i;
+		var name = 'school';
+		var	vars = ['ALL','真駒内幼稚園','プチピヨランド'];
+		var inputs = vars.map(function (v, i) {
+			var key = name + "-" + i;
 			return (
-				<div className="school">
-					<input type="radio" name="school" ref="school" id={key} defaultValue={school} onClick={this.props.onClick} />
-					<label htmlFor={key}>{school}</label>
+				<div className={name}>
+					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+					<label htmlFor={key}>{v}</label>
 				</div>
 			);
 		}, this);
 		return (
-			<div className="schoolList">
+			<div className={name + "List"}>
+				{inputs}
+			</div>
+		);
+	}
+});
+var SexList = React.createClass({
+	render: function() {
+		var name = 'sex';
+		var vars = ['ALL','男','女'];
+		var inputs = vars.map(function (v, i) {
+			var key = name + "-" + i;
+			return (
+				<div className={name}>
+					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+					<label htmlFor={key}>{v}</label>
+				</div>
+			);
+		}, this);
+		return (
+			<div className={name + "List"}>
+				{inputs}
+			</div>
+		);
+	}
+});
+var BirthdayList = React.createClass({
+	render: function() {
+		var name = 'birthday';
+		var vars = ['ALL',4,5,6,7,8,9,10,11,12,1,2,3];
+		var inputs = vars.map(function (v, i) {
+			var key = name + "-" + i;
+			return (
+				<div className={name}>
+					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+					<label htmlFor={key}>{v}</label>
+				</div>
+			);
+		}, this);
+		return (
+			<div className={name + "List"}>
 				{inputs}
 			</div>
 		);

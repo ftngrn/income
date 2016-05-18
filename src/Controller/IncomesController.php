@@ -12,6 +12,15 @@ class IncomesController extends AppController
 {
 
     /**
+     * Search method
+     *
+     * @return \Cake\Network\Response|null
+     */
+    public function search()
+    {
+    }
+
+		/**
      * Index method
      *
      * @return \Cake\Network\Response|null

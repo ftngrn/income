@@ -46,6 +46,12 @@ var Searcher = React.createClass({
 	},
 	doReset: function() {
 		this.setState({data: {}});
+		$('input[name=kana]:checked').removeAttr('checked');
+		$('input[name=room]:checked').removeAttr('checked');
+		$('input[name=course]:checked').removeAttr('checked');
+		$('input[name=school]:checked').removeAttr('checked');
+		$('input[name=sex]:checked').removeAttr('checked');
+		$('input[name=birthday]:checked').removeAttr('checked');
 	},
 	doSearch: function(e) {
 		//フォームの値を一括取得したいので仕方なくjQueryを使う
@@ -106,13 +112,13 @@ var Searcher = React.createClass({
 var SearchForm = React.createClass({
 	render: function() {
 		return (
-			<div>
-				<KanaList onClick={this.props.onClick} />
-				<RoomList onClick={this.props.onClick} />
-				<CourseList onClick={this.props.onClick} />
-				<SexList onClick={this.props.onClick} />
+			<div className="search-form">
 				<BirthdayList onClick={this.props.onClick} />
 				<SchoolList onClick={this.props.onClick} />
+				<SexList onClick={this.props.onClick} />
+				<RoomList onClick={this.props.onClick} />
+				<CourseList onClick={this.props.onClick} />
+				<KanaList onClick={this.props.onClick} />
 				<button onClick={this.props.onReset} >Reset!</button>
 			</div>
 		);
@@ -138,12 +144,13 @@ var KanaList = React.createClass({
 			return (
 				<div className={name}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
-					<label htmlFor={key}>{v}</label>
+					<label htmlFor={key} className="btn btn-sm btn-default">{v}</label>
 				</div>
 			);
 		}, this);
 		return (
-			<div className={name + "List"}>
+			<div className={name + "List buttons"}>
+				<h3>なまえ：</h3>
 				{inputs}
 			</div>
 		);
@@ -158,12 +165,13 @@ var RoomList = React.createClass({
 			return (
 				<div className={name}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
-					<label htmlFor={key}>{v}</label>
+					<label htmlFor={key} className="btn btn-sm btn-default">{v}</label>
 				</div>
 			);
 		}, this);
 		return (
-			<div className={name + "List"}>
+			<div className={name + "List buttons"}>
+				<h3>クラス：</h3>
 				{inputs}
 			</div>
 		);
@@ -178,12 +186,13 @@ var CourseList = React.createClass({
 			return (
 				<div className={name}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
-					<label htmlFor={key}>{v}</label>
+					<label htmlFor={key} className="btn btn-sm btn-default">{v}</label>
 				</div>
 			);
 		}, this);
 		return (
-			<div className={name + "List"}>
+			<div className={name + "List buttons"}>
+				<h3>リボン：</h3>
 				{inputs}
 			</div>
 		);
@@ -198,12 +207,13 @@ var SchoolList = React.createClass({
 			return (
 				<div className={name}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
-					<label htmlFor={key}>{v}</label>
+					<label htmlFor={key} className="btn btn-sm btn-default">{v}</label>
 				</div>
 			);
 		}, this);
 		return (
-			<div className={name + "List"}>
+			<div className={name + "List buttons"}>
+				<h3>所　属：</h3>
 				{inputs}
 			</div>
 		);
@@ -218,12 +228,13 @@ var SexList = React.createClass({
 			return (
 				<div className={name}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
-					<label htmlFor={key}>{v}</label>
+					<label htmlFor={key} className="btn btn-sm btn-default">{v}</label>
 				</div>
 			);
 		}, this);
 		return (
-			<div className={name + "List"}>
+			<div className={name + "List buttons"}>
+				<h3>性　別：</h3>
 				{inputs}
 			</div>
 		);
@@ -238,12 +249,13 @@ var BirthdayList = React.createClass({
 			return (
 				<div className={name}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
-					<label htmlFor={key}>{v}</label>
+					<label htmlFor={key} className="btn btn-sm btn-default">{v}</label>
 				</div>
 			);
 		}, this);
 		return (
-			<div className={name + "List"}>
+			<div className={name + "List buttons"}>
+				<h3>誕生月：</h3>
 				{inputs}
 			</div>
 		);

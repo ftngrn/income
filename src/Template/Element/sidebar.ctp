@@ -9,7 +9,8 @@
 </ul>
 <ul>
 	<li><?= $this->Html->link("出欠をつける", ['controller'=>'incomes', 'action'=>'add']);?></li>
-	<li><?= $this->Html->link("園児をさがす", ['controller'=>'children', 'action'=>'search']);?></li>
+	<li><?= $this->Html->link("園児をさがす", ['controller'=>'incomes', 'action'=>'search']);?></li>
+	<li><?= $this->Html->link("園児一覧", ['controller'=>'children', 'action'=>'index']);?></li>
 </ul>
 <ul>
 <!--

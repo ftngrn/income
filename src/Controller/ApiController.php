@@ -36,8 +36,10 @@ class ApiController extends AppController
 			->all();
 		//結果をもとにサマリを作成
 		$query->each(function ($src, $i) {
+			$seionKana = $this->seion($src->kana);
 			$d = [];
-			$d []= $src->kana;
+			$d []= $seionKana['sei'];
+			$d []= 'FN'.$seionKana['mei'];	//FirstName
 			$d []= 'CR'.$src->room;	//ClassRoom
 			$d []= 'BC'.$src->course;	//BusCourse
 			$d []= 'SC'.$src->school;	//SChool
@@ -55,5 +57,13 @@ class ApiController extends AppController
 		$this->set('children', $children);
 		$this->set('_serialize', 'children');
 		$this->set('_jsonOptions', JSON_UNESCAPED_UNICODE);
+	}
+
+	private function seion($srcKana) {
+		$kana = mb_convert_kana($srcKana, 'hk');	//半角カタカナにする
+		$kana = mb_ereg_replace('ﾞ|ﾟ', '', $kana);	//半角カタカナにすると濁点や半濁点が一時になるので消去
+		$kana = mb_convert_kana($kana, 'H');	//全角ひらがなする
+		list($sei,$mei) = explode(' ', $kana);	//半角スペース区切りで分ける
+		return ['kana' => $kana, 'sei' => $sei, 'mei' => $mei];
 	}
 }

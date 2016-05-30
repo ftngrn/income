@@ -279,10 +279,24 @@ var SearchResult = React.createClass({
 });
 var Child = React.createClass({
 	render: function() {
+		var birthed = new Date(this.props.info.birthed);
 		return (
-			<div className="child">
+			<div className="child info" data-bus={this.props.info.bus} data-course={this.props.info.course}>
+				<div className="photo">
+					<img src={"/photoes/thumbnail/" + this.props.info.id} />
+				</div>
 				<h3>{this.props.info.kana}</h3>
-				{this.props.info.id}
+				<div className="name">{this.props.info.name}</div>
+				<div className="sex">{this.props.info.sex}</div>
+				<div className="birthed">{birthed.getFullYear()}/{birthed.getMonth() + 1}/{birthed.getDate()}</div>
+				<ul className="info-container">
+					<li className="room">{this.props.info.room}</li>
+					<li className="bus">{this.props.info.bus}</li>
+					<li className="course">{this.props.info.course}</li>
+				</ul>
+				<ul className="income-container">
+					{this.props.incomes}
+				</ul>
 			</div>
 		);
 	}

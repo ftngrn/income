@@ -180,7 +180,7 @@ var RoomList = React.createClass({
 var CourseList = React.createClass({
 	render: function() {
 		var name = 'course';
-		var vars = ['ALL','緑','黄','黄緑','青','白','赤','オレンジ','ピンク'];
+		var vars = ['ALL','緑','黄','黄緑','青','白','赤','オレンジ','ピンク','紫'];
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (

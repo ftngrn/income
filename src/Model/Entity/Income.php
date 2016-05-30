@@ -37,6 +37,49 @@ use Cake\ORM\Entity;
  */
 class Income extends Entity
 {
+	/**
+	 * Types for income
+	 *
+	 */
+	public static $INCOME_TYPES = [
+    [
+      'enum' => 1,
+      'key' => 'absent',
+      'label' => 'お休み',
+      'short_label' => '休',
+    ],
+    [
+      'enum' => 2,
+      'key' => 'escort',
+      'label' => '朝送り',
+      'short_label' => '朝送',
+    ],
+    [
+      'enum' => 4,
+      'key' => 'come',
+      'label' => 'お迎え',
+			'short_label' => '迎',
+    ],
+		[
+      'enum' => 8,
+      'key' => 'care',
+      'label' => '預かり保育',
+      'short_label' => '預保',
+    ],
+    [
+      'enum' => 16,
+      'key' => 'late',
+      'label' => '遅刻',
+      'short_label' => '遅',
+    ],
+    [
+      'enum' => 32,
+      'key' => 'other',
+      'label' => 'その他',
+      'short_label' => '他',
+    ],
+  ];
+
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

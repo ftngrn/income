@@ -1,20 +1,19 @@
 <?php
 use Cake\I18n\Date;
+use App\Model\Entity\Income;
+
 $this->extend('../Layout/bootstrap-ui/dashboard');
 
 $week_day = ['日', '月', '火', '水', '木', '金', '土'];
 $this->assign('title', '園児検索');
 $this->assign('page_header', '園児検索');
 ?>
-
 <div class="row Incomes view large-12 medium-12 columns content">
-	<div class="income col-sm-12 col-md-12">
-		<h2>主な活動</h2>
+	<div id="search-container">
 	</div>
-	<div id="content">
-	<div>
 </div>
 
+<?= pr(Income::$INCOME_TYPES); ?>
 <!-- Income用のCSS,JS -->
 <?= $this->Html->css(['income']) ?>
 <?= $this->Html->script([
@@ -304,7 +303,7 @@ var Child = React.createClass({
 
 ReactDOM.render(
 	<Searcher url="/api/children.json" />,
-	document.getElementById('content')
+	document.getElementById('search-container')
 );
 <?= $this->Html->scriptEnd() ?>
 

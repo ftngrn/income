@@ -36,10 +36,13 @@ class ApiController extends AppController
 			->all();
 		//結果をもとにサマリを作成
 		$query->each(function ($src, $i) {
-			$seionKana = $this->seion($src->kana);
+			list($sei,$mei) = explode(' ', $src->kana);
+			$seion = $this->seion($src->kana);
 			$d = [];
-			$d []= $seionKana['sei'];
-			$d []= 'FN'.$seionKana['mei'];	//FirstName
+			$d []= $seion['sei'];
+			$d []= 'SFN'.$seion['mei'];	//Seion FirstName
+			$d []= 'LN'.$sei;	//LastName
+			$d []= 'FN'.$mei;	//FirstName
 			$d []= 'CR'.$src->room;	//ClassRoom
 			$d []= 'BC'.$src->course;	//BusCourse
 			$d []= 'SC'.$src->school;	//SChool

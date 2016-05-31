@@ -41,7 +41,7 @@ class Income extends Entity
 	 * Types for income
 	 *
 	 */
-	public static $INCOME_TYPES = [
+	public static $TYPES = [
     [
       'enum' => 1,
       'key' => 'absent',

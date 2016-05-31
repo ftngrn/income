@@ -13,7 +13,6 @@ $this->assign('page_header', '園児検索');
 	</div>
 </div>
 
-<?= pr(Income::$INCOME_TYPES); ?>
 <!-- Income用のCSS,JS -->
 <?= $this->Html->css(['income']) ?>
 <?= $this->Html->script([
@@ -293,10 +292,20 @@ var Child = React.createClass({
 					<li className="bus">{this.props.info.bus}</li>
 					<li className="course">{this.props.info.course}</li>
 				</ul>
-				<ul className="income-container">
-					{this.props.incomes}
-				</ul>
+				<IncomeForm incomes={this.props.info.incomes} />
 			</div>
+		);
+	}
+});
+var IncomeForm = React.createClass({
+	render: function() {
+		return (
+			<ul className="income-container">
+<?php foreach (Income::$TYPES as $idx => $type): ?>
+				<li>
+				</li>
+<?php endforeach; ?>
+			</ul>
 		);
 	}
 });

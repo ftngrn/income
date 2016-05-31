@@ -61,9 +61,11 @@ class PhotoconvShell extends Shell
 				'model' => 'children',
 				'model_id' => $child->id,
 				'mime' => 'image/jpeg',
-				'name' => basename($path),
+				'name' => $info['name'],
 				'size' => filesize($path),
 				'body' => file_get_contents($path),
+				'modified' => $info['modified'],
+				'created' => $info['modified']
 			];
 			$this->out('Set item');
 			$photo = $P->newEntity($item);
@@ -77,12 +79,14 @@ class PhotoconvShell extends Shell
 	}
 
 	private function parse($path) {
-		list($kana,$joined,$birthed) = explode('_', $path);
+		list($kana,$joined,$birthed,$name,$modified) = explode('_', $path);
 		$kanas = explode('-', $kana);
 		return [
 			'kana' => implode(' ', $kanas),
 			'joined' => $joined,
-			'birthed' => $birthed
+			'birthed' => $birthed,
+			'name' => $name,
+			'modified' => $modified
 		];
 	}
 

@@ -2,6 +2,7 @@
 namespace App\Shell;
 
 use Cake\Console\Shell;
+use Cake\Datasource\ConnectionManager;
 use Cake\I18n\Date;
 use Cake\ORM\TableRegistry;
 
@@ -36,27 +37,36 @@ class PhotoconvShell extends Shell
 
 
 	public function fromfile() {
+		$conn = ConnectionManager::get('default');
 		$C = TableRegistry::get('Children');
 		$P = TableRegistry::get('Photos');
 
-		$path = '/tmp/images';
+		$dir = '/tmp/images';
 		$ext = '.jpg';
-		foreach (glob($path.'/*'.$ext) as $path) {
+
+		$children = $C->find('all')
+			->where(['joined >' => '2013-04-01'])
+			->contain([])
+			->order(['id']);
+		$conn->begin();
+		foreach ($children as $child) {
+			$kana = preg_replace('/ /', '-', $child->kana);
+			$pat = $kana;
+			if ($child->joined) {
+				$pat .= '_' . $child->joined->format("Y-m-d");
+			}
+			if ($child->birthed) {
+				$pat .= '_' . $child->birthed->format("Y-m-d");
+			}
+			$files = glob($dir.DS.$pat.'*'.$ext);
+			if (empty($files)) {
+				$this->out(sprintf("Image not found: %s", $child->kana));
+				continue;
+			}
+			$path = $files[0];
 			$basename = basename($path, $ext);
 			$info = $this->parse($basename);
 			$this->out(sprintf("Parsed image file: %s", $path));
-			$child = $C->find('all')
-				->where([
-					'kana' => $info['kana'],
-					'joined' => $info['joined'],
-					'birthed' => $info['birthed'],
-				])
-				->first();
-			if (is_null($child)) {
-				$this->out(sprintf("Child not found! (%s birthed:%s)", $info['kana'], $info['birthed']));
-				continue;
-			}
-			$this->out(sprintf("Found! Child#%d", $child->id));
 			$item = [
 				'model' => 'children',
 				'model_id' => $child->id,
@@ -76,6 +86,7 @@ class PhotoconvShell extends Shell
 			}
 			$this->out(sprintf("Success to save! Photo#%d <- Child#%d", $photo->id, $child->id));
 		}
+		$conn->commit();
 	}
 
 	private function parse($path) {

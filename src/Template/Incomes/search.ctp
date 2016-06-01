@@ -278,10 +278,18 @@ var SearchResult = React.createClass({
 var Child = React.createClass({
 	render: function() {
 		var birthed = new Date(this.props.info.birthed);
+		var photo = null;
+		var photoClass = "photo";
+		if (this.props.info.photos.length > 0) {
+			photo = <img src={"/photos/thumbnail/" + this.props.info.photos[0].id} />
+		}
+		else {
+			photoClass = photoClass + " none"
+		}
 		return (
 			<div className="child info" data-bus={this.props.info.bus} data-course={this.props.info.course}>
-				<div className="photo">
-					<img src={"/photos/thumbnail/" + this.props.info.id} />
+				<div className={photoClass}>
+					{photo}
 				</div>
 				<h3>{this.props.info.kana}</h3>
 				<div className="name">{this.props.info.name}</div>

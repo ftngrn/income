@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Filesystem\File;
 
 /**
  * Photos Controller
@@ -34,13 +35,20 @@ class PhotosController extends AppController
 		$photo = $this->Photos->get($id, [
 			'contain' => []
 		]);
-		$cropped = $this->crop(stream_get_contents($photo->body));
+		$cropped = $this->crop(stream_get_contents($photo->body), $id);
 		$this->response->type($photo->mime);
 		$this->response->length(strlen($cropped));
 		$this->response->body($cropped);
 	}
 
-	private function crop($body) {
+	/**
+	 * Crop method
+	 *
+	 * @param stream $body Photo binary.
+	 * @param string|null $id Photo id for cache.
+	 * @return stream cropped photo stream.
+	 */
+	private function crop($body, $id_for_cache = null) {
 		$cache_days = 15; //キャッシュする日数
 		$thumb_pct = 0.1;	//元画像に対するサムネイルの比率
 		$center_pct = 0.45; //左右中央切り出しの中央率
@@ -71,14 +79,15 @@ class PhotosController extends AppController
 			imagedestroy($im);
 			imagedestroy($imt);
 			imagedestroy($imn);
-/*
+
 			//静的ファイルがなければ作成、あってもしばらくたっていれば更新
-			$cache_path = sprintf(WWW_ROOT."files".DS."%d_%s.jpg", $id, $this->action);
-			$file = new File($cache_path);
-			if ($file->exists() === false || (time() - $file->lastChange()) > 60*15) {
-				file_put_contents($cache_path, $cropped);
+			if ($id_for_cache) {
+				$cache_path = sprintf(WWW_ROOT.'caches'.DS.'%s_%d.jpg', $this->request->action, $id_for_cache);
+				$file = new File($cache_path);
+				if ($file->exists() === false || (time() - $file->lastChange()) > 60*15) {
+					file_put_contents($cache_path, $cropped);
+				}
 			}
-*/
 		}
 		return $cropped;
 	}

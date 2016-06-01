@@ -88,6 +88,7 @@ class PhotosController extends AppController
 				if ($file->exists() === false || (time() - $file->lastChange()) > 60*15) {
 					file_put_contents($cache_path, $cropped);
 				}
+				$this->log(sprintf("Create cache:%s", $cache_path), LOG_DEBUG);
 			}
 		}
 		return $cropped;

@@ -1,7 +1,10 @@
 <IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
+	RewriteEngine On
+	RewriteBase /
 
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+	RewriteCond %{DOCUMENT_ROOT}caches/thumbnail_$1.jpg !-s
+	RewriteRule ^photos/thumbnail/([0-9]*)$ caches/thumbnail_$1.jpg
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^ index.php [L]
 </IfModule>

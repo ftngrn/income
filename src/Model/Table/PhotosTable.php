@@ -80,4 +80,12 @@ class PhotosTable extends Table
     {
         return $rules;
     }
+
+		// WithoutBody finder
+		public function findWithoutBody(Query $query, array $options) {
+			//body以外を取得する
+			return $query->select(['id', 'model_id', 'seq', 'size', 'mime', 'name', 'modified', 'created'])
+				->order(['seq' => 'desc']);
+		}
+
 }

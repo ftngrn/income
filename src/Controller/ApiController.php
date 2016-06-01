@@ -31,7 +31,7 @@ class ApiController extends AppController
 		$C = TableRegistry::get('Children');
 		$query = $C->find('all')
 			->where(['finished IS NULL'])
-			->contain(['Incomes'])
+			->contain(['Incomes','Photos'])
 			->order('kana')
 			->all();
 		//結果をもとにサマリを作成

@@ -48,6 +48,11 @@ class ChildrenTable extends Table
         $this->hasMany('Incomes', [
             'foreignKey' => 'child_id'
         ]);
+        $this->hasMany('Photos', [
+            'foreignKey' => 'model_id',
+						'conditions' => ['model' => $this->_table],
+						'finder' => 'withoutBody',
+        ]);
         $this->hasMany('Ptas', [
             'foreignKey' => 'child_id'
         ]);

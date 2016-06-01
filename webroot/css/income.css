@@ -37,3 +37,11 @@ label.btn {
 	background-color: #cdf;
 	margin-right: 4px;
 }
+.photo img {
+	height: 70px;
+	max-height: 100px;
+	max-width: 100px;
+}
+.photo.none {
+	display: none;
+}

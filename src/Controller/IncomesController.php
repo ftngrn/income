@@ -18,6 +18,27 @@ class IncomesController extends AppController
      */
     public function search()
     {
+			//こどものカナ頭文字を取得する(capとして)
+			$children = $this->Incomes->Children->find()
+				->contain([])
+				->select(['cap' => 'LEFT(Children.kana, 1)'])
+				->where(['kana IS NOT' => null, 'kana NOT LIKE' => ''])
+				->group(['cap'])
+				->order(['cap'])
+				->all()
+				->toArray();
+			$caps = [];
+			foreach ($children as $item) {
+				$caps []= "'".$item->cap."'";
+			}
+			$capsStr = '';
+			if (count($caps) > 0) {
+				$seion = implode(',', $caps);
+				$seion = mb_convert_kana($seion, 'hk');  //半角カタカナにする
+				$seion = mb_ereg_replace('ﾞ|ﾟ', '', $seion);  //半角カタカナにすると濁点や半濁点が一時になるので消去
+				$capsStr = mb_convert_kana($seion, 'H');  //全角ひらがなする
+			}
+			$this->set(compact('caps', 'capsStr'));
     }
 
 		/**

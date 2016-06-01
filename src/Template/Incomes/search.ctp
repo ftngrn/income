@@ -126,7 +126,8 @@ var SearchForm = React.createClass({
 var KanaList = React.createClass({
 	render: function() {
 		var name = 'kana';
-		var vars = ['ALL',
+		var vars = ['ALL', <?= $capsStr ?>];
+		var capList = [
 			'あ','い','う','え','お',
 			'か','き','く','け','こ',
 			'さ','し','す','せ','そ',

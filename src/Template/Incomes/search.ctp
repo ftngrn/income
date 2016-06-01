@@ -280,7 +280,9 @@ var SearchResult = React.createClass({
 });
 var Child = React.createClass({
 	render: function() {
-		var birthed = new Date(this.props.info.birthed);
+		//SafariではISO8601形式をDateに食わせられないのでYMDに変換
+		var birthedYMD = this.props.info.birthed.split('T',1)[0];
+		var birthed = new Date(birthedYMD.replace(/-/g,"/"));
 		var photo = null;
 		var photoClass = "photo";
 		if (this.props.info.photos.length > 0) {

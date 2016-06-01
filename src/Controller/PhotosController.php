@@ -31,11 +31,13 @@ class PhotosController extends AppController
 	 */
 	public function thumbnail($id = null)
 	{
+		$cache_days = 15; //キャッシュする日数
 		$this->autoRender = false;
 		$photo = $this->Photos->get($id, [
 			'contain' => []
 		]);
 		$cropped = $this->crop(stream_get_contents($photo->body), $id);
+		$this->response->cache('-1 minute', sprintf("+%d days", $cache_days));
 		$this->response->type($photo->mime);
 		$this->response->length(strlen($cropped));
 		$this->response->body($cropped);
@@ -49,7 +51,6 @@ class PhotosController extends AppController
 	 * @return stream cropped photo stream.
 	 */
 	private function crop($body, $id_for_cache = null) {
-		$cache_days = 15; //キャッシュする日数
 		$thumb_pct = 0.1;	//元画像に対するサムネイルの比率
 		$center_pct = 0.45; //左右中央切り出しの中央率
 		$middle_pct = 0.7;	//上下中央切り出しの中央率

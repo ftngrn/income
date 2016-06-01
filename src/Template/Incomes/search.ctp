@@ -281,7 +281,7 @@ var Child = React.createClass({
 		return (
 			<div className="child info" data-bus={this.props.info.bus} data-course={this.props.info.course}>
 				<div className="photo">
-					<img src={"/photoes/thumbnail/" + this.props.info.id} />
+					<img src={"/photos/thumbnail/" + this.props.info.id} />
 				</div>
 				<h3>{this.props.info.kana}</h3>
 				<div className="name">{this.props.info.name}</div>

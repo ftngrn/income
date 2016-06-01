@@ -4,5 +4,6 @@
 /logs/*
 *.swp
 /webroot/icon/*
+/webroot/caches/*
 /webroot/favicon.ico
 

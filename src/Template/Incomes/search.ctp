@@ -100,7 +100,7 @@ var Searcher = React.createClass({
 	render: function() {
 		return (
 			<div className="searcher">
-				<SearchForm onClick={this.doSearch} onReset={this.doReset} />
+				<SearchForm onClick={this.doSearch} onReset={this.doReset} data={this.state.data} />
 				<SearchResult data={this.state.data} />
 			</div>
 		);
@@ -108,6 +108,7 @@ var Searcher = React.createClass({
 });
 var SearchForm = React.createClass({
 	render: function() {
+		var count = Object.keys(this.props.data).length;
 		return (
 			<div className="search-form">
 				<BirthdayList onClick={this.props.onClick} />
@@ -116,7 +117,8 @@ var SearchForm = React.createClass({
 				<RoomList onClick={this.props.onClick} />
 				<CourseList onClick={this.props.onClick} />
 				<KanaList onClick={this.props.onClick} />
-				<button onClick={this.props.onReset} >Reset!</button>
+				<button className="reset btn btn-xs btn-warning" onClick={this.props.onReset} >リセット</button>
+				<div className="count">{count}</div>
 			</div>
 		);
 	}
@@ -141,7 +143,7 @@ var KanaList = React.createClass({
 			return (
 				<div className={name}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
-					<label htmlFor={key} className="btn btn-sm btn-default">{v}</label>
+					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
 		}, this);
@@ -162,7 +164,7 @@ var RoomList = React.createClass({
 			return (
 				<div className={name}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
-					<label htmlFor={key} className="btn btn-sm btn-default">{v}</label>
+					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
 		}, this);
@@ -183,7 +185,7 @@ var CourseList = React.createClass({
 			return (
 				<div className={name}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
-					<label htmlFor={key} className="btn btn-sm btn-default">{v}</label>
+					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
 		}, this);
@@ -204,7 +206,7 @@ var SchoolList = React.createClass({
 			return (
 				<div className={name}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
-					<label htmlFor={key} className="btn btn-sm btn-default">{v}</label>
+					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
 		}, this);
@@ -225,7 +227,7 @@ var SexList = React.createClass({
 			return (
 				<div className={name}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
-					<label htmlFor={key} className="btn btn-sm btn-default">{v}</label>
+					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
 		}, this);
@@ -246,7 +248,7 @@ var BirthdayList = React.createClass({
 			return (
 				<div className={name}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
-					<label htmlFor={key} className="btn btn-sm btn-default">{v}</label>
+					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
 		}, this);
@@ -260,7 +262,8 @@ var BirthdayList = React.createClass({
 });
 var SearchResult = React.createClass({
 	render: function() {
-		console.log("SearchResult:", Object.keys(this.props.data).length);
+		var count = Object.keys(this.props.data).length;
+		console.log("SearchResult:", count);
 		var results = Object.keys(this.props.data).map(function (key) {
 			var child = this.props.data[key];
 			return (

@@ -8,3 +8,92 @@
   height: 60px;
   background-color: #f5f5f5;
 }
+.main {
+	padding-top: 0;
+}
+.search .page-header {
+	display: none;
+}
+.search-form {
+	padding-bottom: 4px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #eee;
+}
+.search-form h3 {
+	display: inline-block;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 0;
+}
+.kana, .room, .course, .sex, .birthday, .school {
+	display: inline-block;
+}
+input[type="radio"] {
+	display: none;
+}
+input[type="radio"]:checked + label {
+	border: 1px solid #f00;
+	background-color: #fd0
+}
+label.btn {
+	margin-right: 1px;
+}
+.birthday .btn {
+	width: 4.0em;
+}
+.school .btn {
+	width: 8.0em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.sex .btn {
+	width: 4.0em;
+}
+.room .btn {
+	width: 4.0em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.course .btn {
+	width: 4.0em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.buttons {
+	margin-bottom: 4px;
+}
+.buttons div:first-of-type label.btn {
+	background-color: #cdf;
+	margin-right: 4px;
+	padding: 1px 5px;
+	width: auto;
+	text-transform: none;
+}
+.reset {
+	display: inline-block;
+}
+.count {
+	display: inline-block;
+	margin-left: 1.0em;
+}
+.count:before {
+	content: "結果: ";
+}
+.count:after {
+	content: "件";
+}
+.child {
+	display: inline-block;
+}
+.child h3 {
+	font-size: 16px;
+	margin: 0;
+}
+.photo img {
+	height: 70px;
+	max-height: 100px;
+	max-width: 100px;
+}
+.photo.none {
+	display: none;
+}

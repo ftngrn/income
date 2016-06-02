@@ -36,10 +36,19 @@ var Searcher = React.createClass({
 		});
 	},
 	getInitialState: function() {
-		return {data: {}};
+		return {
+			data: {},
+			child: {}
+		};
 	},
 	componentDidMount: function() {
 		this.loadChildren();
+	},
+	openIncomePanel: function(child) {
+		this.setState({child: child});
+	},
+	closeIncomePanel: function(child) {
+		this.setState({child: {}});
 	},
 	doReset: function() {
 		this.setState({data: {}});
@@ -98,10 +107,12 @@ var Searcher = React.createClass({
 		this.setState({data: result});
 	},
 	render: function() {
+		console.log("Root render:", this.state);
 		return (
 			<div className="searcher">
 				<SearchForm onClick={this.doSearch} onReset={this.doReset} data={this.state.data} />
-				<SearchResult data={this.state.data} />
+				<SearchResult data={this.state.data} openIncomePanel={this.openIncomePanel} />
+				<IncomePanel child={this.state.child} closeIncomePanel={this.closeIncomePanel} url={this.props.incomeUrl} />
 			</div>
 		);
 	}
@@ -268,7 +279,7 @@ var SearchResult = React.createClass({
 		var results = Object.keys(this.props.data).map(function (key) {
 			var child = this.props.data[key];
 			return (
-				<Child info={child} key={child.id} />
+				<Child info={child} key={child.id} openIncomePanel={this.props.openIncomePanel} />
 			);
 		}, this);
 		return (
@@ -279,6 +290,9 @@ var SearchResult = React.createClass({
 	}
 });
 var Child = React.createClass({
+	openIncomePanel: function() {
+		this.props.openIncomePanel(this.props.info);
+	},
 	render: function() {
 		//SafariではISO8601形式をDateに食わせられないのでYMDに変換
 		var birthedYMD = this.props.info.birthed.split('T',1)[0];
@@ -305,26 +319,80 @@ var Child = React.createClass({
 					<li className="bus">{this.props.info.bus}</li>
 					<li className="course">{this.props.info.course}</li>
 				</ul>
-				<IncomeForm incomes={this.props.info.incomes} />
+				<div className="open-income">
+					<button className="btn btn-success" onClick={this.openIncomePanel}>出欠など連絡を追加する</button>
+				</div>
+			</div>
+		);
+	}
+});
+var IncomePanel = React.createClass({
+	close: function() {
+		this.props.closeIncomePanel(this.props.child);
+	},
+	submit: function() {
+		//ここでAjaxリクエストする
+		var data = {
+			child: this.props.child,
+			income: {
+				come: this.refs.come.checked
+			}
+		};
+		console.log("IncomePanel#submit", data);
+		$.ajax({
+			type: 'POST',
+			url: this.props.url,
+			dataType: 'json',
+			data: data,
+			cache: false,
+			success: function(data) {
+				console.log("IncomePanel#submit success!");
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.error("IncomePanel#submit", this.props.url, status, err.toString());
+			}.bind(this)
+		});
+	},
+	render: function() {
+		var cls = "income-panel";
+		if (jQuery.isEmptyObject(this.props.child)) {
+			cls = cls + " hide";
+		}
+		return (
+			<div className={cls}>
+				<h3>{"IncomePanel:" + this.props.child.kana}</h3>
+				<button className="close-panel" onClick={this.close}>Close</button>
+				<input type="checkbox" name="come" ref="come" id="income-come" />
+				<label htmlFor="income-come">お迎え</label>
+				<button className="submit" onClick={this.submit}>Submit</button>
 			</div>
 		);
 	}
 });
 var IncomeForm = React.createClass({
 	render: function() {
-		return (
-			<ul className="income-container">
-<?php foreach (Income::$TYPES as $idx => $type): ?>
-				<li>
+		var incomeTypes = <?= json_encode(Income::$TYPES) ?>;
+		var name = 'income-type';
+		var inputs = incomeTypes.map(function (type, i) {
+			var cls = name + " " + type.key;
+			var key = type.key + "-" + type.enum + "-" + this.props.info.id;
+			return (
+				<li className={cls} title={type.label}>
+					<input type="checkbox" name={key} ref={cls} id={key} defaultValue={type.enum} onClick={this.props.onClickIncome} />
+					<label htmlFor={key} className="">{type.short_label}</label>
 				</li>
-<?php endforeach; ?>
+			);
+		}, this);
+		return (
+			<ul className="income-types">
+				{inputs}
 			</ul>
 		);
 	}
 });
 
 ReactDOM.render(
-	<Searcher url="/api/children.json" />,
+	<Searcher url="/api/children.json" incomeUrl="/api/incomes" />,
 	document.getElementById('search-container')
 );
 <?= $this->Html->scriptEnd() ?>

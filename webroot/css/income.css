@@ -10,6 +10,8 @@
 }
 .main {
 	padding-top: 0;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 .search .page-header {
 	display: none;
@@ -62,6 +64,9 @@ label.btn {
 .buttons {
 	margin-bottom: 4px;
 }
+.buttons h3 {
+	width: 3.5em;
+}
 .buttons div:first-of-type label.btn {
 	background-color: #cdf;
 	margin-right: 4px;
@@ -70,6 +75,8 @@ label.btn {
 	text-transform: none;
 }
 .reset {
+	font-size: 9px;
+	padding: 1px 0;
 	display: inline-block;
 }
 .count {

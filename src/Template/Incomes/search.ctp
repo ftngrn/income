@@ -142,7 +142,7 @@ var KanaList = React.createClass({
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
-				<div className={name}>
+				<div className={name} title={v}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
@@ -150,7 +150,7 @@ var KanaList = React.createClass({
 		}, this);
 		return (
 			<div className={name + "List buttons"}>
-				<h3>なまえ：</h3>
+				<h3>なまえ</h3>
 				{inputs}
 			</div>
 		);
@@ -163,7 +163,7 @@ var RoomList = React.createClass({
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
-				<div className={name}>
+				<div className={name} title={v}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
@@ -171,7 +171,7 @@ var RoomList = React.createClass({
 		}, this);
 		return (
 			<div className={name + "List buttons"}>
-				<h3>クラス：</h3>
+				<h3>クラス</h3>
 				{inputs}
 			</div>
 		);
@@ -184,7 +184,7 @@ var CourseList = React.createClass({
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
-				<div className={name}>
+				<div className={name} title={v}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
@@ -192,7 +192,7 @@ var CourseList = React.createClass({
 		}, this);
 		return (
 			<div className={name + "List buttons"}>
-				<h3>リボン：</h3>
+				<h3>リボン</h3>
 				{inputs}
 			</div>
 		);
@@ -205,7 +205,7 @@ var SchoolList = React.createClass({
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
-				<div className={name}>
+				<div className={name} title={v}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
@@ -213,7 +213,7 @@ var SchoolList = React.createClass({
 		}, this);
 		return (
 			<div className={name + "List buttons"}>
-				<h3>所　属：</h3>
+				<h3>所　属</h3>
 				{inputs}
 			</div>
 		);
@@ -226,7 +226,7 @@ var SexList = React.createClass({
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
-				<div className={name}>
+				<div className={name} title={v}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
@@ -234,7 +234,7 @@ var SexList = React.createClass({
 		}, this);
 		return (
 			<div className={name + "List buttons"}>
-				<h3>性　別：</h3>
+				<h3>性　別</h3>
 				{inputs}
 			</div>
 		);
@@ -247,7 +247,7 @@ var BirthdayList = React.createClass({
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
-				<div className={name}>
+				<div className={name} title={v}>
 					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
@@ -255,7 +255,7 @@ var BirthdayList = React.createClass({
 		}, this);
 		return (
 			<div className={name + "List buttons"}>
-				<h3>誕生月：</h3>
+				<h3>誕生月</h3>
 				{inputs}
 			</div>
 		);

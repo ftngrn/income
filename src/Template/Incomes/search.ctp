@@ -59,6 +59,13 @@ var Searcher = React.createClass({
 		$('input[name=sex]:checked').removeAttr('checked');
 		$('input[name=birthday]:checked').removeAttr('checked');
 	},
+	doCheckAsRadio: function(e) {
+		var flag = e.target.checked;
+		$('input[name='+ e.target.name +']').removeAttr('checked');
+		$('input#' + e.target.id).prop('checked', flag);
+		console.log("doCheckAsRadio:", e.target.id, flag);
+		this.doSearch(e);
+	},
 	doSearch: function(e) {
 		//フォームの値を一括取得したいので仕方なくjQueryを使う
 		//Reactでこれを実現する方法が不明なため
@@ -80,6 +87,12 @@ var Searcher = React.createClass({
 			this.setState({data: children});
 			return;
 		}
+		if (kana == undefined && room == undefined && course == undefined && school == undefined && sex == undefined && mon == undefined) {
+			console.log("result = none");
+			this.setState({data: {}});
+			return;
+		}
+
 		if (kana != "ALL" && kana != undefined) {
 			regexp = regexp + "^" + kana;
 		}
@@ -113,7 +126,7 @@ var Searcher = React.createClass({
 		console.log("Root render:", this.state);
 		return (
 			<div className="searcher">
-				<SearchForm onClick={this.doSearch} onReset={this.doReset} data={this.state.data} />
+				<SearchForm onClick={this.doCheckAsRadio} onReset={this.doReset} data={this.state.data} />
 				<SearchResult data={this.state.data} openIncomePanel={this.openIncomePanel} />
 				<IncomePanel child={this.state.child} closeIncomePanel={this.closeIncomePanel} url={this.props.incomeUrl} />
 			</div>

@@ -68,7 +68,10 @@ var Searcher = React.createClass({
 		var school = $('input[name=school]:checked').val();
 		var sex = $('input[name=sex]:checked').val();
 		var mon = $('input[name=birthday]:checked').val();
-		var monp = ('00' + mon).slice(-2);
+		var monp = "";
+		if (mon > 0) {
+			monp = ('00' + mon).slice(-2);
+		}
 		console.log(kana,room,course,school,sex,mon,monp);
 
 		var regexp = "";

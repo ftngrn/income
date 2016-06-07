@@ -154,7 +154,7 @@ var KanaList = React.createClass({
 			var key = name + "-" + i;
 			return (
 				<div className={name} title={v}>
-					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+					<input type="checkbox" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
@@ -175,7 +175,7 @@ var RoomList = React.createClass({
 			var key = name + "-" + i;
 			return (
 				<div className={name} title={v}>
-					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+					<input type="checkbox" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
@@ -196,7 +196,7 @@ var CourseList = React.createClass({
 			var key = name + "-" + i;
 			return (
 				<div className={name} title={v}>
-					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+					<input type="checkbox" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
@@ -217,7 +217,7 @@ var SchoolList = React.createClass({
 			var key = name + "-" + i;
 			return (
 				<div className={name} title={v}>
-					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+					<input type="checkbox" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
@@ -238,7 +238,7 @@ var SexList = React.createClass({
 			var key = name + "-" + i;
 			return (
 				<div className={name} title={v}>
-					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+					<input type="checkbox" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
@@ -259,7 +259,7 @@ var BirthdayList = React.createClass({
 			var key = name + "-" + i;
 			return (
 				<div className={name} title={v}>
-					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+					<input type="checkbox" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);

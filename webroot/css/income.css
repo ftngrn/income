@@ -30,10 +30,10 @@
 .kana, .room, .course, .sex, .birthday, .school {
 	display: inline-block;
 }
-input[type="radio"] {
+input[type="checkbox"] {
 	display: none;
 }
-input[type="radio"]:checked + label {
+input[type="checkbox"]:checked + label {
 	border: 1px solid #f00;
 	background-color: #fd0
 }

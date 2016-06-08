@@ -18,31 +18,29 @@
     <?= $this->Form->create($child) ?>
     <fieldset>
         <legend><?= __('Add Child') ?></legend>
-        <?php
-            echo $this->Form->input('guardian_id', ['options' => $guardians]);
-            echo $this->Form->input('school');
-            echo $this->Form->input('room');
-            echo $this->Form->input('grade');
-            echo $this->Form->input('bus');
-            echo $this->Form->input('course');
-            echo $this->Form->input('name');
-            echo $this->Form->input('kana');
-            echo $this->Form->input('sex');
-            echo $this->Form->input('birthed', ['empty' => true]);
-            echo $this->Form->input('joined', ['empty' => true]);
-            echo $this->Form->input('finished', ['empty' => true]);
-            echo $this->Form->input('memo');
-            echo $this->Form->input('season');
-            echo $this->Form->input('number');
-            echo $this->Form->input('oldname');
-            echo $this->Form->input('newschool');
-            echo $this->Form->input('newzip');
-            echo $this->Form->input('newpref');
-            echo $this->Form->input('newaddr');
-            echo $this->Form->input('newaddr2');
-            echo $this->Form->input('newtel');
-            echo $this->Form->input('nondelivery');
-        ?>
+<?= $this->Form->input('guardian_id', ['options' => $guardians]) ?>
+<?= $this->Form->input('school', ['label' => '']) ?>
+<?= $this->Form->input('room', ['label' => '']) ?>
+<?= $this->Form->input('grade', ['label' => '']) ?>
+<?= $this->Form->input('bus', ['label' => '']) ?>
+<?= $this->Form->input('course', ['label' => '']) ?>
+<?= $this->Form->input('name', ['label' => '']) ?>
+<?= $this->Form->input('kana', ['label' => '']) ?>
+<?= $this->Form->input('sex', ['label' => '']) ?>
+<?= $this->Form->input('birthed', ['empty' => true], ['label' => '']) ?>
+<?= $this->Form->input('joined', ['empty' => true], ['label' => '']) ?>
+<?= $this->Form->input('finished', ['empty' => true], ['label' => '']) ?>
+<?= $this->Form->input('memo', ['label' => '']) ?>
+<?= $this->Form->input('season', ['label' => '']) ?>
+<?= $this->Form->input('number', ['label' => '']) ?>
+<?= $this->Form->input('oldname', ['label' => '']) ?>
+<?= $this->Form->input('newschool', ['label' => '']) ?>
+<?= $this->Form->input('newzip', ['label' => '']) ?>
+<?= $this->Form->input('newpref', ['label' => '']) ?>
+<?= $this->Form->input('newaddr', ['label' => '']) ?>
+<?= $this->Form->input('newaddr2', ['label' => '']) ?>
+<?= $this->Form->input('newtel', ['label' => '']) ?>
+<?= $this->Form->input('nondelivery', ['label' => '']) ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>

@@ -13,6 +13,8 @@
         <li><?= $this->Html->link(__('New Child Medication'), ['controller' => 'ChildMedications', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Incomes'), ['controller' => 'Incomes', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Income'), ['controller' => 'Incomes', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Photos'), ['controller' => 'Photos', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Photo'), ['controller' => 'Photos', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Ptas'), ['controller' => 'Ptas', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Pta'), ['controller' => 'Ptas', 'action' => 'add']) ?> </li>
     </ul>
@@ -22,7 +24,7 @@
     <table class="vertical-table">
         <tr>
             <th><?= __('Guardian') ?></th>
-            <td><?= $child->has('guardian') ? $this->Html->link($child->guardian->id, ['controller' => 'Guardians', 'action' => 'view', $child->guardian->id]) : '' ?></td>
+            <td><?= $child->has('guardian') ? $this->Html->link($child->guardian->mother_name, ['controller' => 'Guardians', 'action' => 'view', $child->guardian->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('School') ?></th>
@@ -290,6 +292,45 @@
                     <?= $this->Html->link(__('View'), ['controller' => 'Incomes', 'action' => 'view', $incomes->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Incomes', 'action' => 'edit', $incomes->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Incomes', 'action' => 'delete', $incomes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $incomes->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
+    <div class="related">
+        <h4><?= __('Related Photos') ?></h4>
+        <?php if (!empty($child->photos)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th><?= __('Id') ?></th>
+                <th><?= __('Model') ?></th>
+                <th><?= __('Model Id') ?></th>
+                <th><?= __('Seq') ?></th>
+                <th><?= __('Body') ?></th>
+                <th><?= __('Size') ?></th>
+                <th><?= __('Mime') ?></th>
+                <th><?= __('Name') ?></th>
+                <th><?= __('Modified') ?></th>
+                <th><?= __('Created') ?></th>
+                <th class="actions"><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($child->photos as $photos): ?>
+            <tr>
+                <td><?= h($photos->id) ?></td>
+                <td><?= h($photos->model) ?></td>
+                <td><?= h($photos->model_id) ?></td>
+                <td><?= h($photos->seq) ?></td>
+                <td><?= h($photos->body) ?></td>
+                <td><?= h($photos->size) ?></td>
+                <td><?= h($photos->mime) ?></td>
+                <td><?= h($photos->name) ?></td>
+                <td><?= h($photos->modified) ?></td>
+                <td><?= h($photos->created) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Photos', 'action' => 'view', $photos->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Photos', 'action' => 'edit', $photos->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Photos', 'action' => 'delete', $photos->id], ['confirm' => __('Are you sure you want to delete # {0}?', $photos->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

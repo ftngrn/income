@@ -10,6 +10,8 @@
         <li><?= $this->Html->link(__('New Child Medication'), ['controller' => 'ChildMedications', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Incomes'), ['controller' => 'Incomes', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Income'), ['controller' => 'Incomes', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Photos'), ['controller' => 'Photos', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Photo'), ['controller' => 'Photos', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Ptas'), ['controller' => 'Ptas', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Pta'), ['controller' => 'Ptas', 'action' => 'add']) ?></li>
     </ul>
@@ -35,13 +37,6 @@
                 <th><?= $this->Paginator->sort('season') ?></th>
                 <th><?= $this->Paginator->sort('number') ?></th>
                 <th><?= $this->Paginator->sort('oldname') ?></th>
-                <th><?= $this->Paginator->sort('newschool') ?></th>
-                <th><?= $this->Paginator->sort('newzip') ?></th>
-                <th><?= $this->Paginator->sort('newpref') ?></th>
-                <th><?= $this->Paginator->sort('newaddr') ?></th>
-                <th><?= $this->Paginator->sort('newaddr2') ?></th>
-                <th><?= $this->Paginator->sort('newtel') ?></th>
-                <th><?= $this->Paginator->sort('nondelivery') ?></th>
                 <th><?= $this->Paginator->sort('modified') ?></th>
                 <th><?= $this->Paginator->sort('created') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
@@ -51,7 +46,7 @@
             <?php foreach ($children as $child): ?>
             <tr>
                 <td><?= $this->Number->format($child->id) ?></td>
-                <td><?= $child->has('guardian') ? $this->Html->link($child->guardian->id, ['controller' => 'Guardians', 'action' => 'view', $child->guardian->id]) : '' ?></td>
+                <td><?= $child->has('guardian') ? $this->Html->link($child->guardian->mother_name, ['controller' => 'Guardians', 'action' => 'view', $child->guardian->id]) : '' ?></td>
                 <td><?= h($child->school) ?></td>
                 <td><?= h($child->room) ?></td>
                 <td><?= h($child->grade) ?></td>
@@ -66,13 +61,6 @@
                 <td><?= $this->Number->format($child->season) ?></td>
                 <td><?= $this->Number->format($child->number) ?></td>
                 <td><?= h($child->oldname) ?></td>
-                <td><?= h($child->newschool) ?></td>
-                <td><?= h($child->newzip) ?></td>
-                <td><?= h($child->newpref) ?></td>
-                <td><?= h($child->newaddr) ?></td>
-                <td><?= h($child->newaddr2) ?></td>
-                <td><?= h($child->newtel) ?></td>
-                <td><?= h($child->nondelivery) ?></td>
                 <td><?= h($child->modified) ?></td>
                 <td><?= h($child->created) ?></td>
                 <td class="actions">

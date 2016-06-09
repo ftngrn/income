@@ -4,6 +4,8 @@ namespace App\Model\Table;
 use App\Model\Entity\Photo;
 use ArrayObject;
 use Cake\Event\Event;
+use Cake\Filesystem\File;
+use Cake\Log\Log;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -104,6 +106,14 @@ class PhotosTable extends Table
 		} else {
 			unset($data);
 		}
+	}
+
+	public function afterSave(Event $event, $entity, $options) {
+		//キャッシュを削除する
+		$path = sprintf(WWW_ROOT.'caches'.DS.'thumbnail_%d.jpg', $entity->id);
+		$cache = new File($path);
+		$cache->delete();
+		Log::write('debug', sprintf("Delete cache:%s", $path));
 	}
 
 }

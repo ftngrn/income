@@ -88,7 +88,7 @@ class ChildrenController extends AppController
 				$this->Flash->error(__('The child could not be saved. Please, try again.'));
 			}
 		}
-		$guardians = $this->Children->Guardians->find('list', ['limit' => 200]);
+		$guardians = $this->Children->Guardians->find('list', ['limit' => 300, 'order' => 'id DESC']);
 		$this->set(compact('child', 'guardians'));
 		$this->set('_serialize', ['child']);
 	}

@@ -14,6 +14,7 @@ $this->assign('page_header', '園児検索');
 </div>
 
 <!-- Income用のCSS,JS -->
+<?= $this->Html->css(['income']) ?>
 <?= $this->Html->script([
 			'https://cdnjs.cloudflare.com/ajax/libs/react/15.0.2/react.min.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/react/15.0.2/react-dom.min.js',

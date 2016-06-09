@@ -77,9 +77,13 @@ class ChildrenController extends AppController
 	public function edit($id = null)
 	{
 		$child = $this->Children->get($id, [
-			'contain' => []
+			'contain' => ['Photos']
 		]);
 		if ($this->request->is(['patch', 'post', 'put'])) {
+			$photos = $child->photos;
+			if (!empty($photos) && count($photos) > 0) {
+				$this->request->data['photos'][0]['id'] = $photos[0]['id'];
+			}
 			$child = $this->Children->patchEntity($child, $this->request->data);
 			if ($this->Children->save($child)) {
 				$this->Flash->success(__('The child has been saved.'));

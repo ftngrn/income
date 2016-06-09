@@ -18,19 +18,19 @@ $week_day = ['日', '月', '火', '水', '木', '金', '土'];
 </table>
 
 <div class="children form large-9 medium-8 columns content">
-    <?= $this->Form->create($child, ['type' => 'file']) ?>
-    <fieldset>
-        <legend><?= __('Edit Child') ?></legend>
-        <?php
-            echo $this->Form->input('guardian_id', ['options' => $guardians]);
-            echo $this->Form->input('school');
-            echo $this->Form->input('room');
-            echo $this->Form->input('grade');
-            echo $this->Form->input('bus');
-            echo $this->Form->input('course');
-            echo $this->Form->input('name');
-            echo $this->Form->input('kana');
-            echo $this->Form->input('sex');
+	<?= $this->Form->create($child, ['type' => 'file']) ?>
+	<fieldset>
+		<legend><?= __('Edit Child') ?></legend>
+		<?php
+			echo $this->Form->input('guardian_id', ['options' => $guardians]);
+			echo $this->Form->input('school');
+			echo $this->Form->input('room');
+			echo $this->Form->input('grade');
+			echo $this->Form->input('bus');
+			echo $this->Form->input('course');
+			echo $this->Form->input('name');
+			echo $this->Form->input('kana');
+			echo $this->Form->input('sex');
 						?>
 <?php echo $this->Form->input('birthed', [
 						'type'=>'text',
@@ -55,20 +55,20 @@ $week_day = ['日', '月', '火', '水', '木', '金', '土'];
 ?>
 <?php
 echo $this->Form->input('joined', ['empty' => true]);
-            echo $this->Form->input('finished', ['empty' => true]);
-            echo $this->Form->input('memo');
-            echo $this->Form->input('season');
-            echo $this->Form->input('number');
-            echo $this->Form->input('oldname');
-            echo $this->Form->input('newschool');
-            echo $this->Form->input('newzip');
-            echo $this->Form->input('newpref');
-            echo $this->Form->input('newaddr');
-            echo $this->Form->input('newaddr2');
-            echo $this->Form->input('newtel');
-            echo $this->Form->input('nondelivery');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+			echo $this->Form->input('finished', ['empty' => true]);
+			echo $this->Form->input('memo');
+			echo $this->Form->input('season');
+			echo $this->Form->input('number');
+			echo $this->Form->input('oldname');
+			echo $this->Form->input('newschool');
+			echo $this->Form->input('newzip');
+			echo $this->Form->input('newpref');
+			echo $this->Form->input('newaddr');
+			echo $this->Form->input('newaddr2');
+			echo $this->Form->input('newtel');
+			echo $this->Form->input('nondelivery');
+		?>
+	</fieldset>
+	<?= $this->Form->button(__('Submit')) ?>
+	<?= $this->Form->end() ?>
 </div>

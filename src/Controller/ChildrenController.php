@@ -22,6 +22,7 @@ class ChildrenController extends AppController
 		$this->paginate = [
 			'contain' => ['Guardians'],
 			'order' => ['joined' => 'desc'],
+			'limit' => 50,
 		];
 		$children = $this->paginate($this->Children);
 

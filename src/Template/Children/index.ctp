@@ -1,83 +1,95 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Child'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Guardians'), ['controller' => 'Guardians', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Guardian'), ['controller' => 'Guardians', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Child Healths'), ['controller' => 'ChildHealths', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Child Health'), ['controller' => 'ChildHealths', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Child Medications'), ['controller' => 'ChildMedications', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Child Medication'), ['controller' => 'ChildMedications', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Incomes'), ['controller' => 'Incomes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Income'), ['controller' => 'Incomes', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Photos'), ['controller' => 'Photos', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Photo'), ['controller' => 'Photos', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Ptas'), ['controller' => 'Ptas', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Pta'), ['controller' => 'Ptas', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+<?php
+$this->assign('title', '園児一覧');
+$this->extend('../Layout/bootstrap-ui/dashboard');
+$this->assign('page_header', '園児の一覧');
+?>
+<?= $this->Html->css(['child']) ?>
+<?php $this->start('tb_left_actions', ['label' => '']) ?>
+<li><?= $this->Html->link('園児を探す', ['controller' => 'incomes', 'action' => 'search']) ?></li>
+<li><?= $this->Html->link('一覧', ['action' => 'index']) ?></li>
+<li><?= $this->Html->link('追加', ['controller' => 'guardians', 'action' => 'add']) ?></li>
+<?php $this->end(); ?>
+
 <div class="children index large-9 medium-8 columns content">
-    <h3><?= __('Children') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('guardian_id') ?></th>
-                <th><?= $this->Paginator->sort('school') ?></th>
-                <th><?= $this->Paginator->sort('room') ?></th>
-                <th><?= $this->Paginator->sort('grade') ?></th>
-                <th><?= $this->Paginator->sort('bus') ?></th>
-                <th><?= $this->Paginator->sort('course') ?></th>
-                <th><?= $this->Paginator->sort('name') ?></th>
-                <th><?= $this->Paginator->sort('kana') ?></th>
-                <th><?= $this->Paginator->sort('sex') ?></th>
-                <th><?= $this->Paginator->sort('birthed') ?></th>
-                <th><?= $this->Paginator->sort('joined') ?></th>
-                <th><?= $this->Paginator->sort('finished') ?></th>
-                <th><?= $this->Paginator->sort('season') ?></th>
-                <th><?= $this->Paginator->sort('number') ?></th>
-                <th><?= $this->Paginator->sort('oldname') ?></th>
-                <th><?= $this->Paginator->sort('modified') ?></th>
-                <th><?= $this->Paginator->sort('created') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($children as $child): ?>
-            <tr>
-                <td><?= $this->Number->format($child->id) ?></td>
-                <td><?= $child->has('guardian') ? $this->Html->link($child->guardian->mother_name, ['controller' => 'Guardians', 'action' => 'view', $child->guardian->id]) : '' ?></td>
-                <td><?= h($child->school) ?></td>
-                <td><?= h($child->room) ?></td>
-                <td><?= h($child->grade) ?></td>
-                <td><?= h($child->bus) ?></td>
-                <td><?= h($child->course) ?></td>
-                <td><?= h($child->name) ?></td>
-                <td><?= h($child->kana) ?></td>
-                <td><?= h($child->sex) ?></td>
-                <td><?= h($child->birthed) ?></td>
-                <td><?= h($child->joined) ?></td>
-                <td><?= h($child->finished) ?></td>
-                <td><?= $this->Number->format($child->season) ?></td>
-                <td><?= $this->Number->format($child->number) ?></td>
-                <td><?= h($child->oldname) ?></td>
-                <td><?= h($child->modified) ?></td>
-                <td><?= h($child->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $child->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $child->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $child->id], ['confirm' => __('Are you sure you want to delete # {0}?', $child->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
-    </div>
+	<div class="row">
+		<div class="col-md-1">
+			<?= $this->Paginator->sort('id') ?>
+		</div>
+		<div class="col-md-1">
+			<?= $this->Paginator->sort('school') ?>
+		</div>
+		<div class="col-md-1">
+			<?= $this->Paginator->sort('room') ?>
+		</div>
+		<div class="col-md-1">
+			<?= $this->Paginator->sort('bus') ?>
+		</div>
+		<div class="col-md-1">
+			<?= $this->Paginator->sort('course') ?>
+		</div>
+		<div class="col-md-2">
+			<?= $this->Paginator->sort('kana') ?>
+		</div>
+		<div class="col-md-1">
+			<?= $this->Paginator->sort('birthed') ?>
+		</div>
+		<div class="col-md-1">
+			<?= $this->Paginator->sort('joined') ?>
+		</div>
+		<div class="col-md-1">
+			<?= $this->Paginator->sort('created') ?>
+		</div>
+		<div class="col-md-2">
+			Actions
+		</div>
+	</div>
+
+<?php foreach ($children as $child): ?>
+	<div class="row">
+		<div class="col-md-1">
+			<?= $this->Number->format($child->id) ?>
+		</div>
+		<div class="col-md-1">
+			<?= h($child->school) ?>
+		</div>
+		<div class="col-md-1">
+			<?= h($child->room) ?>
+		</div>
+		<div class="col-md-1">
+			<?= h($child->bus) ?>
+		</div>
+		<div class="col-md-1">
+			<?= h($child->course) ?>
+		</div>
+		<div class="col-md-2">
+			<?= h($child->kana) ?>
+			<?= h($child->name) ?>
+			<?= h($child->sex) ?>
+		</div>
+		<div class="col-md-1">
+			<?= h($child->birthed) ?>
+		</div>
+		<div class="col-md-1">
+			<?= h($child->joined) ?>
+		</div>
+		<div class="col-md-1">
+			<?= h($child->created) ?>
+		</div>
+		<div class="col-md-2">
+			<?= $this->Html->link('確認', ['action' => 'view', $child->id], ['class' => 'btn btn-sm btn-info']) ?>
+			<?= $this->Html->link('変更', ['action' => 'edit', $child->id], ['class' => 'btn btn-sm btn-warning']) ?>
+		</div>
+	</div>
+
+<?php endforeach; ?>
+	<div class="paginator">
+		<ul class="pagination">
+			<?= $this->Paginator->prev('< ' . __('previous')) ?>
+			<?= $this->Paginator->numbers() ?>
+			<?= $this->Paginator->next(__('next') . ' >') ?>
+		</ul>
+		<p><?= $this->Paginator->counter() ?></p>
+	</div>
+
 </div>
+

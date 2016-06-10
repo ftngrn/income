@@ -16,7 +16,7 @@ $this->assign('page_header', '園児の情報');
 
 <?= $this->Form->input('kana', ['label' => 'かな（半角スペースで区切る）']) ?>
 <?= $this->Form->input('name', ['label' => '氏名（半角スペースで区切る）']) ?>
-<?= $this->Form->input('sex', ['label' => '性別', 'type' => 'radio', 'options' => $sexs]) ?>
+<?= $this->Form->input('sex', ['label' => '性別']) ?>
 <?= $this->Form->input('guardian_id', ['options' => $guardians, 'label' => '保護者']) ?>
 <?= $this->Form->input('school', ['label' => '真駒内幼稚園／プチピヨランド']) ?>
 <?= $this->Form->input('room', ['label' => 'クラス／プチピヨコース']) ?>

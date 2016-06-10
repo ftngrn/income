@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Core\Configure;
 
 /**
  * DailyReports Controller
@@ -27,6 +28,7 @@ class DailyReportsController extends AppController
         $dailyReports = $this->paginate($this->DailyReports);
 
         $this->set(compact('dailyReports'));
+        $this->set('week_day', Configure::read('Income.list.week'));
         $this->set('_serialize', ['dailyReports']);
     }
 

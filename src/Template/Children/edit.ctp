@@ -2,8 +2,6 @@
 $this->assign('title', '園児を編集する');
 $this->extend('../Layout/bootstrap-ui/dashboard');
 $this->assign('page_header', '園児の情報');
-
-$week_day = ['日', '月', '火', '水', '木', '金', '土'];
 ?>
 <?= $this->Html->css(['child']) ?>
 <?php $this->start('tb_left_actions', ['label' => '']) ?>

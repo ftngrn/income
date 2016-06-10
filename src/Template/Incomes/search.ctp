@@ -4,7 +4,6 @@ use App\Model\Entity\Income;
 
 $this->extend('../Layout/bootstrap-ui/dashboard');
 
-$week_day = ['日', '月', '火', '水', '木', '金', '土'];
 $this->assign('title', '園児検索');
 $this->assign('page_header', '園児検索');
 ?>

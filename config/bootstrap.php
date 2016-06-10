@@ -226,6 +226,7 @@ Configure::write('Income.list.room', ['うめ','もも','たんぽぽ','さく�
 Configure::write('Income.list.bus', ['','黄','青','赤']);
 Configure::write('Income.list.course', ['','緑','黄','黄緑','青','白','水','赤','オレンジ','ピンク','紫']);
 Configure::write('Income.list.grade', ['','年少','年中','年長']);
+Configure::write('Income.list.week', ['日','月','火','水','木','金','土']);
 
 /**
  * 配列をハッシュに変換する（値をキーに）

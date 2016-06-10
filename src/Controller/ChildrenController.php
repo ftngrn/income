@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Core\Configure;
 
 /**
  * Children Controller
@@ -94,6 +95,12 @@ class ChildrenController extends AppController
 		}
 		$guardians = $this->Children->Guardians->find('list', ['limit' => 300, 'order' => 'id DESC']);
 		$this->set(compact('child', 'guardians'));
+		$this->set('sexs', Configure::read('Income.hash.sex'));
+		$this->set('schools', Configure::read('Income.hash.school'));
+		$this->set('rooms', Configure::read('Income.hash.room'));
+		$this->set('buses', Configure::read('Income.hash.bus'));
+		$this->set('courses', Configure::read('Income.hash.course'));
+		$this->set('grades', Configure::read('Income.hash.grade'));
 		$this->set('_serialize', ['child']);
 	}
 

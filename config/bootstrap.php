@@ -52,6 +52,7 @@ use Cake\Mailer\Email;
 use Cake\Network\Request;
 use Cake\Routing\DispatcherFactory;
 use Cake\Utility\Inflector;
+use Cake\Utility\Hash;
 use Cake\Utility\Security;
 
 /**
@@ -218,4 +219,20 @@ Type::build('datetime')
  */
 Configure::write('App.language', 'ja');
 Configure::write('App.title', 'Income');
+
+Configure::write('Income.list.sex', ['男','女']);
+Configure::write('Income.list.school', ['真駒内幼稚園','プチピヨランド']);
+Configure::write('Income.list.room', ['うめ','もも','たんぽぽ','さくら','ちゅうりっぷ','ひまわり','ばら','すみれ','月水','火木']);
+Configure::write('Income.list.bus', ['','黄','青','赤']);
+Configure::write('Income.list.course', ['','緑','黄','黄緑','青','白','水','赤','オレンジ','ピンク','紫']);
+Configure::write('Income.list.grade', ['','年少','年中','年長']);
+
+/**
+ * 配列をハッシュに変換する（値をキーに）
+ */
+$list = Configure::read('Income.list');
+foreach ($list as $key => $arr) {
+	$valOnVal = Hash::combine($list, $key.'.{n}', $key.'.{n}');
+	Configure::write('Income.hash.'.$key, $valOnVal);
+}
 

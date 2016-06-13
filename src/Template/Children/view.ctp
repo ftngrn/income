@@ -17,7 +17,7 @@ $this->extend('../Layout/bootstrap-ui/dashboard');
 
 	<table class="table table-hover table-responsive">
 		<tr>
-			<th>保護者</th>
+			<th class="right">保護者</th>
 			<td><?= $child->has('guardian') ? $this->Html->link($child->guardian->mother_name, ['controller' => 'Guardians', 'action' => 'view', $child->guardian->id]) : '' ?></td>
 			<td rowspan="10" class="top">
 <?php foreach($child->photos as $photo): ?>
@@ -26,39 +26,39 @@ $this->extend('../Layout/bootstrap-ui/dashboard');
 			</td>
 		</tr>
 		<tr>
-			<th>通い先</th>
+			<th class="right">通い先</th>
 			<td><?= h($child->school) ?></td>
 		</tr>
 		<tr>
-			<th>クラス<span class="slash">／</span>学年</th>
+			<th class="right">クラス<span class="slash">／</span>学年</th>
 			<td><?= h($child->room) ?><span class="slash">／</span><?= h($child->grade) ?></td>
 		</tr>
 		<tr>
-			<th>バス<span class="slash">／</span>バスコース</th>
+			<th class="right">バス<span class="slash">／</span>バスコース</th>
 			<td><?= h($child->bus) ?><span class="slash">／</span><?= h($child->course) ?></td>
 		</tr>
 		<tr>
-			<th>名前<span class="slash">／</span>かな<span class="slash">／</span>性別</th>
+			<th class="right">名前<span class="slash">／</span>かな<span class="slash">／</span>性別</th>
 			<td><?= h($child->name) ?><span class="slash">／</span><?= h($child->kana) ?><span class="slash">／</span><?= h($child->sex) ?></td>
 		</tr>
 		<tr>
-			<th>誕生日</th>
+			<th class="right">誕生日</th>
 			<td><?= h($child->birthed) ?></td>
 		</tr>
 		<tr>
-			<th>入園日</th>
+			<th class="right">入園日</th>
 			<td><?= h($child->joined) ?></td>
 		</tr>
 		<tr>
-			<th>備考</th>
+			<th class="right">備考</th>
 			<td><?= $this->Text->autoParagraph(h($child->memo)); ?></td>
 		</tr>
 		<tr>
-			<th>最終更新日<span class="slash">／</span>作成日</th>
+			<th class="right">最終更新日<span class="slash">／</span>作成日</th>
 			<td><?= h($child->modified) ?><span class="slash">／</span><?= h($child->created) ?></td>
 		</tr>
 		<tr>
-			<th><?= __('Id') ?></th>
+			<th class="right"><?= __('Id') ?></th>
 			<td><?= $child->id ?></td>
 		</tr>
 	</table>

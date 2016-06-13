@@ -1,6 +1,10 @@
 table {
 	width: auto !important;
 }
+th.right {
+	text-align: right;
+	color: #999;
+}
 td.top {
 	vertical-align: top;
 }

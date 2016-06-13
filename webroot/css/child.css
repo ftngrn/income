@@ -1,1 +1,9 @@
-
+table {
+	width: auto !important;
+}
+td.top {
+	vertical-align: top;
+}
+.slash {
+	color: #ccc;
+}

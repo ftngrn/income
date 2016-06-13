@@ -40,7 +40,7 @@ class ChildrenController extends AppController
 	public function view($id = null)
 	{
 		$child = $this->Children->get($id, [
-			'contain' => ['Guardians', 'ChildHealths', 'ChildMedications', 'Incomes', 'Ptas']
+			'contain' => ['Guardians', 'Incomes', 'Photos']
 		]);
 
 		$this->set('child', $child);

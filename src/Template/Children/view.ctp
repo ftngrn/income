@@ -1,393 +1,68 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Child'), ['action' => 'edit', $child->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Child'), ['action' => 'delete', $child->id], ['confirm' => __('Are you sure you want to delete # {0}?', $child->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Children'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Child'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Guardians'), ['controller' => 'Guardians', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Guardian'), ['controller' => 'Guardians', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Child Healths'), ['controller' => 'ChildHealths', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Child Health'), ['controller' => 'ChildHealths', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Child Medications'), ['controller' => 'ChildMedications', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Child Medication'), ['controller' => 'ChildMedications', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Incomes'), ['controller' => 'Incomes', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Income'), ['controller' => 'Incomes', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Photos'), ['controller' => 'Photos', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Photo'), ['controller' => 'Photos', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Ptas'), ['controller' => 'Ptas', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Pta'), ['controller' => 'Ptas', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
+<?php
+$title = sprintf("園児の詳細 #%d", $child->id);
+$this->assign('title', $title);
+$this->assign('page_header', $title);
+$this->extend('../Layout/bootstrap-ui/dashboard');
+?>
+<?= $this->Html->css(['child']) ?>
+<?php $this->start('tb_left_actions', ['label' => '']) ?>
+<li><?= $this->Html->link('園児を探す', ['controller' => 'incomes', 'action' => 'search']) ?></li>
+<li><?= $this->Html->link('一覧', ['action' => 'index']) ?></li>
+<li><?= $this->Html->link('追加', ['controller' => 'guardians', 'action' => 'add']) ?></li>
+<li><?= $this->Html->link('この園児を編集', ['action' => 'edit', $child->id]) ?></li>
+<?php $this->end(); ?>
+
 <div class="children view large-9 medium-8 columns content">
-    <h3><?= h($child->name) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th><?= __('Guardian') ?></th>
-            <td><?= $child->has('guardian') ? $this->Html->link($child->guardian->mother_name, ['controller' => 'Guardians', 'action' => 'view', $child->guardian->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('School') ?></th>
-            <td><?= h($child->school) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Room') ?></th>
-            <td><?= h($child->room) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Grade') ?></th>
-            <td><?= h($child->grade) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Bus') ?></th>
-            <td><?= h($child->bus) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Course') ?></th>
-            <td><?= h($child->course) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($child->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Kana') ?></th>
-            <td><?= h($child->kana) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Sex') ?></th>
-            <td><?= h($child->sex) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Oldname') ?></th>
-            <td><?= h($child->oldname) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Newschool') ?></th>
-            <td><?= h($child->newschool) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Newzip') ?></th>
-            <td><?= h($child->newzip) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Newpref') ?></th>
-            <td><?= h($child->newpref) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Newaddr') ?></th>
-            <td><?= h($child->newaddr) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Newaddr2') ?></th>
-            <td><?= h($child->newaddr2) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Newtel') ?></th>
-            <td><?= h($child->newtel) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($child->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Season') ?></th>
-            <td><?= $this->Number->format($child->season) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Number') ?></th>
-            <td><?= $this->Number->format($child->number) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Birthed') ?></th>
-            <td><?= h($child->birthed) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Joined') ?></th>
-            <td><?= h($child->joined) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Finished') ?></th>
-            <td><?= h($child->finished) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Modified') ?></th>
-            <td><?= h($child->modified) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Created') ?></th>
-            <td><?= h($child->created) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Nondelivery') ?></th>
-            <td><?= $child->nondelivery ? __('Yes') : __('No'); ?></td>
-        </tr>
-    </table>
-    <div class="row">
-        <h4><?= __('Memo') ?></h4>
-        <?= $this->Text->autoParagraph(h($child->memo)); ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Child Healths') ?></h4>
-        <?php if (!empty($child->child_healths)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Child Id') ?></th>
-                <th><?= __('Guardian Id') ?></th>
-                <th><?= __('Insurance Number') ?></th>
-                <th><?= __('Doctor') ?></th>
-                <th><?= __('Doctor Tel') ?></th>
-                <th><?= __('Temperature') ?></th>
-                <th><?= __('Has Allergy') ?></th>
-                <th><?= __('Allergy Diet') ?></th>
-                <th><?= __('Urticaria Food') ?></th>
-                <th><?= __('Nap') ?></th>
-                <th><?= __('Caution') ?></th>
-                <th><?= __('Memo') ?></th>
-                <th><?= __('Modified') ?></th>
-                <th><?= __('Created') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($child->child_healths as $childHealths): ?>
-            <tr>
-                <td><?= h($childHealths->id) ?></td>
-                <td><?= h($childHealths->child_id) ?></td>
-                <td><?= h($childHealths->guardian_id) ?></td>
-                <td><?= h($childHealths->insurance_number) ?></td>
-                <td><?= h($childHealths->doctor) ?></td>
-                <td><?= h($childHealths->doctor_tel) ?></td>
-                <td><?= h($childHealths->temperature) ?></td>
-                <td><?= h($childHealths->has_allergy) ?></td>
-                <td><?= h($childHealths->allergy_diet) ?></td>
-                <td><?= h($childHealths->urticaria_food) ?></td>
-                <td><?= h($childHealths->nap) ?></td>
-                <td><?= h($childHealths->caution) ?></td>
-                <td><?= h($childHealths->memo) ?></td>
-                <td><?= h($childHealths->modified) ?></td>
-                <td><?= h($childHealths->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'ChildHealths', 'action' => 'view', $childHealths->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'ChildHealths', 'action' => 'edit', $childHealths->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'ChildHealths', 'action' => 'delete', $childHealths->id], ['confirm' => __('Are you sure you want to delete # {0}?', $childHealths->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Child Medications') ?></h4>
-        <?php if (!empty($child->child_medications)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Child Id') ?></th>
-                <th><?= __('Guardian Id') ?></th>
-                <th><?= __('Doctor') ?></th>
-                <th><?= __('Doctor Tel') ?></th>
-                <th><?= __('Diagnosis') ?></th>
-                <th><?= __('Medicine Type') ?></th>
-                <th><?= __('Medicine Object') ?></th>
-                <th><?= __('Start') ?></th>
-                <th><?= __('End') ?></th>
-                <th><?= __('Method') ?></th>
-                <th><?= __('Caution') ?></th>
-                <th><?= __('Received') ?></th>
-                <th><?= __('Received Staff Id') ?></th>
-                <th><?= __('Memo') ?></th>
-                <th><?= __('Modified') ?></th>
-                <th><?= __('Created') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($child->child_medications as $childMedications): ?>
-            <tr>
-                <td><?= h($childMedications->id) ?></td>
-                <td><?= h($childMedications->child_id) ?></td>
-                <td><?= h($childMedications->guardian_id) ?></td>
-                <td><?= h($childMedications->doctor) ?></td>
-                <td><?= h($childMedications->doctor_tel) ?></td>
-                <td><?= h($childMedications->diagnosis) ?></td>
-                <td><?= h($childMedications->medicine_type) ?></td>
-                <td><?= h($childMedications->medicine_object) ?></td>
-                <td><?= h($childMedications->start) ?></td>
-                <td><?= h($childMedications->end) ?></td>
-                <td><?= h($childMedications->method) ?></td>
-                <td><?= h($childMedications->caution) ?></td>
-                <td><?= h($childMedications->received) ?></td>
-                <td><?= h($childMedications->received_staff_id) ?></td>
-                <td><?= h($childMedications->memo) ?></td>
-                <td><?= h($childMedications->modified) ?></td>
-                <td><?= h($childMedications->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'ChildMedications', 'action' => 'view', $childMedications->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'ChildMedications', 'action' => 'edit', $childMedications->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'ChildMedications', 'action' => 'delete', $childMedications->id], ['confirm' => __('Are you sure you want to delete # {0}?', $childMedications->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Incomes') ?></h4>
-        <?php if (!empty($child->incomes)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Child Id') ?></th>
-                <th><?= __('Guardian Id') ?></th>
-                <th><?= __('Staff Id') ?></th>
-                <th><?= __('Income Types') ?></th>
-                <th><?= __('Cautions') ?></th>
-                <th><?= __('Absence Type') ?></th>
-                <th><?= __('Childcare Start') ?></th>
-                <th><?= __('Childcare End') ?></th>
-                <th><?= __('Childcare Meal') ?></th>
-                <th><?= __('Start') ?></th>
-                <th><?= __('End') ?></th>
-                <th><?= __('Repeat Type') ?></th>
-                <th><?= __('Repeat Week') ?></th>
-                <th><?= __('Sickness') ?></th>
-                <th><?= __('Consulted') ?></th>
-                <th><?= __('Fevered') ?></th>
-                <th><?= __('Recovered') ?></th>
-                <th><?= __('Temperature') ?></th>
-                <th><?= __('Cough') ?></th>
-                <th><?= __('Route') ?></th>
-                <th><?= __('Ip Addr') ?></th>
-                <th><?= __('Memo') ?></th>
-                <th><?= __('Modified') ?></th>
-                <th><?= __('Created') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($child->incomes as $incomes): ?>
-            <tr>
-                <td><?= h($incomes->id) ?></td>
-                <td><?= h($incomes->child_id) ?></td>
-                <td><?= h($incomes->guardian_id) ?></td>
-                <td><?= h($incomes->staff_id) ?></td>
-                <td><?= h($incomes->income_types) ?></td>
-                <td><?= h($incomes->cautions) ?></td>
-                <td><?= h($incomes->absence_type) ?></td>
-                <td><?= h($incomes->childcare_start) ?></td>
-                <td><?= h($incomes->childcare_end) ?></td>
-                <td><?= h($incomes->childcare_meal) ?></td>
-                <td><?= h($incomes->start) ?></td>
-                <td><?= h($incomes->end) ?></td>
-                <td><?= h($incomes->repeat_type) ?></td>
-                <td><?= h($incomes->repeat_week) ?></td>
-                <td><?= h($incomes->sickness) ?></td>
-                <td><?= h($incomes->consulted) ?></td>
-                <td><?= h($incomes->fevered) ?></td>
-                <td><?= h($incomes->recovered) ?></td>
-                <td><?= h($incomes->temperature) ?></td>
-                <td><?= h($incomes->cough) ?></td>
-                <td><?= h($incomes->route) ?></td>
-                <td><?= h($incomes->ip_addr) ?></td>
-                <td><?= h($incomes->memo) ?></td>
-                <td><?= h($incomes->modified) ?></td>
-                <td><?= h($incomes->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Incomes', 'action' => 'view', $incomes->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Incomes', 'action' => 'edit', $incomes->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Incomes', 'action' => 'delete', $incomes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $incomes->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Photos') ?></h4>
-        <?php if (!empty($child->photos)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Model') ?></th>
-                <th><?= __('Model Id') ?></th>
-                <th><?= __('Seq') ?></th>
-                <th><?= __('Body') ?></th>
-                <th><?= __('Size') ?></th>
-                <th><?= __('Mime') ?></th>
-                <th><?= __('Name') ?></th>
-                <th><?= __('Modified') ?></th>
-                <th><?= __('Created') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($child->photos as $photos): ?>
-            <tr>
-                <td><?= h($photos->id) ?></td>
-                <td><?= h($photos->model) ?></td>
-                <td><?= h($photos->model_id) ?></td>
-                <td><?= h($photos->seq) ?></td>
-                <td><?= h($photos->body) ?></td>
-                <td><?= h($photos->size) ?></td>
-                <td><?= h($photos->mime) ?></td>
-                <td><?= h($photos->name) ?></td>
-                <td><?= h($photos->modified) ?></td>
-                <td><?= h($photos->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Photos', 'action' => 'view', $photos->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Photos', 'action' => 'edit', $photos->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Photos', 'action' => 'delete', $photos->id], ['confirm' => __('Are you sure you want to delete # {0}?', $photos->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Ptas') ?></h4>
-        <?php if (!empty($child->ptas)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Guardian Id') ?></th>
-                <th><?= __('Child Id') ?></th>
-                <th><?= __('Name') ?></th>
-                <th><?= __('Kana') ?></th>
-                <th><?= __('Year') ?></th>
-                <th><?= __('Room') ?></th>
-                <th><?= __('Job') ?></th>
-                <th><?= __('Zip') ?></th>
-                <th><?= __('Addr') ?></th>
-                <th><?= __('Addr2') ?></th>
-                <th><?= __('Tel') ?></th>
-                <th><?= __('Mobile') ?></th>
-                <th><?= __('Memo') ?></th>
-                <th><?= __('Nondelivery') ?></th>
-                <th><?= __('Modified') ?></th>
-                <th><?= __('Created') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($child->ptas as $ptas): ?>
-            <tr>
-                <td><?= h($ptas->id) ?></td>
-                <td><?= h($ptas->guardian_id) ?></td>
-                <td><?= h($ptas->child_id) ?></td>
-                <td><?= h($ptas->name) ?></td>
-                <td><?= h($ptas->kana) ?></td>
-                <td><?= h($ptas->year) ?></td>
-                <td><?= h($ptas->room) ?></td>
-                <td><?= h($ptas->job) ?></td>
-                <td><?= h($ptas->zip) ?></td>
-                <td><?= h($ptas->addr) ?></td>
-                <td><?= h($ptas->addr2) ?></td>
-                <td><?= h($ptas->tel) ?></td>
-                <td><?= h($ptas->mobile) ?></td>
-                <td><?= h($ptas->memo) ?></td>
-                <td><?= h($ptas->nondelivery) ?></td>
-                <td><?= h($ptas->modified) ?></td>
-                <td><?= h($ptas->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Ptas', 'action' => 'view', $ptas->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Ptas', 'action' => 'edit', $ptas->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Ptas', 'action' => 'delete', $ptas->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ptas->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
+	<h3><?= h($child->kana) ?>（<?= h($child->name) ?>）</h3>
+
+	<table class="table table-hover table-responsive">
+		<tr>
+			<th>保護者</th>
+			<td><?= $child->has('guardian') ? $this->Html->link($child->guardian->mother_name, ['controller' => 'Guardians', 'action' => 'view', $child->guardian->id]) : '' ?></td>
+			<td rowspan="10" class="top">
+<?php foreach($child->photos as $photo): ?>
+				<?= $this->Html->image(['controller' => 'photos', 'action' => 'view', $photo->id], ['class' => 'img-rounded img-responsive']) ?>
+<?php endforeach; ?>
+			</td>
+		</tr>
+		<tr>
+			<th>通い先</th>
+			<td><?= h($child->school) ?></td>
+		</tr>
+		<tr>
+			<th>クラス<span class="slash">／</span>学年</th>
+			<td><?= h($child->room) ?><span class="slash">／</span><?= h($child->grade) ?></td>
+		</tr>
+		<tr>
+			<th>バス<span class="slash">／</span>バスコース</th>
+			<td><?= h($child->bus) ?><span class="slash">／</span><?= h($child->course) ?></td>
+		</tr>
+		<tr>
+			<th>名前<span class="slash">／</span>かな<span class="slash">／</span>性別</th>
+			<td><?= h($child->name) ?><span class="slash">／</span><?= h($child->kana) ?><span class="slash">／</span><?= h($child->sex) ?></td>
+		</tr>
+		<tr>
+			<th>誕生日</th>
+			<td><?= h($child->birthed) ?></td>
+		</tr>
+		<tr>
+			<th>入園日</th>
+			<td><?= h($child->joined) ?></td>
+		</tr>
+		<tr>
+			<th>備考</th>
+			<td><?= $this->Text->autoParagraph(h($child->memo)); ?></td>
+		</tr>
+		<tr>
+			<th>最終更新日<span class="slash">／</span>作成日</th>
+			<td><?= h($child->modified) ?><span class="slash">／</span><?= h($child->created) ?></td>
+		</tr>
+		<tr>
+			<th><?= __('Id') ?></th>
+			<td><?= $child->id ?></td>
+		</tr>
+	</table>
+
+	<div class="related">
+	</div>
 </div>

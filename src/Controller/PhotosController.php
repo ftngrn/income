@@ -23,6 +23,27 @@ class PhotosController extends AppController
 	}
 
 	/**
+	 * View method
+	 *
+	 * @param string|null $id Photo id.
+	 * @return \Cake\Network\Response|null
+	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+	 */
+	public function view($id = null)
+	{
+		$cache_days = 15; //キャッシュする日数
+		$this->autoRender = false;
+		$photo = $this->Photos->get($id, [
+			'contain' => []
+		]);
+		$body = stream_get_contents($photo->body);
+		$this->response->cache('-1 minute', sprintf("+%d days", $cache_days));
+		$this->response->type($photo->mime);
+		$this->response->length(strlen($body));
+		$this->response->body($body);
+	}
+
+	/**
 	 * Thumbnail method
 	 *
 	 * @param string|null $id Photo id.

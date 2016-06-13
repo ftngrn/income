@@ -21,7 +21,7 @@ $this->extend('../Layout/bootstrap-ui/dashboard');
 			<td><?= $child->has('guardian') ? $this->Html->link($child->guardian->mother_name, ['controller' => 'Guardians', 'action' => 'view', $child->guardian->id]) : '' ?></td>
 			<td rowspan="10" class="top">
 <?php foreach($child->photos as $photo): ?>
-				<?= $this->Html->image(['controller' => 'photos', 'action' => 'view', $photo->id], ['class' => 'img-rounded img-responsive']) ?>
+				<?= $this->Html->image(['controller' => 'photos', 'action' => 'view', $photo->id], ['class' => 'img-rounded img-responsive w300']) ?>
 <?php endforeach; ?>
 			</td>
 		</tr>

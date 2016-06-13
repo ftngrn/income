@@ -41,6 +41,10 @@ class PhotosController extends AppController
 		$this->response->type($photo->mime);
 		$this->response->length(strlen($body));
 		$this->response->body($body);
+		//キャッシュファイルを作成する
+		if ($id) {
+			$this->cache($body, $id);
+		}
 	}
 
 	/**
@@ -62,6 +66,10 @@ class PhotosController extends AppController
 		$this->response->type($photo->mime);
 		$this->response->length(strlen($cropped));
 		$this->response->body($cropped);
+		//キャッシュファイルを作成する
+		if ($id) {
+			$this->cache($cropped, $id);
+		}
 	}
 
 	/**
@@ -101,17 +109,19 @@ class PhotosController extends AppController
 			imagedestroy($im);
 			imagedestroy($imt);
 			imagedestroy($imn);
-
-			//静的ファイルがなければ作成、あってもしばらくたっていれば更新
-			if ($id_for_cache) {
-				$cache_path = sprintf(WWW_ROOT.'caches'.DS.'%s_%d.jpg', $this->request->action, $id_for_cache);
-				$file = new File($cache_path);
-				if ($file->exists() === false || (time() - $file->lastChange()) > 60*15) {
-					file_put_contents($cache_path, $cropped);
-				}
-				$this->log(sprintf("Create cache:%s", $cache_path), LOG_DEBUG);
-			}
 		}
 		return $cropped;
+	}
+
+	/**
+	 * Cache  method
+	 *
+	 * @param stream $body Photo binary.
+	 * @param string|null $id_for_cache Photo id for cache.
+	 */
+	private function cache($body, $id_for_cache) {
+		$cache_path = sprintf(WWW_ROOT.'caches'.DS.'%s_%d.jpg', $this->request->action, $id_for_cache);
+		file_put_contents($cache_path, $body);
+		$this->log(sprintf("Create cache:%s", $cache_path), LOG_DEBUG);
 	}
 }

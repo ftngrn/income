@@ -376,11 +376,14 @@ var IncomePanel = React.createClass({
 		}
 		return (
 			<div className={cls}>
-				<h3>{"IncomePanel:" + this.props.child.kana}</h3>
-				<button className="close-panel" onClick={this.close}>Close</button>
-				<input type="checkbox" name="come" ref="come" id="income-come" />
-				<label htmlFor="income-come">お迎え</label>
-				<button className="submit" onClick={this.submit}>Submit</button>
+				<div className="modal-overlay" onClick={this.close}></div>
+				<div className="income-content">
+					<h3>{"IncomePanel:" + this.props.child.kana}</h3>
+					<button className="close-panel" onClick={this.close}>Close</button>
+					<input type="checkbox" name="come" ref="come" id="income-come" />
+					<label htmlFor="income-come">お迎え</label>
+					<button className="submit" onClick={this.submit}>Submit</button>
+				</div>
 			</div>
 		);
 	}

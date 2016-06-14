@@ -37,19 +37,30 @@
 	width: 100%;
 	height: 100%;
 }
-.income-content {
+.income-wrapper {
 	position: relative;
 	z-index: 3;
 	top: 150px;
 	min-width: 300px;
 	max-width: 100%;
-	width: 60%;
-	padding: 1.0em 2px;
+	width: 70%;
+	padding: 10px;
 	margin: 0 auto;
-	border: 1px solid #0ff;
 	background-color: #FFF;
-	box-shadow: 0 0 20px #000;
-	text-align: center;
+	border-radius: 10px;
+	box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.close-panel {
+	position: absolute;
+	top: 0.9em;
+	right: 10px;
+}
+.income-content > h1,h2,h3,h4,h5 {
+	margin: 0 0 0.5em;
+	border-bottom: 1px solid #eee;
+}
+.income-content ul li {
+	display: inline-block;
 }
 .modal-overlay {
 	position: absolute;
@@ -57,7 +68,7 @@
 	width: 100%;
 	height: 100%;
 	margin: 0;
-	background: rgba(0, 0, 0, 0.7);
+	background: rgba(192,192,192,0.7);
 }
 
 input[type="checkbox"] {

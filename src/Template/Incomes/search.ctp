@@ -347,11 +347,19 @@ var IncomePanel = React.createClass({
 		this.props.closeIncomePanel(this.props.child);
 	},
 	submit: function() {
+		//IncomeForm内のrefsを取得する
+		var inRefs = this.refs.IncomeForm.refs;
 		//ここでAjaxリクエストする
 		var data = {
 			child: this.props.child,
 			income: {
-				come: this.refs.come.checked
+				absent: inRefs.absent.checked,
+				escort: inRefs.escort.checked,
+				come: inRefs.come.checked,
+				care: inRefs.care.checked,
+				late: inRefs.late.checked,
+				other: inRefs.other.checked,
+				memo: inRefs.memo.value
 			}
 		};
 		console.log("IncomePanel#submit", data);
@@ -377,12 +385,13 @@ var IncomePanel = React.createClass({
 		return (
 			<div className={cls}>
 				<div className="modal-overlay" onClick={this.close}></div>
-				<div className="income-content">
-					<h3>{"IncomePanel:" + this.props.child.kana}</h3>
-					<button className="close-panel" onClick={this.close}>Close</button>
-					<input type="checkbox" name="come" ref="come" id="income-come" />
-					<label htmlFor="income-come">お迎え</label>
-					<button className="submit" onClick={this.submit}>Submit</button>
+				<div className="income-wrapper">
+					<div className="income-content">
+						<h3>【{this.props.child.kana}】の連絡</h3>
+						<button className="close-panel" onClick={this.close}>キャンセル</button>
+						<IncomeForm info={this.props.child} ref="IncomeForm" />
+						<button className="submit btn btn-lg btn-success" onClick={this.submit}>連絡を登録</button>
+					</div>
 				</div>
 			</div>
 		);
@@ -392,20 +401,27 @@ var IncomeForm = React.createClass({
 	render: function() {
 		var incomeTypes = <?= json_encode(Income::$TYPES) ?>;
 		var name = 'income-type';
+		var idsfx = "-" + this.props.info.id;
 		var inputs = incomeTypes.map(function (type, i) {
 			var cls = name + " " + type.key;
 			var key = type.key + "-" + type.enum + "-" + this.props.info.id;
 			return (
 				<li className={cls} title={type.label}>
-					<input type="checkbox" name={key} ref={cls} id={key} defaultValue={type.enum} onClick={this.props.onClickIncome} />
+					<input type="checkbox" name={key} ref={type.key} id={key} defaultValue={type.enum} onClick={this.props.onClickIncome} />
 					<label htmlFor={key} className="">{type.short_label}</label>
 				</li>
 			);
 		}, this);
 		return (
-			<ul className="income-types">
-				{inputs}
-			</ul>
+			<div className="income-form">
+				<ul className="income-types">
+					{inputs}
+				</ul>
+				<input type="text" id={"start" + idsfx} name="start" ref="start" className="datepicker" value="<?= date('Y-m-d') ?>" />
+				<label htmlFor={"start" + idsfx}>対象日</label>
+				<textarea id={"memo" + idsfx} name={"memo" + idsfx} ref="memo"></textarea>
+				<label htmlFor={"memo" + idsfx}>メモ</label>
+			</div>
 		);
 	}
 });

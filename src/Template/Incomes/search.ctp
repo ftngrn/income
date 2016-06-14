@@ -348,18 +348,21 @@ var IncomePanel = React.createClass({
 	},
 	submit: function() {
 		//IncomeForm内のrefsを取得する
-		var inRefs = this.refs.IncomeForm.refs;
+		var refsIncomeForm = this.refs.IncomeForm.refs;
+		var refsIncomeTypes = refsIncomeForm.incomeTypes.refs;
+		console.log(refsIncomeForm, refsIncomeTypes);
 		//ここでAjaxリクエストする
 		var data = {
 			child: this.props.child,
 			income: {
-				absent: inRefs.absent.checked,
-				escort: inRefs.escort.checked,
-				come: inRefs.come.checked,
-				care: inRefs.care.checked,
-				late: inRefs.late.checked,
-				other: inRefs.other.checked,
-				memo: inRefs.memo.value
+				absent: refsIncomeTypes.absent.checked,
+				escort: refsIncomeTypes.escort.checked,
+				come: refsIncomeTypes.come.checked,
+				care: refsIncomeTypes.care.checked,
+				late: refsIncomeTypes.late.checked,
+				other: refsIncomeTypes.other.checked,
+				start: refsIncomeForm.start.value,
+				memo:	refsIncomeForm.memo.value
 			}
 		};
 		console.log("IncomePanel#submit", data);
@@ -397,7 +400,7 @@ var IncomePanel = React.createClass({
 		);
 	}
 });
-var IncomeForm = React.createClass({
+var IncomeTypes = React.createClass({
 	render: function() {
 		var incomeTypes = <?= json_encode(Income::$TYPES) ?>;
 		var name = 'income-type';
@@ -413,10 +416,18 @@ var IncomeForm = React.createClass({
 			);
 		}, this);
 		return (
+			<ul className="income-types">
+				{inputs}
+			</ul>
+		);
+	}
+});
+var IncomeForm = React.createClass({
+	render: function() {
+		var idsfx = "-" + this.props.info.id;
+		return (
 			<div className="income-form">
-				<ul className="income-types">
-					{inputs}
-				</ul>
+				<IncomeTypes {...this.props} ref="incomeTypes" />
 				<input type="text" id={"start" + idsfx} name="start" ref="start" className="datepicker" value="<?= date('Y-m-d') ?>" />
 				<label htmlFor={"start" + idsfx}>対象日</label>
 				<textarea id={"memo" + idsfx} name={"memo" + idsfx} ref="memo"></textarea>

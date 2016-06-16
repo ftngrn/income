@@ -38,7 +38,8 @@ var Searcher = React.createClass({
 	getInitialState: function() {
 		return {
 			data: {},
-			child: {}
+			child: {},
+			flash: null
 		};
 	},
 	componentDidMount: function() {
@@ -49,6 +50,9 @@ var Searcher = React.createClass({
 	},
 	closeIncomePanel: function(child) {
 		this.setState({child: {}});
+	},
+	flashIncomePanel: function(flash) {
+		this.setState({flash: flash});
 	},
 	doReset: function() {
 		this.setState({data: {}});
@@ -128,7 +132,7 @@ var Searcher = React.createClass({
 			<div className="searcher">
 				<SearchForm onClick={this.doCheckAsRadio} onReset={this.doReset} data={this.state.data} />
 				<SearchResult data={this.state.data} openIncomePanel={this.openIncomePanel} />
-				<IncomePanel child={this.state.child} closeIncomePanel={this.closeIncomePanel} url={this.props.incomeUrl} />
+				<IncomePanel child={this.state.child} flash={this.state.flash} flashIncomePanel={this.flashIncomePanel} closeIncomePanel={this.closeIncomePanel} url={this.props.incomeUrl} />
 			</div>
 		);
 	}
@@ -336,7 +340,7 @@ var Child = React.createClass({
 					<li className="course">{this.props.info.course}</li>
 				</ul>
 				<div className="open-income">
-					<button className="btn btn-success" onClick={this.openIncomePanel}>出欠など連絡を追加する</button>
+					<button className="btn btn-success" onClick={this.openIncomePanel}>出欠・連絡を追加</button>
 				</div>
 			</div>
 		);
@@ -344,26 +348,25 @@ var Child = React.createClass({
 });
 var IncomePanel = React.createClass({
 	close: function() {
+		this.props.flashIncomePanel(null);
 		this.props.closeIncomePanel(this.props.child);
 	},
 	submit: function() {
 		//IncomeForm内のrefsを取得する
 		var refsIncomeForm = this.refs.IncomeForm.refs;
 		var refsIncomeTypes = refsIncomeForm.incomeTypes.refs;
-		console.log(refsIncomeForm, refsIncomeTypes);
+		//console.log(refsIncomeForm, refsIncomeTypes);
+		var incomeData = {};
+		Object.keys(refsIncomeTypes).forEach(function(elem) {
+			incomeData[elem] = refsIncomeTypes[elem].checked;
+		});
+		incomeData.start = refsIncomeForm.start.value;
+		incomeData.end = "";	//TODO:終了日を選択して範囲指定
+		incomeData.memo = refsIncomeForm.memo.value;
 		//ここでAjaxリクエストする
 		var data = {
 			child: this.props.child,
-			income: {
-				absent: refsIncomeTypes.absent.checked,
-				escort: refsIncomeTypes.escort.checked,
-				come: refsIncomeTypes.come.checked,
-				care: refsIncomeTypes.care.checked,
-				late: refsIncomeTypes.late.checked,
-				other: refsIncomeTypes.other.checked,
-				start: refsIncomeForm.start.value,
-				memo:	refsIncomeForm.memo.value
-			}
+			income: incomeData
 		};
 		console.log("IncomePanel#submit", data);
 		$.ajax({
@@ -374,9 +377,11 @@ var IncomePanel = React.createClass({
 			cache: false,
 			success: function(data) {
 				console.log("IncomePanel#submit success!");
+				this.props.flashIncomePanel({type:"success", message:""});
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error("IncomePanel#submit", this.props.url, status, err.toString());
+				this.props.flashIncomePanel({type:"warning", message:err.toString()});
 			}.bind(this)
 		});
 	},
@@ -384,6 +389,14 @@ var IncomePanel = React.createClass({
 		var cls = "income-panel";
 		if (jQuery.isEmptyObject(this.props.child)) {
 			cls = cls + " hide";
+		}
+		var error = null;
+		console.log(this.props.flash);
+		if (this.props.flash) {
+			error =	<div className={"alert alert-dismissible in alert-"+this.props.flash.type} role="alert">
+								<button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								{this.props.flash.message}
+							</div>;
 		}
 		return (
 			<div className={cls}>
@@ -394,6 +407,7 @@ var IncomePanel = React.createClass({
 						<button className="close-panel" onClick={this.close}>キャンセル</button>
 						<IncomeForm info={this.props.child} ref="IncomeForm" />
 						<button className="submit btn btn-lg btn-success" onClick={this.submit}>連絡を登録</button>
+						{error}
 					</div>
 				</div>
 			</div>

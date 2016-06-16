@@ -84,7 +84,9 @@ class ApiController extends AppController
 		}
 		//Data作成
 		$data = $this->request->data['income'];
-		$data['end'] = $data['start'];
+		if (empty($data['end'])) {
+			$data['end'] = $data['start'];
+		}
 		$data['child_id'] = $this->request->data['child']['id'];
 		//レスポンス（JSON用）作成
 		$response = [

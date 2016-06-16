@@ -38,7 +38,7 @@ var Searcher = React.createClass({
 	getInitialState: function() {
 		return {
 			data: {},
-			child: {},
+			child: null,
 			flash: null
 		};
 	},
@@ -49,7 +49,7 @@ var Searcher = React.createClass({
 		this.setState({child: child});
 	},
 	closeIncomePanel: function(child) {
-		this.setState({child: {}});
+		this.setState({child: null});
 	},
 	flashIncomePanel: function(flash) {
 		this.setState({flash: flash});
@@ -128,11 +128,15 @@ var Searcher = React.createClass({
 	},
 	render: function() {
 		console.log("Root render:", this.state);
+		var incomePanel = null;
+		if (this.state.child) {
+				incomePanel = <IncomePanel child={this.state.child} flash={this.state.flash} flashIncomePanel={this.flashIncomePanel} closeIncomePanel={this.closeIncomePanel} url={this.props.incomeUrl} />;
+		}
 		return (
 			<div className="searcher">
 				<SearchForm onClick={this.doCheckAsRadio} onReset={this.doReset} data={this.state.data} />
 				<SearchResult data={this.state.data} openIncomePanel={this.openIncomePanel} />
-				<IncomePanel child={this.state.child} flash={this.state.flash} flashIncomePanel={this.flashIncomePanel} closeIncomePanel={this.closeIncomePanel} url={this.props.incomeUrl} />
+				{incomePanel}
 			</div>
 		);
 	}
@@ -347,6 +351,21 @@ var Child = React.createClass({
 	}
 });
 var IncomePanel = React.createClass({
+	_destroyDatePicker: function() {
+		$(".datepicker").datepicker('destroy');
+	},
+	_initDatePicker: function() {
+		$ (".datepicker").datepicker({
+			dateFormat: "yy-mm-dd",
+			showButtonPanel: true
+		});
+	},
+	componentDidMount: function() {
+		this._initDatePicker();
+	},
+	componentWillUnmount: function() {
+		this._destroyDatePicker();
+	},
 	close: function() {
 		this.props.flashIncomePanel(null);
 		this.props.closeIncomePanel(this.props.child);
@@ -387,12 +406,8 @@ var IncomePanel = React.createClass({
 	},
 	render: function() {
 		var cls = "income-panel";
-		if (jQuery.isEmptyObject(this.props.child)) {
-			cls = cls + " hide";
-		}
 		var error = null;
-		console.log(this.props.flash);
-		if (this.props.flash) {
+		if (this.props.flash !== null) {
 			error =	<div className={"alert alert-dismissible in alert-"+this.props.flash.type} role="alert">
 								<button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 								{this.props.flash.message}
@@ -425,12 +440,56 @@ var IncomeTypes = React.createClass({
 			return (
 				<li className={cls} title={type.label}>
 					<input type="checkbox" name={key} ref={type.key} id={key} defaultValue={type.enum} onClick={this.props.onClickIncome} />
-					<label htmlFor={key} className="">{type.short_label}</label>
+					<label htmlFor={key} type={type.label} className="">{type.short_label}</label>
 				</li>
 			);
 		}, this);
 		return (
 			<ul className="income-types">
+				{inputs}
+			</ul>
+		);
+	}
+});
+var CautionTypes = React.createClass({
+	render: function() {
+		var cautionTypes = <?= json_encode(Income::$CAUTIONS) ?>;
+		var name = 'income-caution';
+		var idsfx = "-" + this.props.info.id;
+		var inputs = cautionTypes.map(function (type, i) {
+			var cls = name + " " + type.key;
+			var key = type.key + "-" + type.enum + "-" + this.props.info.id;
+			return (
+				<li className={cls} title={type.label}>
+					<input type="checkbox" name={key} ref={type.key} id={key} defaultValue={type.label} onClick={this.props.onClickIncome} />
+					<label htmlFor={key} title={type.label} className="">{type.short_label}</label>
+				</li>
+			);
+		}, this);
+		return (
+			<ul className="caution-types">
+				{inputs}
+			</ul>
+		);
+	}
+});
+var AbsenceTypes = React.createClass({
+	render: function() {
+		var absenceTypes = <?= json_encode(Income::$ABSENCES) ?>;
+		var name = 'income-absence';
+		var idsfx = "-" + this.props.info.id;
+		var inputs = absenceTypes.map(function (type, i) {
+			var cls = name + " " + type.key;
+			var key = type.key + "-" + type.enum + "-" + this.props.info.id;
+			return (
+				<li className={cls} title={type.label}>
+					<input type="checkbox" name={key} ref={type.key} id={key} defaultValue={type.label} onClick={this.props.onClickIncome} />
+					<label htmlFor={key} title={type.label} className="">{type.short_label}</label>
+				</li>
+			);
+		}, this);
+		return (
+			<ul className="absence-types">
 				{inputs}
 			</ul>
 		);
@@ -442,7 +501,10 @@ var IncomeForm = React.createClass({
 		return (
 			<div className="income-form">
 				<IncomeTypes {...this.props} ref="incomeTypes" />
-				<input type="text" id={"start" + idsfx} name="start" ref="start" className="datepicker" value="<?= date('Y-m-d') ?>" />
+				<CautionTypes {...this.props} ref="cautionTypes" />
+				<AbsenceTypes {...this.props} ref="absenceTypes" />
+
+				<input type="text" id={"start" + idsfx} name="start" ref="start" className="datepicker" defaultValue="<?= date('Y-m-d') ?>" />
 				<label htmlFor={"start" + idsfx}>対象日</label>
 				<textarea id={"memo" + idsfx} name={"memo" + idsfx} ref="memo"></textarea>
 				<label htmlFor={"memo" + idsfx}>メモ</label>

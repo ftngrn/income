@@ -58,7 +58,7 @@ class ChildrenTable extends Table
         ]);
     }
 
-    /**
+		/**
      * Default validation rules.
      *
      * @param \Cake\Validation\Validator $validator Validator instance.
@@ -111,13 +111,11 @@ class ChildrenTable extends Table
 
         $validator
             ->integer('season')
-            ->requirePresence('season', 'create')
-            ->notEmpty('season');
+            ->allowEmpty('season');
 
         $validator
             ->integer('number')
-            ->requirePresence('number', 'create')
-            ->notEmpty('number');
+            ->allowEmpty('number');
 
         $validator
             ->allowEmpty('oldname');
@@ -142,8 +140,7 @@ class ChildrenTable extends Table
 
         $validator
             ->boolean('nondelivery')
-            ->requirePresence('nondelivery', 'create')
-            ->notEmpty('nondelivery');
+            ->allowEmpty('nondelivery');
 
         return $validator;
     }

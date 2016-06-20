@@ -58,8 +58,7 @@ class GuardiansController extends AppController
                 $this->Flash->error(__('The guardian could not be saved. Please, try again.'));
             }
         }
-        $busstops = $this->Guardians->Busstops->find('list', ['limit' => 200]);
-        $this->set(compact('guardian', 'busstops'));
+        $this->set(compact('guardian'));
         $this->set('_serialize', ['guardian']);
     }
 

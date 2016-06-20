@@ -80,8 +80,57 @@ class Income extends Entity
     ],
   ];
 
+	/**
+	 * Cautions for income
+	 *
+	 */
+	public static $CAUTIONS = [
+		[
+			'key' => 'mochi',
+			'label' => '帰り餅',
+			'short_label' => '餅',
+		],
+		[
+			'key' => 'book',
+			'label' => '園だより',
+			'short_label' => '園',
+		],
+		[
+			'key' => 'bag',
+			'label' => '荷物',
+			'short_label' => '荷',
+		],
+	];
 
-    /**
+	/**
+	 * Absences for income
+	 *
+	 */
+	public static $ABSENCES = [
+		[
+			'key' => 'sick',
+			'label' => '病欠',
+			'short_label' => '病',
+		],
+		[
+			'key' => 'private',
+			'label' => '私用',
+			'short_label' => '用',
+		],
+		[
+			'key' => 'accident',
+			'label' => '事故',
+			'short_label' => '事',
+		],
+		[
+			'key' => 'mourning',
+			'label' => '忌引',
+			'short_label' => '忌',
+		],
+	];
+
+
+		/**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
      * Note that when '*' is set to true, this allows all unspecified fields to

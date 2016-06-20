@@ -4,7 +4,6 @@ use App\Model\Entity\Income;
 
 $this->extend('../Layout/bootstrap-ui/dashboard');
 
-$week_day = ['日', '月', '火', '水', '木', '金', '土'];
 $this->assign('title', '園児検索');
 $this->assign('page_header', '園児検索');
 ?>
@@ -14,6 +13,7 @@ $this->assign('page_header', '園児検索');
 </div>
 
 <!-- Income用のCSS,JS -->
+<?= $this->Html->css(['income']) ?>
 <?= $this->Html->script([
 			'https://cdnjs.cloudflare.com/ajax/libs/react/15.0.2/react.min.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/react/15.0.2/react-dom.min.js',
@@ -36,10 +36,23 @@ var Searcher = React.createClass({
 		});
 	},
 	getInitialState: function() {
-		return {data: {}};
+		return {
+			data: {},
+			child: null,
+			flash: null
+		};
 	},
 	componentDidMount: function() {
 		this.loadChildren();
+	},
+	openIncomePanel: function(child) {
+		this.setState({child: child});
+	},
+	closeIncomePanel: function(child) {
+		this.setState({child: null});
+	},
+	flashIncomePanel: function(flash) {
+		this.setState({flash: flash});
 	},
 	doReset: function() {
 		this.setState({data: {}});
@@ -50,6 +63,13 @@ var Searcher = React.createClass({
 		$('input[name=sex]:checked').removeAttr('checked');
 		$('input[name=birthday]:checked').removeAttr('checked');
 	},
+	doCheckAsRadio: function(e) {
+		var flag = e.target.checked;
+		$('input[name='+ e.target.name +']').removeAttr('checked');
+		$('input#' + e.target.id).prop('checked', flag);
+		console.log("doCheckAsRadio:", e.target.id, flag);
+		this.doSearch(e);
+	},
 	doSearch: function(e) {
 		//フォームの値を一括取得したいので仕方なくjQueryを使う
 		//Reactでこれを実現する方法が不明なため
@@ -59,7 +79,10 @@ var Searcher = React.createClass({
 		var school = $('input[name=school]:checked').val();
 		var sex = $('input[name=sex]:checked').val();
 		var mon = $('input[name=birthday]:checked').val();
-		var monp = ('00' + mon).slice(-2);
+		var monp = "";
+		if (mon > 0) {
+			monp = ('00' + mon).slice(-2);
+		}
 		console.log(kana,room,course,school,sex,mon,monp);
 
 		var regexp = "";
@@ -68,6 +91,12 @@ var Searcher = React.createClass({
 			this.setState({data: children});
 			return;
 		}
+		if (kana == undefined && room == undefined && course == undefined && school == undefined && sex == undefined && mon == undefined) {
+			console.log("result = none");
+			this.setState({data: {}});
+			return;
+		}
+
 		if (kana != "ALL" && kana != undefined) {
 			regexp = regexp + "^" + kana;
 		}
@@ -98,10 +127,16 @@ var Searcher = React.createClass({
 		this.setState({data: result});
 	},
 	render: function() {
+		console.log("Root render:", this.state);
+		var incomePanel = null;
+		if (this.state.child) {
+				incomePanel = <IncomePanel child={this.state.child} flash={this.state.flash} flashIncomePanel={this.flashIncomePanel} closeIncomePanel={this.closeIncomePanel} url={this.props.incomeUrl} />;
+		}
 		return (
 			<div className="searcher">
-				<SearchForm onClick={this.doSearch} onReset={this.doReset} data={this.state.data} />
-				<SearchResult data={this.state.data} />
+				<SearchForm onClick={this.doCheckAsRadio} onReset={this.doReset} data={this.state.data} />
+				<SearchResult data={this.state.data} openIncomePanel={this.openIncomePanel} />
+				{incomePanel}
 			</div>
 		);
 	}
@@ -142,15 +177,15 @@ var KanaList = React.createClass({
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
-				<div className={name}>
-					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+				<div className={name} title={v}>
+					<input type="checkbox" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
 		}, this);
 		return (
 			<div className={name + "List buttons"}>
-				<h3>なまえ：</h3>
+				<h3>なまえ</h3>
 				{inputs}
 			</div>
 		);
@@ -163,15 +198,15 @@ var RoomList = React.createClass({
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
-				<div className={name}>
-					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+				<div className={name} title={v}>
+					<input type="checkbox" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
 		}, this);
 		return (
 			<div className={name + "List buttons"}>
-				<h3>クラス：</h3>
+				<h3>クラス</h3>
 				{inputs}
 			</div>
 		);
@@ -184,15 +219,15 @@ var CourseList = React.createClass({
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
-				<div className={name}>
-					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+				<div className={name} title={v}>
+					<input type="checkbox" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
 		}, this);
 		return (
 			<div className={name + "List buttons"}>
-				<h3>リボン：</h3>
+				<h3>リボン</h3>
 				{inputs}
 			</div>
 		);
@@ -205,15 +240,15 @@ var SchoolList = React.createClass({
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
-				<div className={name}>
-					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+				<div className={name} title={v}>
+					<input type="checkbox" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
 		}, this);
 		return (
 			<div className={name + "List buttons"}>
-				<h3>所　属：</h3>
+				<h3>所　属</h3>
 				{inputs}
 			</div>
 		);
@@ -226,15 +261,15 @@ var SexList = React.createClass({
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
-				<div className={name}>
-					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+				<div className={name} title={v}>
+					<input type="checkbox" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
 		}, this);
 		return (
 			<div className={name + "List buttons"}>
-				<h3>性　別：</h3>
+				<h3>性　別</h3>
 				{inputs}
 			</div>
 		);
@@ -247,15 +282,15 @@ var BirthdayList = React.createClass({
 		var inputs = vars.map(function (v, i) {
 			var key = name + "-" + i;
 			return (
-				<div className={name}>
-					<input type="radio" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
+				<div className={name} title={v}>
+					<input type="checkbox" name={name} ref={name} id={key} defaultValue={v} onClick={this.props.onClick} />
 					<label htmlFor={key} className="btn btn-xs btn-default">{v}</label>
 				</div>
 			);
 		}, this);
 		return (
 			<div className={name + "List buttons"}>
-				<h3>誕生月：</h3>
+				<h3>誕生月</h3>
 				{inputs}
 			</div>
 		);
@@ -268,7 +303,7 @@ var SearchResult = React.createClass({
 		var results = Object.keys(this.props.data).map(function (key) {
 			var child = this.props.data[key];
 			return (
-				<Child info={child} key={child.id} />
+				<Child info={child} key={child.id} openIncomePanel={this.props.openIncomePanel} />
 			);
 		}, this);
 		return (
@@ -279,6 +314,9 @@ var SearchResult = React.createClass({
 	}
 });
 var Child = React.createClass({
+	openIncomePanel: function() {
+		this.props.openIncomePanel(this.props.info);
+	},
 	render: function() {
 		//SafariではISO8601形式をDateに食わせられないのでYMDに変換
 		var birthedYMD = this.props.info.birthed.split('T',1)[0];
@@ -305,26 +343,178 @@ var Child = React.createClass({
 					<li className="bus">{this.props.info.bus}</li>
 					<li className="course">{this.props.info.course}</li>
 				</ul>
-				<IncomeForm incomes={this.props.info.incomes} />
+				<div className="open-income">
+					<button className="btn btn-success" onClick={this.openIncomePanel}>出欠・連絡を追加</button>
+				</div>
 			</div>
+		);
+	}
+});
+var IncomePanel = React.createClass({
+	_destroyDatePicker: function() {
+		$(".datepicker").datepicker('destroy');
+	},
+	_initDatePicker: function() {
+		$ (".datepicker").datepicker({
+			dateFormat: "yy-mm-dd",
+			showButtonPanel: true
+		});
+	},
+	componentDidMount: function() {
+		this._initDatePicker();
+	},
+	componentWillUnmount: function() {
+		this._destroyDatePicker();
+	},
+	close: function() {
+		this.props.flashIncomePanel(null);
+		this.props.closeIncomePanel(this.props.child);
+	},
+	submit: function() {
+		//IncomeForm内のrefsを取得する
+		var refsIncomeForm = this.refs.IncomeForm.refs;
+		var refsIncomeTypes = refsIncomeForm.incomeTypes.refs;
+		//console.log(refsIncomeForm, refsIncomeTypes);
+		var incomeData = {};
+		Object.keys(refsIncomeTypes).forEach(function(elem) {
+			incomeData[elem] = refsIncomeTypes[elem].checked;
+		});
+		incomeData.start = refsIncomeForm.start.value;
+		incomeData.end = "";	//TODO:終了日を選択して範囲指定
+		incomeData.memo = refsIncomeForm.memo.value;
+		//ここでAjaxリクエストする
+		var data = {
+			child: this.props.child,
+			income: incomeData
+		};
+		console.log("IncomePanel#submit", data);
+		$.ajax({
+			type: 'POST',
+			url: this.props.url,
+			dataType: 'json',
+			data: data,
+			cache: false,
+			success: function(data) {
+				console.log("IncomePanel#submit success!");
+				this.props.flashIncomePanel({type:"success", message:""});
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.error("IncomePanel#submit", this.props.url, status, err.toString());
+				this.props.flashIncomePanel({type:"warning", message:err.toString()});
+			}.bind(this)
+		});
+	},
+	render: function() {
+		var cls = "income-panel";
+		var error = null;
+		if (this.props.flash !== null) {
+			error =	<div className={"alert alert-dismissible in alert-"+this.props.flash.type} role="alert">
+								<button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								{this.props.flash.message}
+							</div>;
+		}
+		return (
+			<div className={cls}>
+				<div className="modal-overlay" onClick={this.close}></div>
+				<div className="income-wrapper">
+					<div className="income-content">
+						<h3>【{this.props.child.kana}】の連絡</h3>
+						<button className="close-panel" onClick={this.close}>キャンセル</button>
+						<IncomeForm info={this.props.child} ref="IncomeForm" />
+						<button className="submit btn btn-lg btn-success" onClick={this.submit}>連絡を登録</button>
+						{error}
+					</div>
+				</div>
+			</div>
+		);
+	}
+});
+var IncomeTypes = React.createClass({
+	render: function() {
+		var incomeTypes = <?= json_encode(Income::$TYPES) ?>;
+		var name = 'income-type';
+		var idsfx = "-" + this.props.info.id;
+		var inputs = incomeTypes.map(function (type, i) {
+			var cls = name + " " + type.key;
+			var key = type.key + "-" + type.enum + "-" + this.props.info.id;
+			return (
+				<li className={cls} title={type.label}>
+					<input type="checkbox" name={key} ref={type.key} id={key} defaultValue={type.enum} onClick={this.props.onClickIncome} />
+					<label htmlFor={key} type={type.label} className="">{type.short_label}</label>
+				</li>
+			);
+		}, this);
+		return (
+			<ul className="income-types">
+				{inputs}
+			</ul>
+		);
+	}
+});
+var CautionTypes = React.createClass({
+	render: function() {
+		var cautionTypes = <?= json_encode(Income::$CAUTIONS) ?>;
+		var name = 'income-caution';
+		var idsfx = "-" + this.props.info.id;
+		var inputs = cautionTypes.map(function (type, i) {
+			var cls = name + " " + type.key;
+			var key = type.key + "-" + type.enum + "-" + this.props.info.id;
+			return (
+				<li className={cls} title={type.label}>
+					<input type="checkbox" name={key} ref={type.key} id={key} defaultValue={type.label} onClick={this.props.onClickIncome} />
+					<label htmlFor={key} title={type.label} className="">{type.short_label}</label>
+				</li>
+			);
+		}, this);
+		return (
+			<ul className="caution-types">
+				{inputs}
+			</ul>
+		);
+	}
+});
+var AbsenceTypes = React.createClass({
+	render: function() {
+		var absenceTypes = <?= json_encode(Income::$ABSENCES) ?>;
+		var name = 'income-absence';
+		var idsfx = "-" + this.props.info.id;
+		var inputs = absenceTypes.map(function (type, i) {
+			var cls = name + " " + type.key;
+			var key = type.key + "-" + type.enum + "-" + this.props.info.id;
+			return (
+				<li className={cls} title={type.label}>
+					<input type="checkbox" name={key} ref={type.key} id={key} defaultValue={type.label} onClick={this.props.onClickIncome} />
+					<label htmlFor={key} title={type.label} className="">{type.short_label}</label>
+				</li>
+			);
+		}, this);
+		return (
+			<ul className="absence-types">
+				{inputs}
+			</ul>
 		);
 	}
 });
 var IncomeForm = React.createClass({
 	render: function() {
+		var idsfx = "-" + this.props.info.id;
 		return (
-			<ul className="income-container">
-<?php foreach (Income::$TYPES as $idx => $type): ?>
-				<li>
-				</li>
-<?php endforeach; ?>
-			</ul>
+			<div className="income-form">
+				<IncomeTypes {...this.props} ref="incomeTypes" />
+				<CautionTypes {...this.props} ref="cautionTypes" />
+				<AbsenceTypes {...this.props} ref="absenceTypes" />
+
+				<input type="text" id={"start" + idsfx} name="start" ref="start" className="datepicker" defaultValue="<?= date('Y-m-d') ?>" />
+				<label htmlFor={"start" + idsfx}>対象日</label>
+				<textarea id={"memo" + idsfx} name={"memo" + idsfx} ref="memo"></textarea>
+				<label htmlFor={"memo" + idsfx}>メモ</label>
+			</div>
 		);
 	}
 });
 
 ReactDOM.render(
-	<Searcher url="/api/children.json" />,
+	<Searcher url="/api/children.json" incomeUrl="/api/incomes" />,
 	document.getElementById('search-container')
 );
 <?= $this->Html->scriptEnd() ?>

@@ -1,8 +1,6 @@
 <?php
 $this->assign('title', '日誌を書き足す');
 $this->extend('../Layout/bootstrap-ui/dashboard');
-
-$week_day = ['日', '月', '火', '水', '木', '金', '土'];
 ?>
 <?php $this->start('tb_left_actions'); ?>
 <li><?= $this->Html->link('日誌', ['action' => 'index']) ?></li>

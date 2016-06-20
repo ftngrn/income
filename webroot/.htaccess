@@ -2,6 +2,9 @@
 	RewriteEngine On
 	RewriteBase /
 
+	RewriteCond %{DOCUMENT_ROOT}caches/view_$1.jpg !-s
+	RewriteRule ^photos/view/([0-9]*)$ caches/view_$1.jpg
+
 	RewriteCond %{DOCUMENT_ROOT}caches/thumbnail_$1.jpg !-s
 	RewriteRule ^photos/thumbnail/([0-9]*)$ caches/thumbnail_$1.jpg
 

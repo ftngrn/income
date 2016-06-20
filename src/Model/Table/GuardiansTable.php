@@ -32,7 +32,7 @@ class GuardiansTable extends Table
         parent::initialize($config);
 
         $this->table('guardians');
-        $this->displayField('id');
+        $this->displayField('mother_name');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');

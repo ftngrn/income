@@ -8,8 +8,8 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link      http://cakephp.org CakePHP(tm) Project
- * @since     0.2.9
+ * @link	  http://cakephp.org CakePHP(tm) Project
+ * @since	 0.2.9
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 namespace App\Controller;
@@ -28,50 +28,50 @@ use Cake\Event\Event;
 class AppController extends Controller
 {
 
-    /**
-     * Initialization hook method.
-     *
-     * Use this method to add common initialization code like loading components.
-     *
-     * e.g. `$this->loadComponent('Security');`
-     *
-     * @return void
-     */
-    public function initialize()
-    {
-        parent::initialize();
+	/**
+	 * Initialization hook method.
+	 *
+	 * Use this method to add common initialization code like loading components.
+	 *
+	 * e.g. `$this->loadComponent('Security');`
+	 *
+	 * @return void
+	 */
+	public function initialize()
+	{
+		parent::initialize();
 
-        $this->loadComponent('RequestHandler');
-        $this->loadComponent('Flash');
-				// Pass settings in
-				$this->loadComponent('Auth', [
-						'authenticate' => [
-							'Form' => [
-								'userModel' => 'Staffs',
-								'fields' => ['username' => 'account', 'password' => 'secret'],
-								'finder' => 'auth',
-							],
-						],
-						'loginAction' => [
-							'controller' => 'Staffs',
-							'action' => 'login',
-						],
-				]);
-				//$this->Auth->allow();
-    }
+		$this->loadComponent('RequestHandler');
+		$this->loadComponent('Flash');
+		// Pass settings in
+		$this->loadComponent('Auth', [
+			'authenticate' => [
+				'Form' => [
+					'userModel' => 'Staffs',
+					'fields' => ['username' => 'account', 'password' => 'secret'],
+					'finder' => 'auth',
+				],
+			],
+			'loginAction' => [
+				'controller' => 'Staffs',
+				'action' => 'login',
+			],
+		]);
+		//$this->Auth->allow();
+	}
 
-    /**
-     * Before render callback.
-     *
-     * @param \Cake\Event\Event $event The beforeRender event.
-     * @return void
-     */
-    public function beforeRender(Event $event)
-    {
-        if (!array_key_exists('_serialize', $this->viewVars) &&
-            in_array($this->response->type(), ['application/json', 'application/xml'])
-        ) {
-            $this->set('_serialize', true);
-        }
-    }
+	/**
+	 * Before render callback.
+	 *
+	 * @param \Cake\Event\Event $event The beforeRender event.
+	 * @return void
+	 */
+	public function beforeRender(Event $event)
+	{
+		if (!array_key_exists('_serialize', $this->viewVars) &&
+			in_array($this->response->type(), ['application/json', 'application/xml'])
+		) {
+			$this->set('_serialize', true);
+		}
+	}
 }

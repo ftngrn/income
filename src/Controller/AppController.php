@@ -43,6 +43,21 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+				// Pass settings in
+				$this->loadComponent('Auth', [
+						'authenticate' => [
+							'Form' => [
+								'userModel' => 'Staffs',
+								'fields' => ['username' => 'account', 'password' => 'secret'],
+								'finder' => 'auth',
+							],
+						],
+						'loginAction' => [
+							'controller' => 'Staffs',
+							'action' => 'login',
+						],
+				]);
+				//$this->Auth->allow();
     }
 
     /**

@@ -166,4 +166,11 @@ class StaffsTable extends Table
 
         return $validator;
     }
+
+		public function findAuth(\Cake\ORM\Query $query, array $options) {
+			$query
+				->select(['id', 'account', 'secret'])
+				->where(['Staffs.finished IS' => null]);
+			return $query;
+		}
 }

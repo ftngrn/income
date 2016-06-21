@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Entity;
 
+use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Entity;
 
 /**
@@ -57,4 +58,13 @@ class Staff extends Entity
         '*' => true,
         'id' => false,
     ];
+
+	/**
+	 * シークレット保存時のハッシュ化
+	 * @param  string $secret パスワード文字列
+	 * @return string ハッシュ化されたパスワード
+	 */
+	protected function _setSecret($secret) {
+		return (new DefaultPasswordHasher)->hash($secret);
+	}
 }

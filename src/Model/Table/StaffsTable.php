@@ -169,7 +169,7 @@ class StaffsTable extends Table
 
 	public function findAuth(\Cake\ORM\Query $query, array $options) {
 		$query
-			->select(['id', 'account', 'secret'])
+			->select(['id', 'account', 'secret', 'display_name', 'acl_group'])
 			->where(['Staffs.finished IS' => null]);
 		return $query;
 	}

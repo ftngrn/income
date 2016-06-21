@@ -40,9 +40,18 @@ $this->end();
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<?= $this->fetch('tb_right_actions') ?>
+
+					<?php if (!empty($loginUser)): ?>
+					<li><?= $loginUser['display_name']; ?></li>
+					<li><?= $this->Html->link("ログアウト", ['controller' => 'staffs', 'action' => 'logout']); ?></li>
+					<?php endif; ?>
 				</ul>
 				<ul class="nav navbar-nav navbar-right visible-xs">
 					<?= $this->fetch('tb_actions') ?>
+
+					<?php if (!empty($loginUser)): ?>
+					<li><?= $this->Html->link("ログアウト", ['controller' => 'staffs', 'action' => 'logout']); ?></li>
+					<?php endif; ?>
 				</ul>
 <!--
 				<form class="navbar-form navbar-right">

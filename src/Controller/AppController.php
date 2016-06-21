@@ -58,6 +58,7 @@ class AppController extends Controller
 			],
 		]);
 		//$this->Auth->allow();
+		$this->Auth->allow(['login', 'logout']);
 	}
 
 	/**
@@ -73,5 +74,6 @@ class AppController extends Controller
 		) {
 			$this->set('_serialize', true);
 		}
+		$this->set('loginUser', $this->Auth->user());
 	}
 }

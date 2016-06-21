@@ -14,7 +14,6 @@ class StaffsController extends AppController
 	/**
 	 * Login method
 	 *
-	 * @return \Cake\Network\Response|null
 	 */
 	public function login() {
 		if ($this->request->is('post')) {
@@ -27,6 +26,15 @@ class StaffsController extends AppController
 				$this->Flash->error("ユーザ名またはパスワードが間違っていませんか？");
 			}
 		}
+	}
+
+	/**
+	 * Logout method
+	 *
+	 */
+	public function logout() {
+		$this->Flash->info("ログアウトしました");
+		return $this->redirect($this->Auth->logout());
 	}
 
 	/**

@@ -3,12 +3,11 @@ $this->assign('title', 'ログイン');
 $this->assign('page_header', 'ログイン');
 $this->extend('../Layout/bootstrap-ui/dashboard');
 ?>
-<?php $this->start('tb_left_actions'); ?>
-<?php $this->end(); ?>
 
 <div class="staffs login form large-9 medium-8 columns content">
 <?= $this->Form->create('Staff', ['class' => 'form-horizontal']); ?>
 	<?= $this->Form->input('account', [
+				'type' => 'text',
 				'label' => 'アカウント',
 				'placeHolder' => 'アカウント',
 				'class' => 'input-lg',
@@ -19,6 +18,7 @@ $this->extend('../Layout/bootstrap-ui/dashboard');
 				]
 	]) ?>
 	<?= $this->Form->input('secret', [
+				'type' => 'password',
 				'label' => 'パスワード',
 				'placeHolder' => 'パスワード',
 				'class' => 'input-lg col-sm-10',

@@ -40,6 +40,21 @@ $this->end();
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<?= $this->fetch('tb_right_actions') ?>
+
+					<?php if (!empty($loginUser)): ?>
+					<li class="login-user">
+						<?= $this->Html->link('<span class="glyphicon glyphicon-user" aria-hidden="true"></span> '.$loginUser['display_name'],
+								['controller' => 'staffs', 'action' => 'view', $loginUser['id']],
+								['escape' => false, 'title' => $loginUser['display_name']]
+						); ?>
+					</li>
+					<li class="logout">
+						<?= $this->Html->link('<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>',
+								['controller' => 'staffs', 'action' => 'logout'],
+								['escape' => false, 'title' => 'ログアウト']
+						); ?>
+					</li>
+					<?php endif; ?>
 				</ul>
 				<ul class="nav navbar-nav navbar-right visible-xs">
 					<?= $this->fetch('tb_actions') ?>

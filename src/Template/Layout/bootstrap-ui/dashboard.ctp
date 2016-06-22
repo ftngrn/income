@@ -68,7 +68,11 @@ $this->end();
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 <?php endif; ?>
 
-				<h1 class="page-header"><?= $this->fetch('page_header'); ?></h1>
+<?php $page_header = $this->fetch('page_header'); ?>
+<?php if (!empty($page_header)): ?>
+				<h1 class="page-header"><?= $page_header; ?></h1>
+<?php endif; ?>
+
 				<div class="header-nav"><?= $this->fetch('header'); ?></div>
 <?= $this->end() ?>
 <?= $this->append('content') ?>

@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * WeeklyIdeas Controller
@@ -10,6 +11,14 @@ use App\Controller\AppController;
  */
 class WeeklyIdeasController extends AppController
 {
+
+	public function beforeFilter(Event $event) {
+		parent::beforeFilter($event);
+		$this->Flash->error('この機能はまだ使えません...');
+		return $this->redirect(
+			['controller' => 'Pages', 'action' => 'display', 'under_construction']
+		);
+	}
 
     /**
      * Index method

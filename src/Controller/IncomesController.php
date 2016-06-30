@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Incomes Controller
@@ -10,6 +11,17 @@ use App\Controller\AppController;
  */
 class IncomesController extends AppController
 {
+
+	public function beforeFilter(Event $event) {
+		parent::beforeFilter($event);
+		if (in_array($this->request->action, ["search"], true)) {
+			return;
+		}
+		$this->Flash->error('この機能はまだ使えません...');
+		return $this->redirect(
+			['controller' => 'Pages', 'action' => 'display', 'under_construction']
+		);
+	}
 
     /**
      * Search method

@@ -374,7 +374,8 @@ var IncomePanel = React.createClass({
 		//IncomeForm内のrefsを取得する
 		var refsIncomeForm = this.refs.IncomeForm.refs;
 		var refsIncomeTypes = refsIncomeForm.incomeTypes.refs;
-		//console.log(refsIncomeForm, refsIncomeTypes);
+		var refsAbsenceTypes = refsIncomeForm.absenceTypes.refs;
+		var refsCautionTypes = refsIncomeForm.cautionTypes.refs;
 		var incomeData = {};
 		Object.keys(refsIncomeTypes).forEach(function(elem) {
 			incomeData[elem] = refsIncomeTypes[elem].checked;
@@ -382,10 +383,20 @@ var IncomePanel = React.createClass({
 		incomeData.start = refsIncomeForm.start.value;
 		incomeData.end = "";	//TODO:終了日を選択して範囲指定
 		incomeData.memo = refsIncomeForm.memo.value;
+		var absenceData = {};
+		Object.keys(refsAbsenceTypes).forEach(function(elem) {
+			absenceData[elem] = refsAbsenceTypes[elem].checked;
+		});
+		var cautionData = {};
+		Object.keys(refsCautionTypes).forEach(function(elem) {
+			cautionData[elem] = refsCautionTypes[elem].checked;
+		});
 		//ここでAjaxリクエストする
 		var data = {
 			child: this.props.child,
-			income: incomeData
+			income: incomeData,
+			absence: absenceData,
+			caution: cautionData
 		};
 		console.log("IncomePanel#submit", data);
 		$.ajax({
@@ -396,7 +407,7 @@ var IncomePanel = React.createClass({
 			cache: false,
 			success: function(data) {
 				console.log("IncomePanel#submit success!");
-				this.props.flashIncomePanel({type:"success", message:""});
+				this.props.flashIncomePanel({type:"success", message:"連絡を登録しました"});
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error("IncomePanel#submit", this.props.url, status, err.toString());

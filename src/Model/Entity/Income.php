@@ -158,7 +158,29 @@ class Income extends Entity
 			$income_type = $income_type | $enum;
 			//Log::write('debug', "enum:".$enum. " income_type:".$income_type);
 		}
-		return $income_type;
+		$this->income_types = $income_type;
+	}
+
+	public function setFromAbsenceTypes($bools) {
+		$labels = [];
+		foreach ($bools as $key => $bool) {
+			if ($bool === "false") {
+				continue;
+			}
+			$labels []= $this->getLabelFromAbsenceKey($key);
+		}
+		$this->absence_type = implode("/", $labels);
+	}
+
+	public function setFromCautionTypes($bools) {
+		$labels = [];
+		foreach ($bools as $key => $bool) {
+			if ($bool === "false") {
+				continue;
+			}
+			$labels []= $this->getLabelFromCautionKey($key);
+		}
+		$this->cautions = implode("/", $labels);
 	}
 
 	public function getEnumFromIncomeKey($key) {
@@ -169,4 +191,23 @@ class Income extends Entity
 		}
 		return false;
 	}
+
+	public function getLabelFromAbsenceKey($key) {
+		foreach (self::$ABSENCES as $v) {
+			if ($v['key'] === $key) {
+				return $v['label'];
+			}
+		}
+		return false;
+	}
+
+	public function getLabelFromCautionKey($key) {
+		foreach (self::$CAUTIONS as $v) {
+			if ($v['key'] === $key) {
+				return $v['label'];
+			}
+		}
+		return false;
+	}
+
 }

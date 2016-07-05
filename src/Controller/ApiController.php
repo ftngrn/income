@@ -109,7 +109,7 @@ class ApiController extends AppController
 		$response = [
 			'code' => 200,
 			'error' => null,
-			'data' => $data,
+			'data' => $this->request->data,
 		];
 		//JSON出力
 		$json = json_encode($response, JSON_UNESCAPED_UNICODE);

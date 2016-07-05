@@ -88,15 +88,13 @@ class ApiController extends AppController
 			$data['end'] = $data['start'];
 		}
 		$data['child_id'] = $this->request->data['child']['id'];
-		//レスポンス（JSON用）作成
-		$response = [
-			'code' => 200,
-			'error' => null,
-			'data' => $data,
-		];
+		$data['staff_id'] = $this->Auth->user()['id'];
 		//save
+		$this->log($data);
 		$I = TableRegistry::get('Incomes');
 		$income = $I->newEntity($data);
+		$income->income_types = $income->setFromIncomeTypes($data);
+
 		if ($income->errors()) {
 			$msgs = [];
 			foreach ($income->errors() as $col => $val) {
@@ -105,6 +103,12 @@ class ApiController extends AppController
 			throw new BadRequestException(implode("\n", $msgs));
 		}
 		$I->save($income);
+		//レスポンス（JSON用）作成
+		$response = [
+			'code' => 200,
+			'error' => null,
+			'data' => $data,
+		];
 		//JSON出力
 		$json = json_encode($response, JSON_UNESCAPED_UNICODE);
 		$this->autoRender = false;

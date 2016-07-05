@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Entity;
 
+use Cake\Log\Log;
 use Cake\ORM\Entity;
 
 /**
@@ -143,4 +144,29 @@ class Income extends Entity
         '*' => true,
         'id' => false,
     ];
+
+	public function setFromIncomeTypes($bools) {
+		$income_type = 0;
+		foreach ($bools as $key => $bool) {
+			if ($bool === "false") {
+				continue;
+			}
+			$enum = $this->getEnumFromIncomeKey($key);
+			if ($enum === false) {
+				continue;
+			}
+			$income_type = $income_type | $enum;
+			//Log::write('debug', "enum:".$enum. " income_type:".$income_type);
+		}
+		return $income_type;
+	}
+
+	public function getEnumFromIncomeKey($key) {
+		foreach (self::$TYPES as $v) {
+			if ($v['key'] === $key) {
+				return $v['enum'];
+			}
+		}
+		return false;
+	}
 }

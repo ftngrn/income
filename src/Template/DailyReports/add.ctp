@@ -3,7 +3,7 @@ $this->assign('title', '日誌を書く');
 $this->extend('../Layout/bootstrap-ui/dashboard');
 ?>
 <?php $this->start('tb_left_actions'); ?>
-<li><?= $this->Html->link('日誌', ['action' => 'index']) ?></li>
+<li><?= $this->Html->link('日誌', ['action' => 'mine']) ?></li>
 <?php $this->end(); ?>
 
 <div class="dailyReports form large-9 medium-8 columns content">

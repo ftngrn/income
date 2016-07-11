@@ -32,6 +32,31 @@ class DailyReportsController extends AppController
         $this->set('_serialize', ['dailyReports']);
     }
 
+	/**
+	 * Mine	method
+	 *
+	 * @return \Cake\Network\Response|null
+	 */
+	public function mine()
+	{
+		$user_id = $this->Auth->user()['id'];
+		$this->paginate = [
+			'limit' => 20,
+			'conditions' => [
+				'DailyReports.staff_id' => $user_id,
+			],
+			'order' => [
+				'DailyReports.date' => 'desc'
+			],
+			'contain' => ['Staffs']
+		];
+		$dailyReports = $this->paginate($this->DailyReports);
+		$this->viewBuilder()->template('index');
+		$this->set(compact('dailyReports'));
+		$this->set('week_day', Configure::read('Income.list.week'));
+		$this->set('_serialize', ['dailyReports']);
+	}
+
     /**
      * View method
      *
@@ -61,7 +86,7 @@ class DailyReportsController extends AppController
             $dailyReport = $this->DailyReports->patchEntity($dailyReport, $this->request->data);
             if ($this->DailyReports->save($dailyReport)) {
                 $this->Flash->success(__('The daily report has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'mine']);
             } else {
                 $this->Flash->error(__('The daily report could not be saved. Please, try again.'));
             }
@@ -116,7 +141,7 @@ _EOT_;
             $dailyReport = $this->DailyReports->patchEntity($dailyReport, $this->request->data);
             if ($this->DailyReports->save($dailyReport)) {
                 $this->Flash->success(__('The daily report has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'mine']);
             } else {
                 $this->Flash->error(__('The daily report could not be saved. Please, try again.'));
             }
@@ -142,6 +167,6 @@ _EOT_;
         } else {
             $this->Flash->error(__('The daily report could not be deleted. Please, try again.'));
         }
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'mine']);
     }
 }

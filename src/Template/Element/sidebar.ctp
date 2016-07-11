@@ -1,5 +1,6 @@
 <ul>
-	<li><?= $this->Html->link("日誌", ['controller'=>'daily_reports', 'action'=>'index']);?></li>
+	<li><?= $this->Html->link("日誌", ['controller'=>'daily_reports', 'action'=>'mine']);?></li>
+	<li><?= $this->Html->link("日誌【全員】", ['controller'=>'daily_reports', 'action'=>'index']);?></li>
 <!--
 	<li><?= $this->Html->link("出席簿", ['controller'=>'incomes', 'action'=>'index']);?></li>
 	<li><?= $this->Html->link("週案", ['controller'=>'weekly_ideas', 'action'=>'index']);?></li>

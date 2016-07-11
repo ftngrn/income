@@ -83,20 +83,20 @@ class ApiController extends AppController
 			throw new BadRequestException('Income is required');
 		}
 		//Data作成
-		$data = $this->request->data['income'];
-		if (empty($data['end'])) {
-			$data['end'] = $data['start'];
+		$income_data = $this->request->data['income'];
+		if (empty($income_data['end'])) {
+			$income_data['end'] = $income_data['start'];
 		}
-		$data['child_id'] = $this->request->data['child']['id'];
-		//レスポンス（JSON用）作成
-		$response = [
-			'code' => 200,
-			'error' => null,
-			'data' => $data,
-		];
+		$income_data['child_id'] = $this->request->data['child']['id'];
+		$income_data['staff_id'] = $this->Auth->user()['id'];
 		//save
 		$I = TableRegistry::get('Incomes');
-		$income = $I->newEntity($data);
+		$income = $I->newEntity($income_data);
+		$income->setFromIncomeTypes($this->request->data['income']);
+		$income->setFromAbsenceTypes($this->request->data['absence']);
+		$income->setFromCautionTypes($this->request->data['caution']);
+		//$this->log($income);
+
 		if ($income->errors()) {
 			$msgs = [];
 			foreach ($income->errors() as $col => $val) {
@@ -105,6 +105,12 @@ class ApiController extends AppController
 			throw new BadRequestException(implode("\n", $msgs));
 		}
 		$I->save($income);
+		//レスポンス（JSON用）作成
+		$response = [
+			'code' => 200,
+			'error' => null,
+			'data' => $this->request->data,
+		];
 		//JSON出力
 		$json = json_encode($response, JSON_UNESCAPED_UNICODE);
 		$this->autoRender = false;

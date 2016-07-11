@@ -3,7 +3,7 @@ $this->assign('title', '日誌を書く');
 $this->extend('../Layout/bootstrap-ui/dashboard');
 ?>
 <?php $this->start('tb_left_actions'); ?>
-<li><?= $this->Html->link('日誌', ['action' => 'index']) ?></li>
+<li><?= $this->Html->link('日誌', ['action' => 'mine']) ?></li>
 <?php $this->end(); ?>
 
 <div class="dailyReports form large-9 medium-8 columns content">
@@ -21,7 +21,7 @@ $this->extend('../Layout/bootstrap-ui/dashboard');
 						]);
 ?>
 </td><td>
-<?= $this->Form->input('staff_id', ['options'=>$staffs,'label'=>'教職員名']);?>
+<?= $this->Form->input('staff_id', ['options'=>$staffs,'label'=>'教職員名', 'default' => $loginUser['id']]);?>
 </td></tr>
 </table>
 <table class="table table-hover table-responsive">

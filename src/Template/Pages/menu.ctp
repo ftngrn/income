@@ -17,7 +17,7 @@ $this->end();
 		<ul>
 			<li><?= $this->Html->link("日誌を読み返しましょう", [
 						'controller'=>'daily_reports',
-						'action'=>'index'
+						'action'=>'mine'
 					],[
 						'class' => 'btn btn-lg btn-primary',
 					]);?></li>

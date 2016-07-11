@@ -9,7 +9,8 @@ $date_str = sprintf('<span class="date">%s</span><span class="week">%s</span>', 
 $this->assign('page_header', sprintf('日誌<span class="dateweek">%s</span><span class="room">%s</span><span class="name">%s</span>', $date_str, $dailyReport->room, $dailyReport->staff->name));
 ?>
 <?php $this->start('tb_left_actions'); ?>
-<li><?= $this->Html->link('日誌', ['action' => 'index']) ?></li>
+<li><?= $this->Html->link('日誌', ['action' => 'mine']) ?></li>
+<li><?= $this->Html->link('日誌【全員】', ['action' => 'index']) ?></li>
 <li><?= $this->Html->link('日誌を書く', ['action' => 'add']) ?></li>
 <li><?= $this->Html->link('再利用する', ['action' => 'add', 'source' => $dailyReport->id]) ?></li>
 <li><?= $this->Form->postLink('削除', ['action' => 'delete', $dailyReport->id],['confirm' => '削除します。よろしいですか？']) ?></li>

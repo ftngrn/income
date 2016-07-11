@@ -3,7 +3,7 @@ $this->assign('title', '日誌を書き足す');
 $this->extend('../Layout/bootstrap-ui/dashboard');
 ?>
 <?php $this->start('tb_left_actions'); ?>
-<li><?= $this->Html->link('日誌', ['action' => 'index']) ?></li>
+<li><?= $this->Html->link('日誌', ['action' => 'mine']) ?></li>
 <li><?= $this->Html->link('日誌を書く', ['action' => 'add']) ?></li>
 <li><?= $this->Html->link('再利用する', ['action' => 'add', 'source' => $dailyReport->id]) ?></li>
 <li><?= $this->Form->postLink('削除', ['action' => 'delete', $dailyReport->id],['confirm' => '削除します。よろしいですか？']) ?></li>

@@ -21,7 +21,7 @@ $this->extend('../Layout/bootstrap-ui/dashboard');
 						]);
 ?>
 </td><td>
-<?= $this->Form->input('staff_id', ['options'=>$staffs,'label'=>'教職員名']);?>
+<?= $this->Form->input('staff_id', ['options'=>$staffs,'label'=>'教職員名', 'default' => $loginUser['id']]);?>
 </td></tr>
 </table>
 <table class="table table-hover table-responsive">
